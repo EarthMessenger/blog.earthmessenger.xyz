@@ -1,0 +1,31 @@
+body {
+    font-family: "Latin Modern Math", Cambria, Cochin, Georgia, Times, "Times New Roman", "Noto Serif CJK SC", serif;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1d1d1f;
+    background-color: #fbfbfd;
+    padding: 0;
+    margin: 0;
+}
+
+pre code.hljs {
+    font-size: 0.75em;
+    border-radius: 15px;
+    line-height: 1.15;
+    margin: 0.5em;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
