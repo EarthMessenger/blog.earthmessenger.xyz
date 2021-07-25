@@ -1,10 +1,28 @@
 body {
-    font-family: "Latin Modern Math", Cambria, Cochin, Georgia, Times, "Times New Roman", "Noto Serif CJK SC", serif;
+    --font-stack: "Latin Modern Math", Cambria, Cochin, Georgia, Times,
+        "Times New Roman", "Noto Serif CJK SC", "Simsun", serif;
+    --pri-color: #2196f3;
+    --pri-color-dark: #1769aa;
+    --pri-color-light: #4dabf5;
+    --sec-color: #ffc400;
+    --sec-color-dark: #b28900;
+    --sec-color-light: #ffcf33;
+    --font-color: #1d1d1f;
+    --bg-color: #fbfbfd;
+    --header-link-color: #f0f6fc;
+
+    --pri-text: 87%;
+    --sec-text: 54%;
+    --hnt-text: 38%;
+}
+
+body {
+    font-family: var(--font-stack);
     font-size: 21px;
     font-weight: 400;
     line-height: 1.5;
-    color: #1d1d1f;
-    background-color: #fbfbfd;
+    color: var(--font-color);
+    background-color: var(--bg-color);
     padding: 0;
     margin: 0;
 }
