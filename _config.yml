@@ -28,9 +28,7 @@ github_username: EarthMessenger
 
 lang: zh-CN
 
-markdown: kramdown
-kramdown:
-    input: GFM
+markdown: GFM
 
 # Build settings
 # theme: minima
