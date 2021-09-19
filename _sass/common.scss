@@ -1,6 +1,9 @@
 body {
-    --font-stack: "Latin Modern Math", Cambria, Cochin, Georgia, Times,
-        "Times New Roman", "Noto Serif CJK SC", "Simsun", serif;
+    --font-stack: "Latin Modern Roman", Cambria, Cochin, Georgia, Times,
+        "Times New Roman", "Noto Serif CJK SC", Simsun, serif;
+    --mono-font-stack: "Fira Mono", "Menlo", "Monaco", "Consolas",
+        "Andale Mono", "Ubuntu Mono", "Courier New", "Hack", "Fira Code",
+        "Jetbrains Mono", monospace;
     --pri-color: #2196f3;
     --pri-color-dark: #1769aa;
     --pri-color-light: #4dabf5;
@@ -28,6 +31,7 @@ body {
 }
 
 pre code.hljs {
+    font-family: var(--mono-font-stack);
     font-size: 0.75em;
     border-radius: 15px;
     line-height: 1.15;
