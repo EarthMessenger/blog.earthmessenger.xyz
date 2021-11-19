@@ -11,5 +11,39 @@
 
 .post-date {
     font-size: 1.5em;
-    margin-bottom: 3em
+    margin-bottom: 3em;
+}
+
+#post-content {
+    max-width: 100%;
+
+    // header counter
+    h1:before {
+        content: "Part. " counter(h1Counter) " ";
+    }
+    h1 {
+        counter-increment: h1Counter;
+        counter-reset: h2Counter 0;
+    }
+    h2:before {
+        content: counter(h2Counter) " ";
+    }
+    h2 {
+        counter-increment: h2Counter;
+        counter-reset: h3Counter;
+    }
+    h3:before {
+        content: counter(h2Counter) "." counter(h3Counter) " ";
+    }
+    h3 {
+        counter-increment: h3Counter;
+    }
+
+    // post style
+    h1 {
+        padding-top: 1em;
+    }
+    img {
+        max-width: 100%;
+    }
 }
