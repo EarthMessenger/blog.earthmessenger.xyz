@@ -46,4 +46,44 @@
     img {
         max-width: 100%;
     }
+
+    pre,
+    pre.highlight {
+        font-family: var(--mono-font-stack);
+        font-size: 0.75em;
+        border-radius: 4px;
+        line-height: 1.15;
+        padding: 1em;
+        margin: 0.5em;
+        overflow-x: scroll;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: auto auto;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid;
+        padding: 3px;
+    }
+
+    th {
+        border-color: #333;
+    }
+
+    td {
+        border-color: #aaa;
+    }
+
+    blockquote {
+        background-color: #ddd;
+        margin: 0;
+        padding: 0 2em;
+        border-left: #666 0.5em solid;
+        border-left-color: rgb(102, 102, 102);
+        border-left-style: solid;
+        border-left-width: 0.5em;
+    }
 }
