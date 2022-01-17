@@ -86,8 +86,7 @@
     color-scheme: light;
 
     /* custom font family */
-    --font-stack: "Latin Modern Roman", Cambria, Cochin, Georgia, Times,
-    "Times New Roman", "Noto Serif CJK SC", 'Source Han', Simsun, serif;
+    --font-stack: 'Latin Modern Roman', Cambria, Cochin, Georgia, Times, 'Times New Roman', 'Noto Serif CJK SC', 'Source Han Serif CN', Simsun, serif;
 
     font-family: var(--font-stack);
   }
