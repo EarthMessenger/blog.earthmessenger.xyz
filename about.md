@@ -4,4 +4,10 @@ layout: default
 
 # 关于
 
-本博客托管于 GitHub Pages，使用 Jekyll。
+本博客托管于 GitHub Pages，使用 Jekyll，并使用 Cloudflare CDN。
+
+## 友情链接
+
+按字典序排名。
+
+- [Fat Old Eight](fat-old-eight)
