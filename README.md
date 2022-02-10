@@ -1,4 +1,4 @@
-# 1 [earthmessenger.github.io](//earthmessenger.github.io)
+# 1 [earthmessenger.github.io](//blog.earthmessenger.xyz)
 
 一个简单的博客，托管于 GitHub Pages.
 
