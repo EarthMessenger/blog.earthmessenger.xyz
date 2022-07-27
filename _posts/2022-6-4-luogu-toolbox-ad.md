@@ -2,6 +2,8 @@
 layout: post
 title: "[广告] luogu-toolbox"
 date: 2022-6-4
+tags: ad
+categories: common
 ---
 
 🔨 luogu-toolbox 洛谷工具箱（WIP）

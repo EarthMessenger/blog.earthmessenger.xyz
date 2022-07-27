@@ -2,6 +2,8 @@
 layout: post
 title: On Changing Tree 题解
 date: 2022-2-9
+tags: solution ds
+categories: common
 ---
 
 题目：[On Changing Tree](https://www.luogu.com.cn/problem/CF396C)

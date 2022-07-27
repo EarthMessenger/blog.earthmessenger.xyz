@@ -4,21 +4,28 @@ title: page.title
 ---
 
 <div id="post-meta" class="post-meta">
-    <div id="post-title" class="post-title">{{ page.title }}</div>
-    <div id="post-date" class="post-date">{{ page.date | date_to_string }}</div>
+    <div class="post-title">{{ page.title }}</div>
+    <div>{{ page.date | date_to_string }}</div>
+    <div class="post-tags">
+        <span>标签：</span>
+        {% for tag in page.tags %}
+        <span class="tags">{{ tag }}</span>
+        {% endfor %}
+    </div>
 </div>
 <article id="post-content">{{ content }}</article>
 <div id="giscus" class="giscus"></div>
-<script src="https://giscus.app/client.js"
-        data-repo="earthmessenger/earthmessenger.github.io"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkzODc0MzYzNTQ="
-        data-category="giscus"
-        data-category-id="DIC_kwDOFxfPQs4CAtxr"
-        data-mapping="pathname"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-theme="https://blog.earthmessenger.xyz/assets/css/giscus-theme.css"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+<script
+    src="https://giscus.app/client.js"
+    data-repo="earthmessenger/earthmessenger.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzODc0MzYzNTQ="
+    data-category="giscus"
+    data-category-id="DIC_kwDOFxfPQs4CAtxr"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="https://blog.earthmessenger.xyz/assets/css/giscus-theme.css"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+></script>
