@@ -1,0 +1,15 @@
+---
+layout: default
+title: page.title
+---
+
+<div id="post-meta" class="post-meta">
+    <div class="post-title">{{ page.title }}</div>
+    <div class="post-tags">
+        <span>标签：</span>
+        {% for tag in page.tags %}
+        <span class="tags">{{ tag }}</span>
+        {% endfor %}
+    </div>
+</div>
+<article id="post-content">{{ content }}</article>

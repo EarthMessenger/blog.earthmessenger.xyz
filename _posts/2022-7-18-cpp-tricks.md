@@ -3,7 +3,6 @@ layout: post
 title: "C++ 技巧"
 date: 2022-7-18
 tags: cpp trick
-categories: common
 ---
 
 ## 计算 $\mathrm{highbit}$
