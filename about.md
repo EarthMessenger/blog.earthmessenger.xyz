@@ -10,4 +10,4 @@ layout: default
 
 按字典序排名。
 
-- [Fat Old Eight](fat-old-eight)
+- [Fat Old Eight](//fat-old-eight.github.io)
