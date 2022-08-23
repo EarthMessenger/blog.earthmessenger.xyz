@@ -54,7 +54,7 @@ vim 本身相当复杂，不熟练掌握几十个命令就不能体现其优点�
 | <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | 左下上右           |
 | <kbd>w</kbd> <kbd>W</kbd>                        | 跳到下一个单词开头 |
 | <kbd>e</kbd> <kbd>E</kbd>                        | 跳到下一个单词结尾 |
-| <kbd>b</kbe> <kbd>B</kbd>                        | 跳到上一个单词开头 |
+| <kbd>b</kbd> <kbd>B</kbd>                        | 跳到上一个单词开头 |
 | <kbd>^</kbd>                                     | 跳到“软”行首       |
 | <kbd>0</kbd>                                     | 跳到“硬”行首       |
 | <kbd>$</kbd>                                     | 跳到行尾           |
