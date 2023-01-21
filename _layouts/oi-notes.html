@@ -3,8 +3,9 @@ layout: default
 title: page.title
 ---
 
-<div id="post-meta" class="post-meta">
-    <div class="post-title">{{ page.title }}</div>
+<h1 class="post-title">{{ page.title }}</h1>
+<div class="post-meta">
+    <div class="post-author">作者：{{ site.author }}</div>
     <div class="post-tags">
         <span>标签：</span>
         {% for tag in page.tags %}
