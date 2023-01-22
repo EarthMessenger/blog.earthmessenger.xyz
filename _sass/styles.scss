@@ -171,7 +171,7 @@ tbody tr:nth-child(even):hover td {
 
 div#container {
     width: 65%;
-    min-width: 640px;
+    min-width: 320px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -184,7 +184,7 @@ header {
     font-size: 1.2em;
     border-bottom: 1px dotted var(--border-color);
     padding: 0.5em;
-    
+
     img {
         height: 1em;
         border-radius: 16px;
