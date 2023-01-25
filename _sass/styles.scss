@@ -94,12 +94,14 @@ code {
     font-family: $monospace-fonts;
 }
 
-article#post-content>pre {
+article#post-content>pre,
+article#post-content details>pre {
     background-color: var(--background-main);
 }
 
 div.highlight,
-article#post-content>pre {
+article#post-content>pre,
+article#post-content details>pre {
     max-width: 100%;
     overflow-x: scroll;
     border-radius: $border-radius;

@@ -1,7 +1,7 @@
 ---
 title: OIer 的 VIM 教程
 date: 2022-08-23
-tags: vim oi wip
+tags: vim oi continually-updated
 ---
 
 ~缺点：同学没法帮你调代码了~
