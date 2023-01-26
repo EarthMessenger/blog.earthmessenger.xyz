@@ -200,12 +200,9 @@ int proc = std::accumulate(a.begin(), a.end(), 1, std::multiplies<int>()); // 60
 
 [cppreference.com: std::boyer\_moore\_searcher](https://zh.cppreference.com/w/cpp/utility/functional/boyer_moore_searcher)
 
-Boyer-Moore 匹配算法，按理说是 $O(n)$ 的，
-但[没过 loj 板子题目](https://loj.ac/s/1681840)，慎用。
+Boyer-Moore 匹配算法，是 $O(n)$ 的，配合 `std::search` 使用，但主要用于单次字符串匹配，多次的话最坏是 $O(nm)$。
 
-配合 `std::search` 使用。
-
-示例就直接看上面提交记录吧。
+反面教材：[loj 提交记录 \#1683441](https://loj.ac/s/1683441)
 
 ## bit
 
