@@ -50,10 +50,10 @@ set tm=200
 " 根据语言配置
 augroup LangSettings
     autocmd BufRead,BufNewFile *.cpp 
-                \ nnoremap <F9> :!g++ % -Wall -std=c++2a -o %<<CR>
-                \|nnoremap <F10> :!./%<<CR> 
+                \ nnoremap <buffer><F9> :!g++ % -Wall -std=c++2a -o %<<CR>
+                \|nnoremap <buffer><F10> :!./%<<CR> 
     autocmd BufRead,BufNewFile *.py
-                \ nnoremap <F10> :!python %<<CR>
+                \ nnoremap <buffer><F10> :!python %<CR>
 augroup END
 ```
 
