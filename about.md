@@ -10,4 +10,5 @@ layout: default
 
 按字典序排名。
 
+- [Eray](//xxeray.gitlab.io/guestbook/links/)
 - [Fat Old Eight](//fat-old-eight.github.io)
