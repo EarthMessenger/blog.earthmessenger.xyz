@@ -8,4 +8,5 @@
 
 # 3 友链
 
+Eray: [Eray](//xxeray.gitlab.io/)
 fat-old-eight: [fat-old-eight.github.io](//fat-old-eight.github.io/)
