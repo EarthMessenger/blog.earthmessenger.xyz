@@ -13,4 +13,5 @@ layout: default
 - [Eray](//xxeray.gitlab.io/)
 - [Fat Old Eight](//fat-old-eight.github.io/)
 - [煎饼Li](//www.cnblogs.com/GTGumiiL/)
+- [SqrtSecond](//www.cnblogs.com/SqrtSecond)
 - [xx019](//www.cnblogs.com/xx019/)
