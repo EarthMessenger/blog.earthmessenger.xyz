@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 更好的 popcnt
 date: 2021-11-08
 tags: cpp trick

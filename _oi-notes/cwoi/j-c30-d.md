@@ -1,6 +1,5 @@
 ---
-layout: oi-notes
-title: CWOI C30D 糖果
+title: CWOI J C30D 糖果
 tags: cwoi
 ---
 

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "[广告] luogu-toolbox"
 date: 2022-6-4
 tags: ad

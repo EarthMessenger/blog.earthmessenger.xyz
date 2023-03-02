@@ -1,73 +1,64 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
+---
 title: EarthMessenger 的博客
-# email: earthmessenger@qq.com
 description: EarthMessenger 的博客
 bio: Keep it simple, stupid.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.earthmessenger.xyz" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: ""
+url: "https://blog.earthmessenger.xyz"
 github_username: EarthMessenger
 author: EarthMessenger
 
 lang: zh-CN
 
 markdown: CommonMarkGhPages
-
 commonmark:
-    options: ["UNSAFE", "SMART", "FOOTNOTES"]
-    extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+  options: ["UNSAFE", "SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
 
-# Build settings
-# theme: minima
 plugins:
-    - jekyll-feed
-    - jekyll-seo-tag
-    - jekyll-sitemap
-    - jekyll-commonmark-ghpages
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
-# Collections
+sass:
+  style: compressed
+
 collections: 
-    posts:
-        premalink: "/:year/:month/:day/:title/"
-        output: true
-    oi-notes:
-        premalink: "/oi-notes/:title/"
-        output: true
+  posts:
+    premalink: "/:year/:month/:day/:title/"
+    output: true
+  oi-notes:
+    premalink: "/:collection/:path/"
+    output: true
+  docs:
+    permalink: "/:collection/:path"
+    output: true
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "_oi-notes"
+      type: "oi-notes"
+    values:
+      layout: "oi-notes"
+  - scope:
+      path: "_docs"
+      type: "docs"
+    values:
+      layout: "docs"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+
+# vim:et:ts=2:sts=2:sw=2

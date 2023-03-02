@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 在 vim 中编译程序
 tags: vim oi
 ---

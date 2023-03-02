@@ -1,6 +1,5 @@
 ---
 title: 左闭右开神教
-layout: post
 date: 2023-02-13
 tags: oi trick
 ---

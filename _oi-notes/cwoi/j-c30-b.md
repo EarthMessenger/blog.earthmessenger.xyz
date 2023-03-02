@@ -1,6 +1,5 @@
 ---
-layout: oi-notes
-title: CWOI C30B 幻想商店
+title: CWOI J C30B 幻想商店
 tags: cwoi
 ---
 

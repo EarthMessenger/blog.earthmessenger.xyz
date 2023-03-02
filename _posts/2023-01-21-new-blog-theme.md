@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 新的博客主题！
 date: 2023-01-21
 tags: ad

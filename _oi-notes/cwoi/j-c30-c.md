@@ -1,6 +1,5 @@
 ---
-layout: oi-notes
-title: CWOI C30C 覆盖
+title: CWOI J C30C 覆盖
 tags: cwoi
 ---
 

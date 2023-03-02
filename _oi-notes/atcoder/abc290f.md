@@ -1,5 +1,4 @@
 ---
-layout: oi-notes
 title: Atcoder ABC 290 F Maximum Diameter
 tags: at
 ---

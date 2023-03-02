@@ -1,5 +1,4 @@
 ---
-layout: oi-notes
 title: Atcoder ABC 290 E Make it Palindrome
 tags: abc
 ---

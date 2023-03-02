@@ -1,5 +1,4 @@
 ---
-layout: post
 title: On Changing Tree 题解
 date: 2022-2-9
 tags: solution ds
