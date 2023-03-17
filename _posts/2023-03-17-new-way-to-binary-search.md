@@ -1,6 +1,6 @@
 ---
 title: 一种很新的二分答案写法
-tags: oi tricks
+tags: oi trick
 date: 2023-03-17
 ---
 
@@ -70,7 +70,7 @@ RandomAccessIterator 要求定义的运算符很多，然而我们可以根据 `
 ## 例子
 
 P1873：给定一个长度为 $N$ 的数组 $a$，和一个正整数 $M$，求最大的 $x$ 使得 
-$\sum \max\left(a\_i-x, 0\right) >= M$。
+$\sum \max\left(a\_i-x, 0\right) \ge M$。
 
 ```cpp
 int main()
