@@ -1,10 +1,11 @@
-$fonts: "Noto Sans CJK SC", sans-serif;
-$monospace-fonts: "Sarasa Mono SC", "Iosevka", monospace;
-$serif-fonts: "Latin Modern Roman", Georgia, "Times New Roman", Times, "Noto Serif CJK SC", serif;
-$font-size: 12pt;
-$border-radius: 11px;
+:root {
+    --fonts: "Noto Sans CJK SC", sans-serif;
+    --monospace-fonts: "Sarasa Mono SC", "Iosevka", monospace;
+    --serif-fonts: "Latin Modern Roman", Georgia, "Times New Roman", Times, "Noto Serif CJK SC", serif;
+    --font-size: 12pt;
+    --border-radius: 11px;
+}
 
-// Use basic CSS variable, because it's dymanic and more elegent
 :root {
     --background-body: #fff;
     --background-main: #eee;

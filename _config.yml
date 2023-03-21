@@ -9,10 +9,10 @@ author: EarthMessenger
 
 lang: zh-CN
 
-markdown: CommonMarkGhPages
-commonmark:
-  options: ["UNSAFE", "SMART", "FOOTNOTES"]
-  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+# markdown: CommonMark
+# commonmark:
+#   options: ["FOOTNOTES"]
+#   extensions: ["strikethrough", "autolink", "table"]
 
 plugins:
   - jekyll-feed
@@ -61,5 +61,8 @@ exclude:
   - Gemfile.lock
   - CNAME
   - vendor
+
+feed:
+  disable_in_development: true
 
 # vim:et:ts=2:sts=2:sw=2

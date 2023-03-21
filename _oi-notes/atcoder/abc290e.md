@@ -1,5 +1,5 @@
 ---
-title: Atcoder ABC 290 E Make it Palindrome
+title: AtCoder ABC 290 E Make it Palindrome
 tags: abc
 ---
 

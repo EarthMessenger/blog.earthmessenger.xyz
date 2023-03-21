@@ -1,0 +1,41 @@
+- word: algorithm
+  phonetic: /ˈælɡərɪðəm/
+  translation: 
+    - type: n
+      data: 算法
+- word: array
+  phonetic: /əˈreɪ/
+  translation: 
+    - type: n
+      data: 数组
+- word: algebra
+  phonetic: /ˈældʒɪbrə/
+  translation:
+    - type: n[u]
+      data: 代数
+- word: matrix
+  phonetic: /ˈmeɪtrɪks/
+  plural: matrices
+  translation:
+    - type: n
+      data: 矩阵
+- word: exponent
+  phonetic: /ɪkˈspəʊnənt/
+  translation:
+    - type: n
+      data: 指数
+- word: exponential
+  phonetic: /ˌekspəˈnenʃl/
+  translation:
+    - type: adj
+      data: 指数的 
+- word: recursion
+  phonetic: "BrE: /rɪˈkɜːʃn/, NAmE: /rɪˈkɜːrʒn/"
+  translation:
+    - type: n
+      data: 递归
+- word: recursive
+  phonetic: "BrE: /rɪˈkɜːsɪv/, NAmE: /rɪˈkɜːrsɪv/"
+  translation:
+    - type: adj
+      data: 递归的

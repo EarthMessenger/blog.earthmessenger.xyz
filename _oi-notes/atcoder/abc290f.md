@@ -1,5 +1,5 @@
 ---
-title: Atcoder ABC 290 F Maximum Diameter
+title: AtCoder ABC 290 F Maximum Diameter
 tags: at
 ---
 
