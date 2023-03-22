@@ -4,7 +4,7 @@ date: 2022-08-23
 tags: vim oi continually-updated
 ---
 
-~缺点：同学没法帮你调代码了~
+~~缺点：同学没法帮你调代码了~~
 
 ## 快速在考场上配置 vim
 

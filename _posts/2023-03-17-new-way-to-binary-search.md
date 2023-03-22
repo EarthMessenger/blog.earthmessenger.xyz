@@ -59,7 +59,7 @@ private:
 首先，前几行 using 是迭代器的必需定义，只有定义了这些量，标准库才能用 
 `std::iterator_traits` 访问迭代器的各个属性。`iterator_category` 被定义成
 了 `std::random_access_iterator_tag`，即
-[老式随机访问迭代器] (https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator)。
+[老式随机访问迭代器](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator)。
 这样调用 STL 时，STL 会用 `+=` 来实现 `std::advance`，而不是一个一个地自增，也
 会用 `-` 来求两个迭代器的距离，保证复杂度正确（这也是为什么不要在 map、set 上直
 接用 STL 二分而用自带二分的原因）。

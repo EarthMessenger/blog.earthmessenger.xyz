@@ -6,7 +6,7 @@ tags: oi trick
 
 ## 前言
 
-~缺点：同学读不懂你的代码了~
+~~缺点：同学读不懂你的代码了~~
 
 不难发现，在大多数编程语言的标准库中，通常都会以左闭又开，从 0 开始的方式表示
 区间。本文将论述这种表示方式在算法竞赛中的诸多优势。
@@ -77,20 +77,20 @@ $i + 1 \pmod n$。
 对于数列 $a_0, a_1, a_2, \cdots$，我们定义其前缀和数组：
 
 $$s_i = 
-\\begin{cases}
-0                     & i = 0 \\\\
+\begin{cases}
+0                     & i = 0 \\
 a_{i - 1} + s_{i - 1} & i > 0
-\\end{cases}$$
+\end{cases}$$
 
 即前 $i$ 项的和。
 
 同样我们定义差分数组：
 
 $$d_i = 
-\\begin{cases}
-a_i             & i = 0 \\\\
-a_i - a_{i - 1} & i > 0 \\\\
-\\end{cases}$$
+\begin{cases}
+a_i             & i = 0 \\
+a_i - a_{i - 1} & i > 0 \\
+\end{cases}$$
 
 求区间 $[l, r)$ 的和：$s_r - s_l$
 
@@ -110,10 +110,10 @@ for (int i = 1; i < n; i++) d[i] = a[i] - a[i - 1];
 仿照前缀和，我们也可以定义出字符串 $s$ 的前缀哈希：
 
 $$h_i = 
-\\begin{cases}
-0                                  & i = 0 \\\\
+\begin{cases}
+0                                  & i = 0 \\
 h_{i - 1} \times M + s_{i} \pmod N & i > 0
-\\end{cases}
+\end{cases}
 $$
 
 这样求子串 $s_{[l, r)}$ 的哈希就是 $h_r - h_l \times M^{r - l} \pmod N$。

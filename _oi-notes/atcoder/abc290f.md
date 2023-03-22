@@ -36,10 +36,10 @@ $\binom{i - 2 + n - i - 1}{n - i - 1}$ 为把多余的 $i$ 分配到其他 $n - 
 
 $$
 \begin{aligned}
-  & \sum_{i = 2}^{n - 1} (n - i + 1) \binom{n}{i} \binom{i - 2 + n - i - 1}{n - i - 1} \\\\
-= & \sum_{i = 2}^{n - 1} (n - i + 1) \binom{n}{i} \binom{n - 3}{n - i - 1} \\\\
-= & (n + 1) \sum_{i = 2}^{n - 1} \binom{n}{i} \binom{n - 3}{n - i - 1} - \sum_{i = 2}^{n - 1} i \binom{n}{i} \binom{n - 3}{n - i - 1} \\\\
-= & (n + 1) \sum_{i = 2}^{n - 1} \binom{n}{i} \binom{n - 3}{n - i - 1} - \sum_{i = 2}^{n - 1} n\binom{n - 1}{i - 1} \binom{n - 3}{n - i - 1} \\\\
+  & \sum_{i = 2}^{n - 1} (n - i + 1) \binom{n}{i} \binom{i - 2 + n - i - 1}{n - i - 1} \\
+= & \sum_{i = 2}^{n - 1} (n - i + 1) \binom{n}{i} \binom{n - 3}{n - i - 1} \\
+= & (n + 1) \sum_{i = 2}^{n - 1} \binom{n}{i} \binom{n - 3}{n - i - 1} - \sum_{i = 2}^{n - 1} i \binom{n}{i} \binom{n - 3}{n - i - 1} \\
+= & (n + 1) \sum_{i = 2}^{n - 1} \binom{n}{i} \binom{n - 3}{n - i - 1} - \sum_{i = 2}^{n - 1} n\binom{n - 1}{i - 1} \binom{n - 3}{n - i - 1} \\
 \end{aligned}
 $$
 
