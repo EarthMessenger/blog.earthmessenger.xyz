@@ -39,3 +39,18 @@
   translation:
     - type: adj
       data: 递归的
+- word: sequence
+  phonetic: /ˈsiːkwəns/
+  translation:
+    - type: n
+      data: 序列
+- word: inclusive
+  phonetic: /ɪnˈkluːsɪv/
+  translation:
+    - type: adj
+      data: 包含的
+- word: factor
+  phonetic: /ˈfæktər/
+  translation:
+    - type: n
+      data: 因数；因子
