@@ -95,17 +95,14 @@ std::ranges::max(a);
 与 memset 相比，优点在于可以任意设置填充的值，`std::fill(a.begin(), a.end(), 114514)`，
 或 `std::ranges::fill(a, 114514)`，更加人性化。
 
-性能上，不开 O2 与手写 for 循环填充相当，开了 O2 与 memset 相当。
-（我没法测出开 O2 后手写填充的速度，它总是被 g++ 优化掉）。
-
-<details>
-<summary>测试代码</summary>
+性能上，不开 O2 与手写 for 循环填充相当，开了 O2 都差不多。
 
 ```cpp
 #include <algorithm>
+#include <cstdint>
+#include <cstdio>
 #include <cstring>
 #include <ctime>
-#include <cstdio>
 
 uint8_t a[1 << 20];
 
@@ -124,7 +121,7 @@ int main()
     printf("std::fill, filled with %u: %lf\n", a[0], (double)(t3 - t2) / CLOCKS_PER_SEC);
     for (int i = 0; i < (1 << 10); i++) {
         for (int j = 0; j < (1 << 20); j++) {
-            a[i] = 0;
+            a[j] = 0;
         }
     }
     auto t4 = clock();
@@ -136,17 +133,15 @@ int main()
 
 无优化（-O0）：
 
-    memset, filled with 0:  0.027887
-    std::fill, filled with 0: 2.433606
-    for, filled with 0: 2.133989
+    memset, filled with 0:  0.022000
+    std::fill, filled with 0: 2.298235
+    for, filled with 0: 2.282090
 
-优化（-O2，下面那个 for 被优化掉了)：
+优化（-O2)：
 
-    memset, filled with 0:  0.027291
-    std::fill, filled with 0: 0.023069
-    for, filled with 0: 0.000010
-
-</details>
+    memset, filled with 0:  0.023301
+    std::fill, filled with 0: 0.026282
+    for, filled with 0: 0.022732
 
 ### 堆
 
@@ -156,6 +151,9 @@ int main()
 `std::pop_heap` 等函数实现的堆。
 
 个人认为优点在于建堆是 $O(n)$ 的，而建 `std::priority_queue` 只能是 $O(n \log n)$ 的。
+
+update: `std::priority_queue` 可以 $O(n)$ 建堆，使用其构造函数。这个东西我不知
+道有什么优势。
 
 注意用法：
 
@@ -181,7 +179,7 @@ std::vector<int> a(10);
 std::iota(a.begin(), a.end(), 0); // a = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 ```
 
-注意：std::ranges::iota 是 C++23 才加入的~漏网之鱼~。
+注意：std::ranges::iota 是 C++23 才加入的~~漏网之鱼~~。
 
 ### std::accumulate
 
@@ -198,6 +196,8 @@ int proc = std::accumulate(a.begin(), a.end(), 1, std::multiplies<int>()); // 60
 ### std::boyer\_moore\_searcher
 
 [cppreference.com: std::boyer\_moore\_searcher](https://zh.cppreference.com/w/cpp/utility/functional/boyer_moore_searcher)
+
+update: 我确实不知道它的原理，不要乱用。
 
 Boyer-Moore 匹配算法，是 $O(n)$ 的，配合 `std::search` 使用，但主要用于单次字符串匹配，多次的话最坏是 $O(nm)$。
 
