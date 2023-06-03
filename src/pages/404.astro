@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "404 Not Found";
+---
+
+<BaseLayout title={title}>
+  <h1>{title}</h1>
+
+  <p>
+    由于本博客经历过多次更新和迁移，可能存在连接失效，可以在 GitHub 中搜索：
+  </p>
+
+  <form id="search" action="//github.com/search">
+    <input type="hidden" name="q" />
+    <input type="search" tabindex="1" name="q_origin" />
+    <input id="search-button" type="submit" value="搜索" />
+  </form>
+</BaseLayout>
+
+<style>
+  #search {
+    text-align: center;
+  }
+</style>
+
+<script>
+  const searchButton = document.getElementById("search-button");
+  searchButton.onclick = () => {
+    searchButton.form.q.value = `${searchButton.form.q_origin.value} repo:EarthMessenger/blog.earthmessenger.xyz`;
+  };
+</script>
