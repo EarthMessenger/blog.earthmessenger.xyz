@@ -1,6 +1,6 @@
 ---
 import { formatDate } from "../utils";
-const { title, date } = Astro.props.frontmatter;
+const { title, pubDate } = Astro.props.frontmatter;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Giscus from "../components/Giscus.astro";
@@ -12,7 +12,7 @@ import "../styles/posts.css";
 <BaseLayout title={title}>
   <div id="post-meta">
     <h1>{title}</h1>
-    {date && <time>{formatDate(date)}</time>}
+    {pubDate && <time>{formatDate(pubDate)}</time>}
   </div>
 
   <hr />

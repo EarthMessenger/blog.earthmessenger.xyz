@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: On Changing Tree 题解
-date: 2022-02-09
+pubDate: 2022-02-09
 tags: solution ds
 ---
 

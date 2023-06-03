@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 快速 log2
-date: 2022-01-11
+pubDate: 2022-01-11
 tags: cpp trick
 ---
 

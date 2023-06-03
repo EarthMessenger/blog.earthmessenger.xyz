@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: example
-date: 2023-06-02
+pubDate: 2023-06-02
 tags: test
 ---
 

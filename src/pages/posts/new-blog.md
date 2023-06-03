@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 新博客建立啦！
-date: 2021-07-21
+pubDate: 2021-07-21
 tags: ad
 ---
 

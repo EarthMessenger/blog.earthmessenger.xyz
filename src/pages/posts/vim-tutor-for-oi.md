@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: OIer 的 VIM 教程
-date: 2022-08-23
+pubDate: 2022-08-23
 tags: vim oi continually-updated
 ---
 

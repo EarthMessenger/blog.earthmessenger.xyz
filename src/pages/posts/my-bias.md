@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: "偏见"
-date: 2023-01-20
+pubDate: 2023-01-20
 tags: thought oi
 ---
 

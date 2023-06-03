@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 左闭右开神教
-date: 2023-02-13
+pubDate: 2023-02-13
 tags: oi trick
 ---
 

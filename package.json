@@ -13,10 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@astrojs/rss": "^2.4.3",
     "astro": "^2.5.6",
     "giscus": "^1.2.8",
     "lunar-calendar": "^0.1.4",
     "rehype-mathjax": "^4.0.2",
-    "remark-math": "^5.1.1"
+    "remark-math": "^5.1.1",
+    "sanitize-html": "^2.10.0"
   }
 }

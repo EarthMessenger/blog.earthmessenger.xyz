@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: 在 vim 中编译程序
 tags: vim oi
-date: 2023-02-26
+pubDate: 2023-02-26
 ---
 
 ## 新手：直接使用 map 映射编译命令

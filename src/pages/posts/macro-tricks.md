@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 宏魔法
-date: 2022-08-26
+pubDate: 2022-08-26
 tags: cpp trick
 ---
 

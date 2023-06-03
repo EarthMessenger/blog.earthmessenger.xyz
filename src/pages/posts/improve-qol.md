@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: 如何提升在机房的代码体验
 tags: oi
-date: 2023-05-07
+pubDate: 2023-05-07
 ---
 
 ## 背景

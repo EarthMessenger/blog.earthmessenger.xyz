@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: "[广告] luogu-toolbox"
-date: 2022-06-04
+pubDate: 2022-06-04
 tags: ad
 ---
 

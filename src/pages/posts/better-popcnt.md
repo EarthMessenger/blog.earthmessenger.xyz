@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 更好的 popcnt
-date: 2021-11-08
+pubDate: 2021-11-08
 tags: cpp trick
 ---
 众所周知 $\mathrm{popcnt}$ 是一个十分常用的算法。
