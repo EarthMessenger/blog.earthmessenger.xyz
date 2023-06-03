@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import remarkMath from "remark-math";
 import rehypeMathJaxSvg from "rehype-mathjax";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,5 +11,7 @@ export default defineConfig({
     },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathJaxSvg]
-  }
+  },
+  integrations: [sitemap()],
+  site: "https://blog.earthmessenger.xyz"
 });

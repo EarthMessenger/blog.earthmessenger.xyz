@@ -1,2 +1,4 @@
 User-Agent: *
 Disallow: /oi-notes/cwoi/
+
+Sitemap: https://blog.earthmessenger.xyz/sitemap-index.xml
