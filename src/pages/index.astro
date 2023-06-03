@@ -12,7 +12,7 @@ const allPosts = await Astro.glob("../pages/posts/*.md");
         .sort(
           (p, q) =>
             Date.parse(q.frontmatter.pubDate) -
-            Date.parse(p.frontmatter.putDate)
+            Date.parse(p.frontmatter.pubDate)
         )
         .map((post) => (
           <li>
