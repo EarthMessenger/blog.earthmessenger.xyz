@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const allPosts = await Astro.glob("../pages/posts/*.md");
+---
+
+<BaseLayout title="首页">
+  <h1>EarthMessenger 的博客</h1>
+  <ol reversed="true">
+    {
+      allPosts
+        .sort(
+          (p, q) =>
+            Date.parse(q.frontmatter.pubDate) -
+            Date.parse(p.frontmatter.putDate)
+        )
+        .map((post) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </li>
+        ))
+    }
+  </ol>
+</BaseLayout>

@@ -1,0 +1,58 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --main-font: Sarasa UI SC, Noto Sans CJK SC, sans-serif;
+  --mono-font: Sarasa Mono SC, Noto Sans Mono SC, monospace;
+}
+
+:root {
+  --bg-body: #fff;
+  --bg-main: #eee;
+  --color-main: #222;
+  --color-strong: #000;
+  --link-normal: #00e;
+  --link-visited: #518;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-body: #000;
+    --bg-main: #222;
+    --color-main: #eee;
+    --color-strong: #fff;
+    --link-normal: #88e;
+    --link-visited: #a4e;
+  }
+}
+
+body {
+  font-family: var(--main-font);
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 2em auto;
+  color: var(--color-main);
+  background-color: var(--bg-body);
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  color: var(--color-strong);
+}
+
+a {
+  color: var(--link-normal);
+}
+
+a:visited {
+  color: var(--link-visited);
+}

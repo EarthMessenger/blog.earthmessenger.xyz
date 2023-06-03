@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const allPosts = await Astro.glob("./*/*.md");
+
+const title="题解";
+---
+
+<BaseLayout title={title}>
+  <h1>{title}</h1>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <li>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

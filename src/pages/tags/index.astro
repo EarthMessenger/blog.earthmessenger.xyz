@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const allPosts = await Astro.glob("../posts/*.md");
+
+const tags = [
+  ...new Set(
+    allPosts
+      .map((post) =>
+        post.frontmatter.tags ? post.frontmatter.tags.split(" ") : []
+      )
+      .flat()
+  ),
+];
+
+const title = "标签";
+---
+
+<BaseLayout title={title}>
+  <h1>{title}</h1>
+  <ul>
+    {
+      tags.map((tag) => (
+        <li>
+          <a href={`/tags/${tag}`}>
+            {tag}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
