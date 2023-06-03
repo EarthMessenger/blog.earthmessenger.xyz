@@ -1,0 +1,16 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Navigation from "../components/Navigation.astro"
+import { SITE_LANG } from "../config";
+const title = Astro.props.title || Astro.props.frontmatter.title;
+---
+
+<html lang={SITE_LANG}>
+  <head>
+    <BaseHead title={title} />
+  </head>
+  <body>
+    <Navigation />
+    <slot />
+  </body>
+</html>

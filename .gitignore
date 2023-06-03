@@ -1,7 +1,3 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
-.bundle
-_drafts
+node_modules
+dist
+.astro

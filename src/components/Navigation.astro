@@ -1,0 +1,46 @@
+---
+---
+
+<nav>
+  <div class="nav-home">
+    <a href="/" title="首页">
+      <img src="/favicon.png" title="icon"/>
+      <span>/</span>
+    </a>
+  </div>
+  <div class="nav-menu">
+    <a href="/about" title="关于">关于</a>
+    <a href="/oi-notes" title="题解">题解</a>
+    <a href="/tags" title="标签">标签</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 1.2em;
+  }
+
+  .nav-home img {
+    height: 1em;
+    border-radius: 10px;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    margin: 0.5em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+</style>

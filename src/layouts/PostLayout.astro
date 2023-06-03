@@ -1,0 +1,27 @@
+---
+import { formatDate } from "../utils";
+const { title, date } = Astro.props.frontmatter;
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Giscus from "../components/Giscus.astro";
+
+import "../styles/gruvbox.css";
+import "../styles/posts.css";
+---
+
+<BaseLayout title={title}>
+  <div id="post-meta">
+    <h1>{title}</h1>
+    {date && <time>{formatDate(date)}</time>}
+  </div>
+
+  <hr />
+
+  <div id="post-content">
+  <slot />
+  </div>
+
+  <hr />
+
+  <Giscus />
+</BaseLayout>

@@ -1,0 +1,14 @@
+import { defineConfig } from "astro/config";
+import remarkMath from "remark-math";
+import rehypeMathJaxSvg from "rehype-mathjax";
+
+// https://astro.build/config
+export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      theme: "css-variables"
+    },
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeMathJaxSvg]
+  }
+});
