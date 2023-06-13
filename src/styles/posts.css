@@ -5,5 +5,5 @@
 #post-content pre.astro-code {
   padding: 0.3em;
   border-radius: 6px;
-  border: var(--color-main) 1px solid;
+  border: var(--border-color) 1px solid;
 }

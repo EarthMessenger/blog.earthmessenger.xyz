@@ -1,6 +1,6 @@
 ---
 import { formatDate } from "../utils";
-const { title, pubDate } = Astro.props.frontmatter;
+const { title, pubDate, tags } = Astro.props.frontmatter;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Giscus from "../components/Giscus.astro";
@@ -12,16 +12,51 @@ import "../styles/posts.css";
 <BaseLayout title={title}>
   <div id="post-meta">
     <h1>{title}</h1>
-    {pubDate && <time>{formatDate(pubDate)}</time>}
+    {
+      pubDate && (
+        <>
+          <span>日期：</span>
+          <time>{formatDate(pubDate)}</time>
+          <br />
+        </>
+      )
+    }
+    {tags && <span>标签：</span>}
+    {
+      tags &&
+        tags.split(" ").map((tag) =>
+          Astro.props.url.includes("/posts/") ? (
+            <a class="tags" href={`/tags/${tag}`}>
+              {tag}
+            </a>
+          ) : (
+            <span class="tags">{tag}</span>
+          )
+        )
+    }
+    {tags && <br />}
   </div>
 
   <hr />
 
   <div id="post-content">
-  <slot />
+    <slot />
   </div>
 
   <hr />
 
   <Giscus />
 </BaseLayout>
+
+<style>
+  .tags {
+    font-family: var(--mono-font);
+    background-color: var(--bg-main);
+    margin-right: 0.4em;
+    padding: 0 0.2em;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+
+    text-decoration: none;
+  }
+</style>

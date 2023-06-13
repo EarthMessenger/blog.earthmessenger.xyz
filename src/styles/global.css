@@ -16,6 +16,7 @@
   --color-strong: #000;
   --link-normal: #00e;
   --link-visited: #518;
+  --border-color: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +27,7 @@
     --color-strong: #fff;
     --link-normal: #88e;
     --link-visited: #a4e;
+    --border-color: #333;
   }
 }
 
