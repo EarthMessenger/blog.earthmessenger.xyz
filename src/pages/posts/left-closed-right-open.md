@@ -114,7 +114,8 @@ for (int i = 1; i < n; i++) d[i] = a[i] - a[i - 1];
 
 仿照前缀和，我们也可以定义出字符串 $s$ 的前缀哈希：
 
-$$h_i = 
+$$
+h_i = 
 \begin{cases}
 0                                  & i = 0 \\
 h_{i - 1} \times M + s_{i} \pmod N & i > 0
