@@ -20,6 +20,7 @@
     "giscus": "^1.2.8",
     "lunar-calendar": "^0.1.4",
     "rehype-mathjax": "^4.0.2",
+    "remark-join-cjk-lines": "^1.0.9",
     "remark-math": "^5.1.1",
     "sanitize-html": "^2.10.0"
   }
