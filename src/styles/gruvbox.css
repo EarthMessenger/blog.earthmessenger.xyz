@@ -1,7 +1,7 @@
 :root {
   --astro-code-color-text: #3c3836;
   --astro-code-color-background: #fbf1c7;
-  --astro-code-token-constant: #8f3f71;
+  --astro-code-token-constant: #076678;
   --astro-code-token-string: #79740e;
   --astro-code-token-comment: #928374;
   --astro-code-token-keyword: #9d0006;
@@ -16,7 +16,7 @@
   :root {
     --astro-code-color-text: #ebdbb2;
     --astro-code-color-background: #282828;
-    --astro-code-token-constant: #d3689b;
+    --astro-code-token-constant: #83a598;
     --astro-code-token-string: #b8bb26;
     --astro-code-token-comment: #928374;
     --astro-code-token-keyword: #fabd2f;
