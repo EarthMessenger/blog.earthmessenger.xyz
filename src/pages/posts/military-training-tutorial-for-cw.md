@@ -12,7 +12,7 @@ tags: misc
 
 我们军训的位置在新都应用地质爱国主义教育基地
 
-百度地图：https://j.map.baidu.com/74/KDMh。
+百度地图：[https://j.map.baidu.com/74/KDMh](https://j.map.baidu.com/74/KDMh)。
 
 ![图片.png](https://s2.loli.net/2023/06/13/lczUqoSNKFrmbfa.png)
 
