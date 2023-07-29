@@ -55,9 +55,9 @@ $a_{i-1}$ 到 $a_{i}$ 的步长。同时，$b$ 的值域和 $a$ 一样，都是 
 
 $$
 \begin{aligned}
-S_{n}(k)    &= \int_{0}^{k} S_{n-1}(k-x) \mathrm{d}x \\
-            &= \int_{0}^{k} \frac{k^{n-1}}{(n-1)!} \mathrm{d}x \\
-            &= \frac{1}{(n-1)!} \cdot \int_{0}^{k} k^{n-1} \mathrm{d}x \\
+S_{n}(k)    &= \int_{0}^{k} S_{n-1}(x) \mathrm{d}x \\
+            &= \int_{0}^{k} \frac{x^{n-1}}{(n-1)!} \mathrm{d}x \\
+            &= \frac{1}{(n-1)!} \cdot \int_{0}^{k} x^{n-1} \mathrm{d}x \\
             &= \frac{1}{(n-1)!} \cdot \frac{k^n}{n} \\
             &= \frac{k^n}{n!}
 \end{aligned}
