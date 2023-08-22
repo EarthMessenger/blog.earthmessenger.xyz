@@ -20,7 +20,7 @@ edges = [(random.randrange(i), i) for i in range(1, N)]
 ```python
 edges = []
 def build(l, r):
-    p = random.choice(range(l, r))
+    p = random.randrange(l, r)
     if p - l > 0:
         edges.append((p, build(l, p)))
     if r - p - 1 > 0:
@@ -28,6 +28,9 @@ def build(l, r):
     return p
 build(0, N)
 ```
+
+`build` 函数会返回一个数，表示二叉树的根节点，如果希望以 0 为根的话，可以输出边
+的时候把 0 和根对调一下。
 
 ### 长度为 N，和为 M 的正整数序列
 
@@ -324,7 +327,7 @@ template <int P> struct static_modint
 };
 ```
 
-可以考虑搞上 barret 优化，但我不会。
+模数固定，编译器（应该）会自动加上 Barrett reduction 优化。
 
 ## 图论
 
