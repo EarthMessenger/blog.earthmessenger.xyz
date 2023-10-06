@@ -5,8 +5,9 @@
 }
 
 :root {
-  --main-font: Sarasa UI SC, Noto Sans CJK SC, sans-serif;
-  --mono-font: Sarasa Mono SC, Noto Sans Mono SC, monospace;
+  /* let reader to decide what font to display */
+  --main-font: monospace, sans-serif;
+  --mono-font: monospace, sans-serif;
 }
 
 :root {
@@ -17,6 +18,7 @@
   --link-normal: #00e;
   --link-visited: #518;
   --border-color: #ddd;
+  --hr-color: #8e8f8f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +30,7 @@
     --link-normal: #88e;
     --link-visited: #a4e;
     --border-color: #333;
+    --hr-color: #fff;
   }
 }
 
@@ -57,4 +60,9 @@ a {
 
 a:visited {
   color: var(--link-visited);
+}
+
+hr {
+  border: none;
+	border-top: 1px dashed var(--hr-color);
 }

@@ -25,7 +25,7 @@ const title = "404 Not Found";
 </style>
 
 <script>
-  const searchButton = document.getElementById("search-button");
+  const searchButton = document.querySelector<HTMLFormElement>("#search-button")!;
   searchButton.onclick = () => {
     searchButton.form.q.value = `${searchButton.form.q_origin.value} repo:EarthMessenger/blog.earthmessenger.xyz`;
   };

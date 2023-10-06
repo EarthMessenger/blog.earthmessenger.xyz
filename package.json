@@ -2,7 +2,6 @@
   "name": "blog.earthmessenger.xyz",
   "version": "1.0.0",
   "description": "",
-  "packageManager": "pnpm@8.6.12",
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",

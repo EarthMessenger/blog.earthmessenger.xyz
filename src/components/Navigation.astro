@@ -4,7 +4,7 @@
 <nav>
   <div class="nav-home">
     <a href="/" title="首页">
-      <img src="/favicon.png" title="icon"/>
+      <img src="/favicon.png" title="icon" height="24" width="24"/>
       <span>/</span>
     </a>
   </div>
@@ -25,9 +25,14 @@
     font-size: 1.2em;
   }
 
+  .nav-home a {
+    display: flex;
+    align-items: center;
+  }
+
   .nav-home img {
-    height: 1em;
     border-radius: 10px;
+    margin-right: 0.5em;
   }
 
   .nav-menu {
