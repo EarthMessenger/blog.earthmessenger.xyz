@@ -38,6 +38,8 @@ void print_binary(unsigned int x)
 
 ## lambda 函数递归
 
+类似函数式编程的 yc
+
 ```cpp
 auto f = [](auto &f, int i) -> int {
     if (i <= 1) return 1;
@@ -45,9 +47,11 @@ auto f = [](auto &f, int i) -> int {
 }
 ```
 
-类似函数式编程的 yc
+## 迭代器技巧
 
-## vector 的末尾元素
+### 取末尾元素
+
+非常 pythonic
 
 ```cpp
 std::vector a{0, 1, 2, 3, 4};
@@ -55,6 +59,13 @@ a[a.size() - 1] == 4;       // true
 a.rbegin()[0] == 4;         // true
 a.end()[-1] == 4;           // true
 std::end(a)[-1] == 4;       // true
+```
+
+### 逆序排序
+
+```cpp
+std::sort(a.begin(), a.end()); // 顺序
+std::sort(a.rbegin(), a.rend()); // 逆序
 ```
 
 ## std::ranges
@@ -194,6 +205,8 @@ int sum = std::accumulate(a.begin(), a.end(), 0); // 14
 int proc = std::accumulate(a.begin(), a.end(), 1, std::multiplies<int>()); // 60
 ```
 
+<!--
+
 ### std::boyer\_moore\_searcher
 
 [cppreference.com: std::boyer\_moore\_searcher](https://zh.cppreference.com/w/cpp/utility/functional/boyer_moore_searcher)
@@ -203,6 +216,8 @@ update: 我确实不知道它的原理，不要乱用。
 Boyer-Moore 匹配算法，是 $O(n)$ 的，配合 `std::search` 使用，但主要用于单次字符串匹配，多次的话最坏是 $O(nm)$。
 
 反面教材：[loj 提交记录 \#1683441](https://loj.ac/s/1683441)
+
+-->
 
 ## bit
 
@@ -268,3 +283,21 @@ template<int P> struct modint
 };
 ```
 
+## `std::greater<>` 等
+
+C++14 之后，所有的这种比较类都有了这种特化，当你不在模板参数中填写内容，或者填
+写 `void` 的时候，可用于任意两个类型的比较。大概长这样：
+
+```cpp
+template< class T, class U >
+
+constexpr auto operator()( T&& lhs, U&& rhs ) const
+    -> decltype(std::forward<T>(lhs) > std::forward<U>(rhs));
+```
+
+这意味着你在大多是需要传这种比较类的地方可以这样写了：
+
+```cpp
+std::priority_queue<std::pair<int, int>, std::vector<int, int>, std::greater<>>
+std::sort(a.begin(), a.end(), std::greater<>());
+```
