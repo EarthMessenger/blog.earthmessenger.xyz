@@ -84,7 +84,7 @@ std::unique(a.begin(), a.end());
 std::ranges::unique(a);
 
 std::lower_bound(a.begin(), a.end(), x);
-std::ranges::unique(a, x);
+std::ranges::lower_bound(a, x);
 ```
 
 就相当于每处 `.begin()`、`.end()` 都可以节省 8 个非空白字符。
