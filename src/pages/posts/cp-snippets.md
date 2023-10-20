@@ -64,8 +64,7 @@ do
     python -m gen_data $seed > a.in
     cat a.in | ./bf > a.ans
     cat a.in | ./a > a.out
-    diff -Z a.ans a.out
-    if [ $? -ne 0 ]
+    if ! diff -Z ans.ans ans.out
     then
         echo WA
         break
@@ -75,6 +74,46 @@ done
 
 其中 `bf` 是暴力程序，`a` 是需要对拍的程序，`gen_data` 是用 Python 写的数据生成
 器，`diff` 的 `-Z` 选项用于忽略行末空格。
+
+`$RANDOM` 的值域一般是 $[0, 32768)$，如果觉得太小可以考虑将多个 `$RANDOM` 拼到
+一起，类似这样：
+
+```sh
+print "%04x" $RANDOM $RANDOM $RANDOM $RANDOM
+```
+
+## judgesh
+
+```sh
+#!/usr/bin/bash
+
+program=$1
+tmp=$(mktemp)
+
+clean() {
+  rm -f "${tmp}"
+}
+
+trap clean EXIT
+
+while read -r t
+do
+  echo -ne "${t}\t"
+  if ! { "./${program}"; } < "${t}.in" > "${tmp}" 2> /dev/null
+  then
+    echo "RE"
+  elif ! diff -ZB "${t}.ans" "${tmp}" > /dev/null 2> /dev/null
+  then
+    echo "WA"
+  else
+    echo "AC"
+  fi
+done < <(find . -name "${program}*.in" | sed "s/.in$//" | sort)
+```
+
+自动寻找目录下所有与可执行文件同名的 `.in` 文件进行评测，注意 TLE 会导致卡死。
+
+完整版：[judgesh](https://github.com/EarthMessenger/judgesh)
 
 ## 数据结构
 
