@@ -309,7 +309,7 @@ std::mt19937 Treap::mt;
 ### `static_modint`
 
 ```cpp
-template <int P> struct static_modint
+template <unsigned int P> struct static_modint
 {
 	using mint = static_modint;
 	unsigned int _v;
@@ -326,7 +326,7 @@ template <int P> struct static_modint
 	unsigned int val() const { return _v; }
 	static constexpr unsigned int mod() { return P; }
 
-	mint operator-() const { return mint(-_v); }
+	mint operator-() const { return mint(P - _v); }
 	mint &operator+=(const mint &a)
 	{
 		_v += a._v;
