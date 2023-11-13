@@ -10,7 +10,7 @@ export async function get() {
   return rss({
     title: SITE_TITLE,
     description: SITE_DISCRIPTION,
-    site: "https://blog.earthmessenger.xyz",
+    site: "https://earthmessenger.xyz",
     items: posts.map((post) => ({
       link: post.url,
       content: sanitizeHtml(post.compiledContent()),

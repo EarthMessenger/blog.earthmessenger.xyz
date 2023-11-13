@@ -14,5 +14,5 @@ export default defineConfig({
     rehypePlugins: [rehypeMathJaxSvg]
   },
   integrations: [sitemap()],
-  site: "https://blog.earthmessenger.xyz"
+  site: "https://earthmessenger.xyz"
 });
