@@ -373,7 +373,7 @@ template <unsigned int P> struct static_modint
 ### Dinic
 
 ```cpp
-struct dinic_algorithm
+struct maxflow
 {
 	int n;
 	int s, t;
@@ -391,7 +391,7 @@ struct dinic_algorithm
 
 	std::vector<int> level, ptr;
 
-	dinic_algorithm(int n, int s, int t)
+	maxflow(int n, int s, int t)
 	    : n(n), s(s), t(t), adj(n), level(n), ptr(n)
 	{
 	}
@@ -436,7 +436,7 @@ struct dinic_algorithm
 			if (level[v] != level[u] + 1 ||
 			    edges[id].cap - edges[id].flow < 1)
 				continue;
-			int d = dfs(v, std::min(flow_limit, edges[id].cap - edges[id].flow));
+			int d = dfs(v, std::min(flow_limit - res, edges[id].cap - edges[id].flow));
 			if (d == 0) continue;
 			res += d;
 			edges[id].flow += d;
