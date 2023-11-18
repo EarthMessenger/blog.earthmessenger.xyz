@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: CSP2023 游寄
 pubDate: 2023-10-22
-tags: csp
+tags: journal
 ---
 
 ## Day 初赛

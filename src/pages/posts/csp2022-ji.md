@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: CSP2022 游只因
 pubDate: 2022-11-07
-tags: csp
+tags: journal
 ---
 
 ## Day 0
