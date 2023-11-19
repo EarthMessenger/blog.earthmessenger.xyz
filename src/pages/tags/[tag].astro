@@ -1,20 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob("../posts/*.md");
+  const allPosts = (await getCollection("posts")).sort(
+    (p, q) => p.data.pubDate.getTime() - q.data.pubDate.getTime(),
+  );
   const uniqueTags = [
     ...new Set(
       allPosts
-        .map((post) =>
-          post.frontmatter.tags ? post.frontmatter.tags.split(" ") : []
-        )
-        .flat()
+        .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+        .flat(),
     ),
   ];
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.frontmatter.tags.split(" ").includes(tag)
+      post.data.tags.split(" ").includes(tag),
     );
     return {
       params: { tag },
@@ -35,8 +36,8 @@ const title = `带有 ${tag} 标签的博客`;
     {
       posts.map((post) => (
         <li>
-          <a href={post.url} title={post.frontmatter.title}>
-            {post.frontmatter.title}
+          <a href={`/posts/${post.slug}`} title={post.data.title}>
+            {post.data.title}
           </a>
         </li>
       ))

@@ -1,7 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const allPosts = await Astro.glob("./*/*.md");
+const allPosts = await getCollection("oi-notes");
 
 const title="题解";
 ---
@@ -12,7 +13,7 @@ const title="题解";
     {
       allPosts.map((post) => (
         <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
+          <a href={`/oi-notes/${post.slug}`}>{post.data.title}</a>
         </li>
       ))
     }

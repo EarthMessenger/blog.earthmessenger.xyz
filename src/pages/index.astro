@@ -1,7 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await getCollection("posts");
 ---
 
 <BaseLayout title="首页">
@@ -9,14 +10,10 @@ const allPosts = await Astro.glob("../pages/posts/*.md");
   <ol reversed="true">
     {
       allPosts
-        .sort(
-          (p, q) =>
-            Date.parse(q.frontmatter.pubDate) -
-            Date.parse(p.frontmatter.pubDate)
-        )
+        .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime())
         .map((post) => (
           <li>
-            <a href={post.url}>{post.frontmatter.title}</a>
+            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
           </li>
         ))
     }

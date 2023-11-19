@@ -1,6 +1,7 @@
 ---
 import { formatDate } from "../utils";
 const { title, pubDate, tags } = Astro.props.frontmatter;
+const linkTags = Astro.props.linkTags || false;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Giscus from "../components/Giscus.astro";
@@ -25,13 +26,13 @@ import "../styles/posts.css";
     {
       tags &&
         tags.split(" ").map((tag) =>
-          Astro.props.url.includes("/posts/") ? (
-              <a class="tags" href={`/tags/${tag}`}>
-                {tag}
-              </a>
+          linkTags ? (
+            <a class="tags" href={`/tags/${tag}`}>
+              {tag}
+            </a>
           ) : (
             <span class="tags">{tag}</span>
-          )
+          ),
         )
     }
     {tags && <br />}
