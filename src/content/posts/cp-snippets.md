@@ -367,6 +367,99 @@ template <unsigned int P> struct static_modint
 
 模数固定，编译器（应该）会自动加上 Barrett reduction 优化。
 
+### `dynamic_modint`
+
+```cpp
+using u32 = unsigned int;
+using u64 = unsigned long long;
+using u128 = __uint128_t; 
+
+struct barrett {
+  u32 m;
+  u64 im;
+
+  barrett() {}
+  barrett(u32 m) : m(m), im((u64)(-1) / m + 1) {}
+
+  u32 mod() const { return m; }
+
+  u32 reduce(u64 x) const 
+  {
+    u64 y = ((u128)x * im) >> 64;
+    u32 z = x - y * m;
+    if (z >= m) z += m;
+    return z;
+  }
+};
+
+template <int id>
+struct dynamic_modint
+{
+  static barrett &bar()
+  {
+    static barrett b;
+    return b;
+  }
+  static u32 mod() { return bar().m; }
+  static void set_mod(u32 x) { bar() = barrett(x); }
+  static u32 reduce(u64 x) { return bar().reduce(x); }
+
+  u32 v;
+
+  dynamic_modint() : v(0) {}
+  template <typename T>
+  dynamic_modint(T x) : v((x % mod() + mod()) % mod()) {}
+
+  using mint = dynamic_modint;
+
+  u32 val() const { return v; }
+
+  static mint raw(u32 x)
+  {
+    mint res;
+    res.v = x;
+    return res;
+  }
+
+  mint operator-() const { return dynamic_modint(mod() - v); }
+  mint &operator+=(mint x)
+  {
+    if ((v += x.v) >= mod()) v -= mod();
+    return *this;
+  }
+  mint &operator-=(mint x)
+  {
+    if ((v += mod() - x.v) >= mod()) v -= mod();
+    return *this;
+  }
+  mint &operator*=(mint x)
+  {
+    v = reduce((u64)v * x.v);
+    return *this;
+  }
+  mint operator+(mint x) const { return mint{*this} += x; }
+  mint operator-(mint x) const { return mint{*this} -= x; }
+  mint operator*(mint x) const { return mint{*this} *= x; }
+
+  mint pow(long long y) const
+  {
+    mint res = 1;
+    mint base = *this;
+    while (y) {
+      if (y & 1) res *= base;
+      base *= base;
+      y >>= 1;
+    }
+    return res;
+  }
+
+  mint inv() const { return pow(mod() - 2); }
+
+  mint &operator/=(mint x) { return *this *= x.inv(); }
+  mint operator/(mint x) const { return mint{*this} *= x.inv(); }
+};
+```
+
 ## 图论
 
 ### Dinic
