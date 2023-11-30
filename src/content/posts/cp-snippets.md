@@ -78,7 +78,7 @@ done
 一起，类似这样：
 
 ```sh
-print "%04x" $RANDOM $RANDOM $RANDOM $RANDOM
+printf "%04x" $RANDOM $RANDOM $RANDOM $RANDOM
 ```
 
 ## judgesh
