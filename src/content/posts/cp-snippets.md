@@ -640,15 +640,16 @@ struct twosat
 ```cpp
 std::vector<int> prefix_function(const std::string &s)
 {
-	const int n = s.size();
-	std::vector<int> p(n);
-	for (int i = 1; i < n; i++) {
-		int j = p[i - 1];
-		while (j > 0 && s[i] != s[j]) j = p[j - 1];
-		if (s[i] == s[j]) j++;
-		p[i] = j;
-	}
-	return p;
+    int n = s.size();
+    std::vector<int> p(n + 1);
+    p[0] = p[1] = 0;
+    for (int i = 1; i <= (int)s.size(); i++) {
+        int t = p[i];
+        while (t > 0 && s[t] != s[i]) t = p[t];
+        if (s[t] == s[i]) t++;
+        p[i + 1] = t;
+    }
+    return p;
 }
 ```
 
@@ -721,4 +722,45 @@ struct aho_corasick
     return adj;
   }
 };
+```
+
+### 后缀数组
+
+```cpp
+std::pair<std::vector<int>, std::vector<int>> suffix_array(const std::string &s)
+{
+  int n = s.size();
+  int m = std::max(128, n);
+
+  std::vector<int> sa(n), rk(n), sa2(n), rk2(n * 2, -1), cnt(m + 1);
+  for (int i = 0; i < n; i++) rk[i] = s[i];
+  for (int i = 0; i < n; i++) cnt[rk[i] + 1]++;
+  for (int i = 1; i < m; i++) cnt[i] += cnt[i - 1];
+  for (int i = 0; i < n; i++) sa[cnt[rk[i]]++] = i;
+
+  for (int w = 1; ; w *= 2) {
+    int p = 0;
+    for (int i = n - w; i < n; i++) sa2[p++] = i;
+    for (int i = 0; i < n; i++) {
+      if (sa[i] >= w) sa2[p++] = sa[i] - w;
+    }
+
+    std::fill(cnt.begin(), cnt.end(), 0);
+    for (int i = 0; i < n; i++) cnt[rk[sa2[i]] + 1]++;
+    for (int i = 1; i < m; i++) cnt[i] += cnt[i - 1];
+    for (int i = 0; i < n; i++) sa[cnt[rk[sa2[i]]]++] = sa2[i];
+
+    std::copy(rk.begin(), rk.end(), rk2.begin());
+    int q = 0;
+    rk[sa[0]] = 0;
+    for (int i = 1; i < n; i++) {
+      int u = sa[i - 1], v = sa[i];
+      if (rk2[u] != rk2[v] || rk2[u + w] != rk2[v + w]) q++;
+      rk[sa[i]] = q;
+    }
+    if (q + 1 == n) break;
+  }
+
+  return {sa, rk};
+}
 ```
