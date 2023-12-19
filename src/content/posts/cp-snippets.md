@@ -633,6 +633,35 @@ struct twosat
 };
 ```
 
+### static graph
+
+卡常用，从 AtCoder Library 摘的。
+
+```cpp
+template <typename E>
+struct static_graph
+{
+  std::vector<int> start;
+  std::vector<E> elist;
+
+  static_graph(int n, const std::vector<std::pair<int, E>> &edges) 
+    : start(n + 1), elist(edges.size())
+  {
+    for (const auto &e : edges) start[e.first + 1]++;
+    for (int i = 1; i <= n; i++) start[i] += start[i - 1];
+    auto counter = start;
+    for (const auto &e : edges) elist[counter[e.first]++] = e.second;
+  }
+
+  auto operator[](int u) const
+  {
+    return std::span{elist.begin() + start[u], elist.begin() + start[u + 1]};
+  };
+};
+```
+
+`static_graph::operator[]` 用到了 `std::span`，需要 C++20，如果不支持可以考虑写一个支持 `begin()`，`end()` 的简单 wrapper。
+
 ## 字符串
 
 ### KMP
