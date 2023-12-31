@@ -260,9 +260,11 @@ __builtin_popount(x);
 std::popcount(x);
 ```
 
-## 三路比较
+## 比较
 
-C++20 引入的新东西，主要用于简写六个比较运算符（`==`、`<`、`>`、`<=`、`>=`、`!=`）。
+### 三路比较
+
+C++20 引入的新东西，主要用于简写多个比较运算符。
 
 [cppreference.com: 三路比较](https://zh.cppreference.com/w/cpp/language/operator_comparison#.E4.B8.89.E8.B7.AF.E6.AF.94.E8.BE.83)
 
@@ -282,7 +284,7 @@ template<int P> struct modint
 };
 ```
 
-## `std::greater<>` 等
+### `std::greater<>` 等
 
 C++14 之后，所有的这种比较类都有了这种特化，当你不在模板参数中填写内容，或者填
 写 `void` 的时候，可用于任意两个类型的比较。大概长这样：
@@ -300,3 +302,7 @@ constexpr auto operator()( T&& lhs, U&& rhs ) const
 std::priority_queue<std::pair<int, int>, std::vector<int, int>, std::greater<>>
 std::sort(a.begin(), a.end(), std::greater<>());
 ```
+
+### 透明比较器
+
+见[用于关联式容器的透明比较器技巧](/posts/associative-containers-trick)。
