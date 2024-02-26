@@ -13,10 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@astrojs/rss": "^4.0.1",
-    "@astrojs/sitemap": "^3.0.4",
-    "astro": "^4.0.8",
-    "giscus": "^1.4.0",
+    "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.1",
+    "astro": "^4.4.4",
+    "giscus": "^1.5.0",
     "lunar-calendar": "^0.1.4",
     "rehype-mathjax": "^6.0.0",
     "rehype-sanitize": "^6.0.0",
@@ -24,7 +24,7 @@
     "remark-join-cjk-lines": "^1.0.11",
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.0.0",
+    "remark-rehype": "^11.1.0",
     "unified": "^11.0.4"
   }
 }
