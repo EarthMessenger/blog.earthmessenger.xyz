@@ -2,6 +2,7 @@
 title: SCOI 2024
 tags: journal
 pubDate: 2024-02-26
+lang: zh-hant
 ---
 
 已經連續寫了好多篇遊記了，博客不知道該寫什麼好了。

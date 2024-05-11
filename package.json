@@ -14,8 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "@astrojs/rss": "^4.0.5",
-    "@astrojs/sitemap": "^3.1.1",
-    "astro": "^4.4.4",
+    "@astrojs/sitemap": "^3.1.4",
+    "astro": "^4.8.2",
     "lunar-calendar": "^0.1.4",
     "rehype-mathjax": "^6.0.0",
     "rehype-sanitize": "^6.0.0",

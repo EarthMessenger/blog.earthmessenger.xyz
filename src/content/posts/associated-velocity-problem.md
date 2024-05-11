@@ -2,6 +2,7 @@
 title: 關聯速度問題
 tags: whk
 pubDate: 2024-03-10
+lang: zh-hant
 ---
 
 高中物理關聯速度問題是類似這種這樣的問題：

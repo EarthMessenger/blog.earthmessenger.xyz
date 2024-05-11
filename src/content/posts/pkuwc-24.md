@@ -2,6 +2,7 @@
 title: PKUWC 2024
 pubDate: 2024-01-27
 tags: journal
+lang: zh-hant
 ---
 
 ## 2024-01-25

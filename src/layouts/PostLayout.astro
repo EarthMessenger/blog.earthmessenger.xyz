@@ -1,7 +1,9 @@
 ---
+import { SITE_LANG } from "../config";
 import { formatDate } from "../utils";
 const { title, pubDate, tags } = Astro.props.frontmatter;
 const linkTags = Astro.props.linkTags || false;
+const lang = Astro.props.frontmatter.lang || SITE_LANG;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Giscus from "../components/Giscus.astro";
@@ -22,7 +24,7 @@ import "../styles/posts.css";
         </>
       )
     }
-    {tags && <span>标签：</span>}
+    {tags && <span>標籤：</span>}
     {
       tags &&
         tags.split(" ").map((tag) =>
@@ -40,7 +42,7 @@ import "../styles/posts.css";
 
   <hr />
 
-  <div id="post-content">
+  <div id="post-content" lang={lang}>
     <slot />
   </div>
 
