@@ -369,11 +369,9 @@ template <unsigned int P> struct static_modint
 
 ### `dynamic_modint`
 
-```cpp
-using u32 = unsigned int;
-using u64 = unsigned long long;
-using u128 = __uint128_t; 
+UPD: 刪除了 `barrett::bar()`，以此函數得 barrett 很慢。
 
+```cpp
 struct barrett {
   u32 m;
   u64 im;
@@ -395,24 +393,18 @@ struct barrett {
 template <int id>
 struct dynamic_modint
 {
-  static barrett &bar()
-  {
-    static barrett b;
-    return b;
-  }
-  static u32 mod() { return bar().m; }
-  static void set_mod(u32 x) { bar() = barrett(x); }
-  static u32 reduce(u64 x) { return bar().reduce(x); }
+  static barrett b;
+  static u32 mod() { return b.m; }
+  static void set_mod(u32 x) { b = barrett(x); }
+  static u32 reduce(u64 x) { return b.reduce(x); }
 
   u32 v;
 
-  dynamic_modint() : v(0) {}
+  dynamic_modint() = default; // as a trivial struct
   template <typename T>
-  dynamic_modint(T x) : v((x % mod() + mod()) % mod()) {}
+  dynamic_modint(T x) : v((x % (T)mod() < 0) ? x + (T)mod() : x) {}
 
   using mint = dynamic_modint;
-
-  u32 val() const { return v; }
 
   static mint raw(u32 x)
   {
@@ -420,6 +412,8 @@ struct dynamic_modint
     res.v = x;
     return res;
   }
+
+  u32 val() const { return v; }
 
   mint operator-() const { return dynamic_modint(mod() - v); }
   mint &operator+=(mint x)
@@ -437,9 +431,9 @@ struct dynamic_modint
     v = reduce((u64)v * x.v);
     return *this;
   }
-  mint operator+(mint x) const { return mint{*this} += x; }
-  mint operator-(mint x) const { return mint{*this} -= x; }
-  mint operator*(mint x) const { return mint{*this} *= x; }
+  friend mint operator+(mint x, mint y) { return x += y; }
+  friend mint operator-(mint x, mint y) { return x -= y; }
+  friend mint operator*(mint x, mint y) { return x *= y; }
 
   mint pow(long long y) const
   {
@@ -456,8 +450,10 @@ struct dynamic_modint
   mint inv() const { return pow(mod() - 2); }
 
   mint &operator/=(mint x) { return *this *= x.inv(); }
-  mint operator/(mint x) const { return mint{*this} *= x.inv(); }
+  friend mint operator/(mint x, mint y) { return x *= y.inv(); }
 };
+
+template <int id> barrett dynamic_modint<id>::b;
 ```
 
 ## 图论
