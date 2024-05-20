@@ -308,60 +308,68 @@ std::mt19937 Treap::mt;
 ### `static_modint`
 
 ```cpp
-template <unsigned int P> struct static_modint
+template <int M>
+struct static_modint
 {
-	using mint = static_modint;
-	unsigned int _v;
+  static constexpr u32 UM = M;
+  static_assert(UM < 0x80'00'00'00u);
 
-	static_modint() : _v(0) {}
+  u32 v;
+  constexpr static_modint() : v(0) {}
 
-	static_modint(long long v)
-	{
-		long long x = v % mod();
-		if (x < 0) x += mod();
-		_v = x;
-	}
+  template <typename T, std::enable_if_t<std::is_signed_v<T>>* = nullptr>
+  constexpr static_modint(T n) : v((n %= M) < 0 ? n + M : n) {}
 
-	unsigned int val() const { return _v; }
-	static constexpr unsigned int mod() { return P; }
+  template <typename T, std::enable_if_t<std::is_unsigned_v<T>>* = nullptr>
+  constexpr static_modint(T n) : v(n %= UM) {}
 
-	mint operator-() const { return mint(P - _v); }
-	mint &operator+=(const mint &a)
-	{
-		_v += a._v;
-		if (_v >= mod()) _v -= mod();
-		return *this;
-	}
-	mint &operator-=(const mint &a)
-	{
-		_v += mod() - a._v;
-		if (_v >= mod()) _v -= mod();
-		return *this;
-	}
-	mint &operator*=(const mint &a)
-	{
-		_v = (long long)_v * a._v % mod();
-		return *this;
-	}
-	mint operator+(const mint &a) const { return mint(*this) += a; }
-	mint operator-(const mint &a) const { return mint(*this) -= a; }
-	mint operator*(const mint &a) const { return mint(*this) *= a; }
+  using mint = static_modint;
 
-	mint pow(long long n) const
-	{
-		mint x = *this, r = 1;
-		while (n) {
-			if (n & 1) r *= x;
-			x *= x;
-			n >>= 1;
-		}
-		return r;
-	}
+  static mint raw(u32 v)
+  {
+    mint res;
+    res.v = v;
+    return res;
+  }
 
-	mint inv() const { return pow(mod() - 2); }
+  constexpr u32 val() const { return v; }
 
-	mint &operator/=(const mint &a) { return *this *= a.inv(); }
-	mint operator/(const mint &a) const { return mint(*this) /= a; }
+  mint operator-() const { return mint::raw(v == 0 ? 0u : UM - v); }
+
+  mint &operator+=(mint a)
+  {
+    if ((v += a.v) >= UM) v -= UM;
+    return *this;
+  }
+  mint &operator-=(mint a)
+  {
+    if ((v += UM - a.v) >= UM) v -= UM;
+    return *this;
+  }
+  mint &operator*=(mint a)
+  {
+    v = (u64)v * a.v % UM;
+    return *this;
+  }
+  mint &operator/=(mint a) { return *this *= a.inv(); }
+
+  friend mint operator+(mint a, mint b) { return a += b; }
+  friend mint operator-(mint a, mint b) { return a -= b; }
+  friend mint operator*(mint a, mint b) { return a *= b; }
+  friend mint operator/(mint a, mint b) { return a /= b; }
+
+  mint pow(u64 n) const
+  {
+    mint res = 1, base = *this;
+    while (n) {
+      if (n & 1) res *= base;
+      base *= base;
+      n >>= 1;
+    }
+    return res;
+  }
+
+  mint inv() const { return pow(UM - 2); }
 };
 ```
 
@@ -369,7 +377,7 @@ template <unsigned int P> struct static_modint
 
 ### `dynamic_modint`
 
-UPD: 刪除了 `barrett::bar()`，以此函數得 barrett 很慢。
+UPD: 刪除了 `dynamic_modint::bar()`，以此函數得 barrett 很慢。
 
 ```cpp
 struct barrett {
