@@ -158,150 +158,489 @@ struct dsu
 };
 ```
 
-### Treap
+### 平衡樹
 
-这是 join-based 实现。
+此 [Dynamic Sequence Range Affine Range Sum](https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum)。
+
+#### RBST
 
 ```cpp
-struct Treap
+struct SumMonoid
 {
-	static std::mt19937 mt;
+  mint sum;
+  SumMonoid() : sum(0) {}
+  SumMonoid(mint sum) : sum(sum) {}
 
-	struct node_t
-	{
-		using pnode_t = node_t*;
-
-		const int key;
-		const unsigned int prior;
-
-		int cnt;
-		int size;
-
-		pnode_t lc, rc;
-		node_t(int key) :
-			key(key), prior(mt()), 
-			cnt(1), size(1)
-			lc(nullptr), rc(nullptr) {}
-
-		void update()
-		{
-			size = cnt;
-			if (lc) {
-				size += lc->size;
-			}
-			if (rc) {
-				size += rc->size;
-			}
-		}
-	};
-
-	using pnode_t = node_t::pnode_t;
-
-	pnode_t root;
-
-	Treap() : root(nullptr) {}
-
-	template <typename Compare> 
-	std::tuple<pnode_t, pnode_t> split(pnode_t p, int key, Compare &&cmp)
-	{
-		if(p == nullptr) {
-			return {nullptr, nullptr};
-		} else if (cmp(p->key, key)) {
-			pnode_t r;
-			std::tie(p->rc, r) = split(p->rc, key, cmp);
-			p->update();
-			return {p, r};
-		} else {
-			pnode_t l;
-			std::tie(l, p->lc) = split(p->lc, key, cmp);
-			p->update();
-			return {l, p};
-		}
-	}
-
-	std::tuple<pnode_t, pnode_t, pnode_t> split3(pnode_t p, int key)
-	{
-		auto [le, g] = split(p, key, std::less_equal<int>());
-		auto [l, e] = split(le, key, std::less<int>());
-		return {l, e, g};
-	}
-
-	pnode_t join(pnode_t p, pnode_t q)
-	{
-		if (p == nullptr && q == nullptr) return nullptr;
-		if (p == nullptr) return q;
-		if (q == nullptr) return p;
-		if (p->prior < q->prior) {
-			p->rc = join(p->rc, q);
-			p->update();
-			return p;
-		} else {
-			q->lc = join(p, q->lc);
-			q->update();
-			return q;
-		}
-	}
-
-	pnode_t join3(pnode_t a, pnode_t b, pnode_t c)
-	{
-		return join(join(a, b), c);
-	}
-
-	void insert(int key)
-	{
-		auto [l, e, g] = split3(root, key);
-
-		if (e == nullptr) {
-			e = new node_t(key);
-		} else {
-			e->cnt++;
-			e->update();
-		}
-
-		root = join3(l, e, g);
-	}
-
-	void del(int key) 
-	{
-		auto [l, e, g] = split3(root, key);
-
-		if (e->cnt > 1) {
-			e->cnt--;
-			e->update();
-		} else {
-			delete e;
-			e = nullptr;
-		}
-
-		root = join3(l, e, g);
-	}
-
-	template <typename Compare> 
-	int get_cnt(pnode_t p, int key, Compare &&cmp) const
-	{
-		if (p == nullptr) return 0;
-		int les = p->size;
-		if (p->rc != nullptr) les -= p->rc->size;
-		if (cmp(p->key, key)) {
-			return les + get_cnt(p->rc, key, cmp);
-		} else {
-			return get_cnt(p->lc, key, cmp);
-		}
-	}
-	template <typename Compare> int get_cnt(int key, Compare &&cmp) const { return get_cnt(root, key, cmp); }
-
-	int size() const
-	{
-		if (root) return root->size;
-		else return 0;
-	}
+  SumMonoid operator*(const SumMonoid &s) const
+  {
+    return sum + s.sum;
+  };
 };
 
-std::mt19937 Treap::mt;
+struct AddTimesMonoid
+{
+  mint k, b;
+  AddTimesMonoid() : k(1), b(0) {}
+  AddTimesMonoid(mint k, mint b) : k(k), b(b) {}
+
+  AddTimesMonoid operator*(const AddTimesMonoid &a) const
+  {
+    return {k * a.k, b * a.k + a.b};
+  };
+
+  SumMonoid operator()(const SumMonoid &s, u32 size) const
+  {
+    return {s.sum * k + b * size};
+  }
+
+  bool is_unit() const
+  {
+    return k.val() == 1 && b.val() == 0;
+  }
+};
+
+struct RBST
+{
+  struct node_t
+  {
+    bool reverse;
+    AddTimesMonoid tag;
+    u32 size;
+    SumMonoid prod;
+    SumMonoid m;
+    node_t *lc, *rc;
+
+    node_t() : reverse(false), tag(), size(0), prod(), m(), lc(nullptr), rc(nullptr) {}
+    node_t(SumMonoid m) : reverse(false), tag(), size(1), prod(m), m(m), lc(nullptr), rc(nullptr) {}
+
+    void update()
+    {
+      size = 1;
+      prod = m;
+      if (lc) {
+        size = size + lc->size;
+        prod = prod * lc->prod;
+      }
+      if (rc) {
+        size = size + rc->size;
+        prod = prod * rc->prod;
+      }
+    }
+
+    void toggle_reverse()
+    {
+      reverse = !reverse;
+      std::swap(lc, rc);
+    }
+
+    void apply(const AddTimesMonoid &t)
+    {
+      prod = t(prod, size);
+      m = t(m, 1);
+      tag = tag * t;
+    }
+
+    void push()
+    {
+      if (reverse) {
+        if (lc) lc->toggle_reverse();
+        if (rc) rc->toggle_reverse();
+        reverse = false;
+      }
+      if (!tag.is_unit()) {
+        if (lc) lc->apply(tag);
+        if (rc) rc->apply(tag);
+        tag = AddTimesMonoid{};
+      }
+    }
+  };
+
+  node_t *root;
+
+  // 可用 std::mt19937 之類代替
+  static u32 get_random()
+  {
+    static u32 x = 123456789;
+    static u32 y = 362436069;
+    static u32 z = 521288629;
+    static u32 w = 88675123;
+    u32 t = x ^ (x << 11);
+    x = y;
+    y = z;
+    z = w;
+    return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
+  };
+
+  static bool choice(u32 ls, u32 rs)
+  {
+    return get_random() % (ls + rs) < ls;
+  }
+
+  RBST() : root(nullptr) {}
+  RBST(const std::vector<mint> &a) : root(build_tree(0, a.size(), a)) {}
+
+  static node_t *build_tree(u32 l, u32 r, const std::vector<mint> &a)
+  {
+    if (r - l == 0) return nullptr;
+    u32 mid = l + (r - l) / 2;
+    auto p = new node_t(a[mid]);
+    p->lc = build_tree(l, mid, a);
+    p->rc = build_tree(mid + 1, r, a);
+    p->update();
+    return p;
+  }
+
+  static std::pair<node_t *, node_t *> split(u32 k, node_t *p)
+  {
+    if (p == nullptr) return {nullptr, nullptr};
+
+    p->push();
+    u32 ls = p->lc ? p->lc->size : 0;
+    if (ls < k) {
+      node_t *r;
+      std::tie(p->rc, r) = split(k - ls - 1, p->rc);
+      p->update();
+      return {p, r};
+    } else {
+      node_t *l;
+      std::tie(l, p->lc) = split(k, p->lc);
+      p->update();
+      return {l, p};
+    }
+  }
+
+  static node_t *join(node_t *p, node_t *q)
+  {
+    if (p == nullptr) return q;
+    if (q == nullptr) return p;
+
+    if (choice(p->size, q->size)) {
+      p->push();
+      p->rc = join(p->rc, q);
+      p->update();
+      return p;
+    } else {
+      q->push();
+      q->lc = join(p, q->lc);
+      q->update();
+      return q;
+    }
+  }
+
+  static node_t *join3(node_t *p1, node_t *p2, node_t *p3)
+  {
+    return join(p1, join(p2, p3));
+  }
+
+  void insert(u32 i, SumMonoid m)
+  {
+    auto [lp, rp] = split(i, root);
+    root = join3(lp, new node_t(m), rp);
+  }
+
+  void remove(u32 i)
+  {
+    auto [lp, irp] = split(i, root);
+    auto [ip, rp] = split(1, irp);
+    root = join(lp, rp);
+  }
+
+  void reverse(u32 l, u32 r)
+  {
+    auto [lp, mrp] = split(l, root);
+    auto [mp, rp] = split(r - l, mrp);
+    if (mp) mp->toggle_reverse();
+    root = join3(lp, mp, rp);
+  }
+
+  void apply(u32 l, u32 r, const AddTimesMonoid &m)
+  {
+    auto [lp, mrp] = split(l, root);
+    auto [mp, rp] = split(r - l, mrp);
+    if (mp) mp->apply(m);
+    root = join3(lp, mp, rp);
+  }
+
+  static SumMonoid prod(u32 l, u32 r, u32 ll, u32 rr, node_t *p)
+  {
+    if (p == nullptr) return {};
+
+    if (l <= ll && rr <= r) {
+      return p->prod;
+    } else {
+      p->push();
+
+      u32 mid = ll + (p->lc ? p->lc->size : 0);
+      SumMonoid res;
+      if (l < mid) res = res * prod(l, r, ll, mid, p->lc);
+      if (l <= mid && mid < r) res = res * p->m;
+      if (mid + 1 < r) res = res * prod(l, r, mid + 1, rr, p->rc);
+      return res;
+    }
+  }
+
+  SumMonoid prod(u32 l, u32 r) const
+  {
+    if (root == nullptr) return {};
+    return prod(l, r, 0, root->size, root);
+  }
+};
 ```
 
-`cmp` 只能传 `std::less` 或 `std::less_equal`。其实我觉得改成一个 `bool` 值表示
-是否要有等于也挺好的。
+#### Splay
+
+```cpp
+struct SumMonoid
+{
+  mint sum;
+  SumMonoid() : sum(0) {}
+  SumMonoid(mint sum) : sum(sum) {}
+
+  SumMonoid operator*(const SumMonoid &s) const
+  {
+    return sum + s.sum;
+  };
+};
+
+struct AddTimesMonoid
+{
+  mint k, b;
+  AddTimesMonoid() : k(1), b(0) {}
+  AddTimesMonoid(mint k, mint b) : k(k), b(b) {}
+
+  AddTimesMonoid operator*(const AddTimesMonoid &a) const
+  {
+    return {k * a.k, b * a.k + a.b};
+  };
+
+  SumMonoid operator()(const SumMonoid &s, u32 size) const
+  {
+    return {s.sum * k + b * size};
+  }
+
+  bool is_unit() const
+  {
+    return k.val() == 1 && b.val() == 0;
+  }
+};
+
+struct Splay
+{
+  struct node_t
+  {
+    bool reversed;
+    u32 size;
+
+    SumMonoid prod;
+    SumMonoid m;
+    AddTimesMonoid tag;
+
+    using pnode_t = node_t *;
+    pnode_t fa;
+    pnode_t ch[2];
+
+    node_t() : reversed(false), size(0), prod(), m(), tag(), fa(nullptr), ch{nullptr, nullptr} {}
+    node_t(SumMonoid m) : reversed(false), size(1), prod(m), m(m), tag(), fa(nullptr), ch{nullptr, nullptr} {}
+
+    void update()
+    {
+      size = 1;
+      prod = m;
+      for (auto c : ch) {
+        if (!c) continue;
+        size += c->size;
+        prod = prod * c->prod;
+      }
+    }
+
+    void reverse()
+    {
+      reversed = !reversed;
+      std::swap(ch[0], ch[1]);
+    }
+
+    void apply(const AddTimesMonoid &t)
+    {
+      prod = t(prod, size);
+      m = t(m, 1);
+      tag = tag * t;
+    }
+
+    void push()
+    {
+      for (auto c : ch) {
+        if (!c) continue;
+        if (reversed) c->reverse();
+        if (!tag.is_unit()) c->apply(tag);
+      }
+      reversed = false;
+      tag = AddTimesMonoid();
+    }
+
+    u32 which_child() const
+    {
+      assert(this->fa != nullptr);
+      return this->fa->ch[1] == this;
+    }
+
+    void rotate()
+    {
+      auto x = this;
+      assert(x->fa != nullptr);
+
+      auto y = x->fa;
+      auto z = y->fa;
+      auto xci = x->which_child();
+      y->ch[xci] = x->ch[xci ^ 1];
+      if (x->ch[xci ^ 1]) x->ch[xci ^ 1]->fa = y;
+      x->ch[xci ^ 1] = y;
+      if (z) z->ch[y->which_child()] = x;
+      y->fa = x;
+      x->fa = z;
+
+      y->update();
+      x->update();
+    }
+  };
+
+  using pnode_t = node_t *;
+  pnode_t root;
+
+  Splay() : root(nullptr) {}
+  Splay(pnode_t root) : root(root) {}
+  template <typename F>
+  Splay(u32 n, F &&f) : root(build_tree(0, n, f, nullptr)) {}
+
+  template <typename F>
+  static pnode_t build_tree(u32 l, u32 r, F &&f, pnode_t fa)
+  {
+    if (r - l == 0) return nullptr;
+    u32 mid = l + (r - l) / 2;
+    auto p = new node_t(f(mid));
+    p->ch[0] = build_tree(l, mid, f, p);
+    p->ch[1] = build_tree(mid + 1, r, f, p);
+    p->fa = fa;
+    p->update();
+    return p;
+  }
+
+  void splay(pnode_t x)
+  {
+    assert(x != nullptr);
+
+    x->push();
+    while (x->fa) {
+      auto y = x->fa;
+      if (!y->fa) {
+        y->push();
+        x->push();
+        x->rotate();
+      } else {
+        auto z = y->fa;
+        z->push();
+        y->push();
+        x->push();
+        if (y->which_child() == x->which_child()) y->rotate();
+        else x->rotate();
+        x->rotate();
+      }
+    }
+    root = x;
+  };
+
+  void splay_kth(u32 k)
+  {
+    auto p = root;
+    while (true) {
+      auto ls = p->ch[0] ? p->ch[0]->size : 0;
+      if (k == ls) break;
+      p->push();
+      if (k < ls) {
+        p = p->ch[0];
+      } else {
+        k -= ls + 1;
+        p = p->ch[1];
+      }
+    }
+    splay(p);
+  }
+
+  std::pair<pnode_t, pnode_t> split(u32 k)
+  {
+    if (!root) return {nullptr, nullptr};
+    if (k == 0) return {nullptr, root};
+    if (k == root->size) return {root, nullptr};
+    splay_kth(k);
+    auto l = root->ch[0];
+    root->ch[0] = nullptr;
+    root->update();
+    if (l) l->fa = nullptr;
+    return {l, root};
+  }
+
+  std::tuple<pnode_t, pnode_t, pnode_t> split3(u32 l, u32 r)
+  {
+    pnode_t mp, rp;
+    std::tie(root, rp) = split(r);
+    std::tie(root, mp) = split(l);
+    return {root, mp, rp};
+  }
+
+  static pnode_t join(pnode_t p, pnode_t q)
+  {
+    if (!p) return q;
+    if (!q) return p;
+    Splay sq = q;
+    sq.splay_kth(0);
+    q = sq.root;
+    q->ch[0] = p;
+    p->fa = q;
+    q->update();
+    return q;
+  }
+
+  static pnode_t join3(pnode_t p1, pnode_t p2, pnode_t p3)
+  {
+    return join(p1, join(p2, p3));
+  }
+
+  void insert(u32 x, SumMonoid m)
+  {
+    auto [lp, rp] = split(x);
+    root = join3(lp, new node_t(m), rp);
+  }
+
+  void remove(u32 x)
+  {
+    auto [lp, xp, rp] = split3(x, x + 1);
+    delete xp;
+    root = join(lp, rp);
+  }
+
+  void reverse(u32 l, u32 r)
+  {
+    auto [lp, mp, rp] = split3(l, r);
+    if (mp) mp->reverse();
+    root = join3(lp, mp, rp);
+  }
+
+  void apply(u32 l, u32 r, AddTimesMonoid m)
+  {
+    auto [lp, mp, rp] = split3(l, r);
+    if (mp) mp->apply(m);
+    root = join3(lp, mp, rp);
+  }
+
+  SumMonoid prod(u32 l, u32 r)
+  {
+    auto [lp, mp, rp] = split3(l, r);
+    SumMonoid res;
+    if (mp) res = mp->prod;
+    root = join3(lp, mp, rp);
+    return res;
+  }
+};
+```
 
 ## 数学
 
