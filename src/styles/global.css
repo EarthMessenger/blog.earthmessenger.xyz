@@ -64,7 +64,7 @@ a:visited {
 
 hr {
   border: none;
-	border-top: 1px dashed var(--hr-color);
+  border-top: 1px dashed var(--hr-color);
 }
 
 :not(pre) > code {
@@ -72,4 +72,8 @@ hr {
   padding: 0 0.2em;
   border: 1px solid var(--border-color);
   border-radius: 6px;
+}
+
+pre, code {
+  font-family: var(--mono-font);
 }
