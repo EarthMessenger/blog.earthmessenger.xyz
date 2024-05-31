@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import remarkMath from "remark-math";
 import rehypeMathJaxSvg from "rehype-mathjax";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
+import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
 
 import gruvboxLight from "./src/shiki/gruvbox-light.json";
@@ -16,7 +17,7 @@ export default defineConfig({
         dark: gruvboxDark
       }
     },
-    remarkPlugins: [remarkMath, remarkJoinCjkLines],
+    remarkPlugins: [remarkMath, remarkToc, remarkJoinCjkLines],
     rehypePlugins: [rehypeMathJaxSvg]
   },
   integrations: [sitemap()],

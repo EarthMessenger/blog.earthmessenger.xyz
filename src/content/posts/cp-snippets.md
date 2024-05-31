@@ -1,20 +1,23 @@
 ---
-title: 算法竞赛的板子
+title: 算法競賽的板子
 pubDate: 2023-07-28
 tags: oi continually-updated
+lang: zh-hant
 ---
 
-这篇文章主要存一些板子，应该会继续更新。
+這篇文章主要存一些板子，應該會繼續更新。
 
-## 数据生成器
+## TOC
 
-### 有 N 个节点的树
+## 數據生成器
+
+### 有 N 個節點的樹
 
 ```python
 edges = [(random.randrange(i), i) for i in range(1, N)]
 ```
 
-### 有 N 个节点的二叉树
+### 有 N 個節點的二叉樹
 
 ```python
 edges = []
@@ -28,10 +31,10 @@ def build(l, r):
 build(0, N)
 ```
 
-`build` 函数会返回一个数，表示二叉树的根节点，如果希望以 0 为根的话，可以输出边
-的时候把 0 和根对调一下。
+`build` 函數會返回一個數，表示二叉樹的根節點，如果希望以 0 爲根的話，可以輸出邊
+的時候把 0 和根對調一下。
 
-### 长度为 N，和为 M 的正整数序列
+### 長度爲 N，和爲 M 的正整數序列
 
 ```python
 def generate_sequence(N, M):
@@ -40,7 +43,7 @@ def generate_sequence(N, M):
     return [sequence[i+1] - sequence[i] for i in range(N)]
 ```
 
-### 有 N 个节点，M 条边的简单无向图
+### 有 N 個節點，M 條邊的簡單無向圖
 
 ```python
 edges = set()
@@ -53,7 +56,7 @@ while cnt < M:
     cnt += 1
 ```
 
-## 对拍脚本
+## 對拍腳本
 
 ```sh
 while true
@@ -71,11 +74,11 @@ do
 done
 ```
 
-其中 `bf` 是暴力程序，`a` 是需要对拍的程序，`gen_data` 是用 Python 写的数据生成
-器，`diff` 的 `-Z` 选项用于忽略行末空格。
+其中 `bf` 是暴力程序，`a` 是需要對拍的程序，`gen_data` 是用 Python 寫的數據生成
+器，`diff` 的 `-Z` 選項用於忽略行末空格。
 
-`$RANDOM` 的值域一般是 $[0, 32768)$，如果觉得太小可以考虑将多个 `$RANDOM` 拼到
-一起，类似这样：
+`$RANDOM` 的值域一般是 $[0, 32768)$，如果覺得太小可以考慮將多個 `$RANDOM` 拼到
+一起，類似這樣：
 
 ```sh
 printf "%04x" $RANDOM $RANDOM $RANDOM $RANDOM
@@ -110,51 +113,51 @@ do
 done < <(find . -name "${program}*.in" | sed "s/.in$//" | sort)
 ```
 
-自动寻找目录下所有与可执行文件同名的 `.in` 文件进行评测，注意 TLE 会导致卡死。
+自動尋找目錄下所有與可執行文件同名的 `.in` 文件進行評測，注意 TLE 會導致卡死。
 
 完整版：[judgesh](https://github.com/EarthMessenger/judgesh)
 
-## 数据结构
+## 數據結構
 
-### 并查集
+### 並查集
 
 ```cpp
 struct dsu
 {
-	int n;
-	std::vector<int> fa;
-	std::vector<int> size;
+    int n;
+    std::vector<int> fa;
+    std::vector<int> size;
 
-	dsu(int n) : n(n), fa(n), size(n, 1)
-	{
-		for (int i = 0; i < n; i++) fa[i] = i;
-	}
+    dsu(int n) : n(n), fa(n), size(n, 1)
+    {
+        for (int i = 0; i < n; i++) fa[i] = i;
+    }
 
-	int find(int x)
-	{
-		if (x == fa[x]) return x;
-		return fa[x] = find(fa[x]);
-	}
+    int find(int x)
+    {
+        if (x == fa[x]) return x;
+        return fa[x] = find(fa[x]);
+    }
 
-	int merge(int x, int y)
-	{
-		int fx = find(x), fy = find(y);
-		if (fx == fy) return fx;
-		if (size[fx] < size[fy]) std::swap(fx, fy);
-		fa[fy] = fx;
-		size[fx] += size[fy];
-		return fx;
-	}
+    int merge(int x, int y)
+    {
+        int fx = find(x), fy = find(y);
+        if (fx == fy) return fx;
+        if (size[fx] < size[fy]) std::swap(fx, fy);
+        fa[fy] = fx;
+        size[fx] += size[fy];
+        return fx;
+    }
 
-	bool same(int x, int y)
-	{
-		return find(x) == find(y);
-	}
+    bool same(int x, int y)
+    {
+        return find(x) == find(y);
+    }
 
-	bool is_root(int x) const
-	{
-		return fa[x] == x;
-	}
+    bool is_root(int x) const
+    {
+        return fa[x] == x;
+    }
 };
 ```
 
@@ -642,7 +645,187 @@ struct Splay
 };
 ```
 
-## 数学
+### LCT
+
+[Dynamic Tree Vertex Add Path Sum](https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum)
+
+```cpp
+template <typename T>
+struct LinkCutTree
+{
+  struct Splay
+  {
+    using ptr = Splay *;
+
+    u32 size;
+    bool reversed;
+    T val, prod;
+    ptr fa, ch[2];
+
+    Splay() : size(0), reversed(false), val(), prod(), fa(nullptr), ch{nullptr, nullptr} {}
+    Splay(const T &val) : size(1), reversed(false), val(val), prod(val), fa(nullptr), ch{nullptr, nullptr} {}
+
+    void update()
+    {
+      size = 1;
+      prod = val;
+      for (auto c : ch) {
+        if (!c) continue;
+        size += c->size;
+        prod = prod * c->prod;
+      }
+    }
+
+    void reverse()
+    {
+      reversed = !reversed;
+      std::swap(ch[0], ch[1]);
+    }
+
+    void set(const T &v)
+    {
+      val = v;
+      update();
+    }
+
+    void push()
+    {
+      for (auto c : ch) {
+        if (!c) continue;
+        if (reversed) c->reverse();
+      }
+      reversed = false;
+    }
+
+    u32 which_child() const
+    {
+      assert(fa != nullptr);
+      return fa->ch[1] == this;
+    }
+
+    bool is_root() const
+    {
+      return fa == nullptr || (fa->ch[0] != this && fa->ch[1] != this);
+    }
+
+    void rotate()
+    {
+      auto x = this;
+      assert(!is_root());
+
+      auto y = x->fa;
+      auto z = y->fa;
+      auto xci = which_child();
+      y->ch[xci] = x->ch[xci ^ 1];
+      if (x->ch[xci ^ 1]) x->ch[xci ^ 1]->fa = y;
+      x->ch[xci ^ 1] = y;
+      if (!y->is_root()) z->ch[y->which_child()] = x;
+      y->fa = x;
+      x->fa = z;
+
+      y->update();
+      x->update();
+    }
+
+    void splay()
+    {
+      push();
+      while (!is_root()) {
+        auto y = fa;
+        if (y->is_root()) {
+          y->push();
+          push();
+          rotate();
+        } else {
+          auto z = y->fa;
+          z->push();
+          y->push();
+          push();
+          if (y->which_child() == which_child()) y->rotate();
+          else rotate();
+          rotate();
+        }
+      }
+    }
+
+    ptr access()
+    {
+      ptr rp = nullptr;
+      ptr cur = this;
+      while (cur) {
+        cur->splay();
+        cur->ch[1] = rp;
+        cur->update();
+        rp = cur;
+        cur = cur->fa;
+      }
+      splay();
+      return rp;
+    }
+
+    void make_root()
+    {
+      access();
+      reverse();
+    }
+  };
+
+  using ptr = typename Splay::ptr;
+
+  std::vector<ptr> ptrs;
+
+  template <typename F>
+  LinkCutTree(int n, F &&f) : ptrs(n)
+  {
+    for (int i = 0; i < n; i++) ptrs[i] = new Splay(f(i));
+  }
+
+  void link(int x, int y)
+  {
+    auto xp = ptrs[x], yp = ptrs[y];
+    xp->make_root();
+    xp->fa = yp;
+  }
+
+  void cut(int x, int y)
+  {
+    auto xp = ptrs[x], yp = ptrs[y];
+    xp->make_root();
+    yp->access();
+    assert(xp->fa == yp);
+    yp->ch[0] = xp->fa = nullptr;
+  }
+
+  T prod(int x, int y)
+  {
+    auto xp = ptrs[x], yp = ptrs[y];
+    xp->make_root();
+    yp->access();
+    return yp->prod;
+  }
+
+  void set(int x, const T &v)
+  {
+    auto xp = ptrs[x];
+    xp->splay();
+    xp->set(v);
+  }
+
+  void multiply(int x, const T &v)
+  {
+    auto xp = ptrs[x];
+    xp->splay();
+    xp->set(xp->val * v);
+  }
+
+  T get(int x)
+  {
+    return ptrs[x]->val;
+  }
+};
+```
+
+## 數學
 
 ### `static_modint`
 
@@ -712,7 +895,7 @@ struct static_modint
 };
 ```
 
-模数固定，编译器（应该）会自动加上 Barrett reduction 优化。
+模數固定，編譯器（應該）會自動加上 Barrett reduction 優化。
 
 ### `dynamic_modint`
 
@@ -803,7 +986,7 @@ struct dynamic_modint
 template <int id> barrett dynamic_modint<id>::b;
 ```
 
-## 图论
+## 圖論
 
 ### Dinic
 
@@ -976,9 +1159,9 @@ struct twosat
 };
 ```
 
-### static graph
+### `static_graph`
 
-卡常用，从 AtCoder Library 摘的。
+卡常用，從 AtCoder Library 摘的。
 
 ```cpp
 template <typename E>
@@ -1003,7 +1186,23 @@ struct static_graph
 };
 ```
 
-`static_graph::operator[]` 用到了 `std::span`，需要 C++20，如果不支持可以考虑写一个支持 `begin()`，`end()` 的简单 wrapper。
+`static_graph::operator[]` 用到了 `std::span`，需要 C++20，如果不支持可以考慮寫
+一個支持 `begin()`，`end()` 的簡單 wrapper。
+
+註：複製 `start` 於 `counter`，使其序與 `edges` 同。若無此要求，可改作：
+
+```cpp
+  static_graph(int n, const std::vector<std::pair<int, E>> &edges) 
+    : start(n + 1), elist(edges.size())
+  {
+    for (const auto &e : edges) start[e.first]++;
+    for (int i = 0; i < n; i++) start[i + 1] += start[i];
+    for (const auto &e : edges) elist[--start[e.first]] = e.second;
+  }
+```
+
+又註：`static_graph` 雖減少內存碎片，但不能減少內存使用。構建之時，`edges`
+`elist` 並存，用內存二倍。
 
 ## 字符串
 
@@ -1026,7 +1225,7 @@ std::vector<int> prefix_function(const std::string &s)
 
 ```
 
-### AC 自动机
+### AC 自動機
 
 ```cpp
 struct aho_corasick
@@ -1097,7 +1296,7 @@ struct aho_corasick
 };
 ```
 
-### 后缀数组
+### 後綴數組
 
 ```cpp
 std::pair<std::vector<int>, std::vector<int>> suffix_array(const std::string &s)
@@ -1138,7 +1337,7 @@ std::pair<std::vector<int>, std::vector<int>> suffix_array(const std::string &s)
 }
 ```
 
-### 后缀自动机
+### 後綴自動機
 
 ```cpp
 struct suffix_automaton
