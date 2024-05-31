@@ -124,40 +124,40 @@ done < <(find . -name "${program}*.in" | sed "s/.in$//" | sort)
 ```cpp
 struct dsu
 {
-    int n;
-    std::vector<int> fa;
-    std::vector<int> size;
+  int n;
+  std::vector<int> fa;
+  std::vector<int> size;
 
-    dsu(int n) : n(n), fa(n), size(n, 1)
-    {
-        for (int i = 0; i < n; i++) fa[i] = i;
-    }
+  dsu(int n) : n(n), fa(n), size(n, 1)
+  {
+    for (int i = 0; i < n; i++) fa[i] = i;
+  }
 
-    int find(int x)
-    {
-        if (x == fa[x]) return x;
-        return fa[x] = find(fa[x]);
-    }
+  int find(int x)
+  {
+    if (x == fa[x]) return x;
+    return fa[x] = find(fa[x]);
+  }
 
-    int merge(int x, int y)
-    {
-        int fx = find(x), fy = find(y);
-        if (fx == fy) return fx;
-        if (size[fx] < size[fy]) std::swap(fx, fy);
-        fa[fy] = fx;
-        size[fx] += size[fy];
-        return fx;
-    }
+  bool merge(int x, int y)
+  {
+    int fx = find(x), fy = find(y);
+    if (fx == fy) return false;
+    if (size[fx] < size[fy]) std::swap(fx, fy);
+    fa[fy] = fx;
+    size[fx] += size[fy];
+    return true;
+  }
 
-    bool same(int x, int y)
-    {
-        return find(x) == find(y);
-    }
+  bool same(int x, int y)
+  {
+    return find(x) == find(y);
+  }
 
-    bool is_root(int x) const
-    {
-        return fa[x] == x;
-    }
+  bool is_root(int x) const
+  {
+    return fa[x] == x;
+  }
 };
 ```
 
