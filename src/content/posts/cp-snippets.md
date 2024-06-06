@@ -5,6 +5,8 @@ tags: oi continually-updated
 lang: zh-hant
 ---
 
+https://earthmessenger.github.io/icpc-snippet/
+
 這篇文章主要存一些板子，應該會繼續更新。
 
 ## TOC
