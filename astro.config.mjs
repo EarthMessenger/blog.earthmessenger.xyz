@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import remarkMath from "remark-math";
-import rehypeMathJaxSvg from "rehype-mathjax";
+import rehypeKatex from "rehype-katex";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
@@ -18,7 +18,7 @@ export default defineConfig({
       }
     },
     remarkPlugins: [remarkMath, remarkToc, remarkJoinCjkLines],
-    rehypePlugins: [rehypeMathJaxSvg]
+    rehypePlugins: [rehypeKatex]
   },
   integrations: [sitemap()],
   site: "https://earthmessenger.xyz"

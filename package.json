@@ -15,9 +15,10 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.6",
     "@astrojs/sitemap": "^3.1.5",
-    "astro": "^4.9.2",
+    "astro": "^4.10.0",
+    "katex": "^0.16.10",
     "lunar-calendar": "^0.1.4",
-    "rehype-mathjax": "^6.0.0",
+    "rehype-katex": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.0",
     "remark-join-cjk-lines": "^1.0.11",
@@ -27,5 +28,5 @@
     "remark-toc": "^9.0.0",
     "unified": "^11.0.4"
   },
-  "packageManager": "pnpm@9.1.4+sha512.9df9cf27c91715646c7d675d1c9c8e41f6fce88246f1318c1aa6a1ed1aeb3c4f032fcdf4ba63cc69c4fe6d634279176b5358727d8f2cc1e65b65f43ce2f8bfb0"
+  "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
