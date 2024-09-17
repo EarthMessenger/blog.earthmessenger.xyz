@@ -36,6 +36,10 @@ lang: zh-hant
 類的話還又不如用 Next.js 這種專門的。不過屎山已經寫好了，懶得改，不去碰纔是最好
 的。
 
+額，好像少點 JS 好像性能確實好不少：
+
+[![PageSpeed Insignts](../../assets/posts/fullstack/pagespeed-insights.png)](https://pagespeed.web.dev/analysis/https-cwoi-earthmessenger-xyz/z1yvb33xyt?form_factor=desktop)
+
 還有樣式，完全不懂得怎麼設計網頁。想着丑點就丑點吧，能用就行。
 
 數據庫也很頭疼，用的 Vercel 提供的 postgresql，當然我這個數據量用什麼數據庫好像
