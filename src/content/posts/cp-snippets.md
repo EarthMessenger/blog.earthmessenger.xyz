@@ -904,7 +904,8 @@ struct static_modint
 UPD: 刪除了 `dynamic_modint::bar()`，以此函數得 barrett 很慢。
 
 ```cpp
-struct barrett {
+struct barrett
+{
   u32 m;
   u64 im;
 
@@ -913,7 +914,7 @@ struct barrett {
 
   u32 mod() const { return m; }
 
-  u32 reduce(u64 x) const 
+  u32 reduce(u64 x) const
   {
     u64 y = ((u128)x * im) >> 64;
     u32 z = x - y * m;
@@ -922,19 +923,23 @@ struct barrett {
   }
 };
 
-template <int id>
-struct dynamic_modint
+template <int id> struct dynamic_modint
 {
   static barrett b;
-  static u32 mod() { return b.m; }
+  static constexpr u32 mod() { return b.m; }
+  static constexpr int smod() { return mod(); }
   static void set_mod(u32 x) { b = barrett(x); }
   static u32 reduce(u64 x) { return b.reduce(x); }
 
   u32 v;
 
-  dynamic_modint() = default; // as a trivial struct
-  template <typename T>
-  dynamic_modint(T x) : v((x % (T)mod() < 0) ? x + (T)mod() : x) {}
+  dynamic_modint() : v(0) {}
+
+  template <typename T, std::enable_if_t<std::is_signed_v<T>>* = nullptr>
+  constexpr dynamic_modint(T n) : v((n %= smod()) < 0 ? n + smod() : n) {}
+
+  template <typename T, std::enable_if_t<std::is_unsigned_v<T>>* = nullptr>
+  constexpr dynamic_modint(T n) : v(n %= mod()) {}
 
   using mint = dynamic_modint;
 
