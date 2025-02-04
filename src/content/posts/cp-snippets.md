@@ -993,6 +993,75 @@ template <int id> struct dynamic_modint
 template <int id> barrett dynamic_modint<id>::b;
 ```
 
+## modint $2^{61} - 1$
+
+```cpp
+struct modint61
+{
+  static constexpr u64 M = (1ull << 61) - 1;
+ 
+  u64 v;
+  constexpr modint61() : v(0) {}
+ 
+  constexpr modint61(int n) : v(n < 0 ? n + M : n) {}
+  constexpr modint61(u32 n) : v(n) {}
+  constexpr modint61(i64 n) : v((n %= M) <= 0 ? n + M : n) {}
+  constexpr modint61(u64 n) : v(n % M) {}
+ 
+  using mint = modint61;
+ 
+  static mint raw(u32 v)
+  {
+    mint res;
+    res.v = v;
+    return res;
+  }
+ 
+  u32 val() const { return v; }
+ 
+  mint operator-() const { return mint::raw(v == 0 ? 0u : M - v); }
+ 
+  mint &operator+=(mint a)
+  {
+    if ((v += a.v) >= M) v -= M;
+    return *this;
+  }
+  mint &operator-=(mint a)
+  {
+    if ((v += M - a.v) >= M) v -= M;
+    return *this;
+  }
+  mint &operator*=(mint a)
+  {
+    u128 t = (u128)v * a.v;
+    v = (t >> 61) + (t & M);
+    if (v >= M) v -= M;
+    return *this;
+  }
+  mint &operator/=(mint a) { return *this *= a.inv(); }
+ 
+  friend mint operator+(mint a, mint b) { return a += b; }
+  friend mint operator-(mint a, mint b) { return a -= b; }
+  friend mint operator*(mint a, mint b) { return a *= b; }
+  friend mint operator/(mint a, mint b) { return a /= b; }
+ 
+  mint pow(u64 n) const
+  {
+    mint res = 1, base = *this;
+    while (n) {
+      if (n & 1) res *= base;
+      base *= base;
+      n >>= 1;
+    }
+    return res;
+  }
+ 
+  mint inv() const { return pow(M - 2); }
+ 
+  friend bool operator==(mint a, mint b) { return a.v == b.v; }
+};
+```
+
 ## 圖論
 
 ### Dinic
@@ -1429,4 +1498,94 @@ std::vector<int> z_algorithm(const std::string &s)
   }
   return z;
 }
+```
+
+### Manacher
+
+奇偶兩次處理版本。
+
+```cpp
+std::vector<int> manacher_even(const std::string &s)
+{
+  int n = s.size();
+  std::vector<int> f(n + 1);
+  int p = 0;
+  for (int i = 0; i <= n; i++) {
+    if (i <= p + f[p]) f[i] = std::min(f[p * 2 - i], p + f[p] - i);
+    while (i - f[i] - 1 >= 0 && i + f[i] < n && s[i - f[i] - 1] == s[i + f[i]]) f[i]++;
+    if (i + f[i] >= p + f[p]) p = i;
+  }
+  return f;
+}
+ 
+std::vector<int> manacher_odd(const std::string &s)
+{
+  int n = s.size();
+  std::vector<int> f(n);
+  int p = 0;
+  for (int i = 0; i < n; i++) {
+    if (i < p + f[p]) f[i] = std::min(f[p * 2 - i], p + f[p] - i);
+    while (i - f[i] >= 0 && i + f[i] < n && s[i - f[i]] == s[i + f[i]]) f[i]++;
+    if (i + f[i] >= p + f[p]) p = i;
+  }
+  return f;
+}
+ 
+std::pair<std::vector<int>, std::vector<int>> manacher(const std::string &s)
+{
+  return {manacher_even(s), manacher_odd(s)};
+}
+```
+
+### Rolling Hash
+
+```cpp
+struct HashBase
+{
+  std::vector<mint> h;
+ 
+  static mint rand_base()
+  {
+    static std::random_device rd;
+    static std::mt19937 mt(rd());
+    static std::uniform_int_distribution<u64> rand(mint::M / 2, mint::M - 1);
+    return rand(mt);
+  }
+ 
+  HashBase() : h{1, rand_base()} {}
+ 
+  void expand(int n)
+  {
+    while ((int)h.size() <= n) {
+      h.emplace_back(h.back() * base());
+    }
+  }
+ 
+  mint operator[](int n)
+  {
+    expand(n);
+    return h[n];
+  }
+ 
+  mint base() const { return h[1]; }
+};
+ 
+struct StringHash
+{
+  std::vector<mint> h;
+ 
+  StringHash(const std::string &s, const HashBase &hb)
+  {
+    h.reserve(s.size() + 1);
+    h.emplace_back(1);
+    for (auto i : s) {
+      h.emplace_back(h.back() * hb.base() + i);
+    }
+  }
+ 
+  mint operator()(int l, int r, HashBase &hb) const
+  {
+    return h[r] - h[l] * hb[r - l];
+  }
+};
 ```
