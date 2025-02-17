@@ -121,7 +121,7 @@ done < <(find . -name "${program}*.in" | sed "s/.in$//" | sort)
 
 ## 數據結構
 
-### 並查集
+### 併查集
 
 ```cpp
 struct dsu
