@@ -993,7 +993,7 @@ template <int id> struct dynamic_modint
 template <int id> barrett dynamic_modint<id>::b;
 ```
 
-## modint $2^{61} - 1$
+## modint (1<<61) - 1
 
 ```cpp
 struct modint61
