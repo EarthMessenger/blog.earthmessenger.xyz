@@ -1589,3 +1589,23 @@ struct StringHash
   }
 };
 ```
+
+## 雜項
+
+### `create_array`
+
+https://stackoverflow.com/a/57757301/18180934
+
+```cpp
+template <typename T, usize... Is>
+constexpr std::array<T, sizeof...(Is)>
+create_array_details(const T v, std::index_sequence<Is...>)
+{
+  return {((void)Is, v)...};
+}
+
+template <usize N, typename T> constexpr auto create_array(const T &v)
+{
+  return create_array_details(v, std::make_index_sequence<N>{});
+}
+```
