@@ -10,7 +10,7 @@ export const collections = {
       title: z.string(),
       pubDate: z.date(),
       tags: z.string(), // Currently, the tags need to be split manually, and I'm lazy to change it.
-      lang: z.string().default("SITE_LANG"),
+      lang: z.string().default(SITE_LANG),
     })
   }),
   "oi-notes": defineCollection({
