@@ -14,12 +14,22 @@ export default defineConfig({
     shikiConfig: {
       themes: {
         light: gruvboxLight,
-        dark: gruvboxDark
-      }
+        dark: gruvboxDark,
+      },
     },
     remarkPlugins: [remarkMath, remarkToc, remarkJoinCjkLines],
-    rehypePlugins: [rehypeKatex]
+    rehypePlugins: [
+      [
+        rehypeKatex, {
+          macros: {
+            "\\e": "\\mathrm{e}",
+            "\\d": "\\mathrm{d}",
+            "\\i": "\\mathrm{i}",
+          },
+        },
+      ]
+    ],
   },
   integrations: [sitemap()],
-  site: "https://earthmessenger.xyz"
+  site: "https://earthmessenger.xyz",
 });
