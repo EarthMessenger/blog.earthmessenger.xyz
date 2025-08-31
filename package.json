@@ -13,9 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
-    "astro": "^4.13.4",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.5.1",
+    "astro": "^5.13.5",
     "katex": "^0.16.10",
     "lunar-calendar": "^0.1.4",
     "rehype-katex": "^7.0.0",
@@ -27,6 +28,7 @@
     "remark-rehype": "^11.1.0",
     "remark-toc": "^9.0.0",
     "sharp": "^0.33.4",
+    "typescript": "^5.9.2",
     "unified": "^11.0.4"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"

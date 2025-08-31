@@ -24,7 +24,7 @@ export async function GET() {
     description: SITE_DISCRIPTION,
     site: "https://earthmessenger.xyz",
     items: posts.map((post) => ({
-      link: `/posts/${post.slug}`,
+      link: `/posts/${post.id}`,
       content: String(markdownParser.processSync(post.body)),
       ...post.data
     })),

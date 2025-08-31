@@ -36,7 +36,7 @@ const title = `帶有 ${tag} 標籤的博客`;
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.slug}`} title={post.data.title}>
+          <a href={`/posts/${post.id}`} title={post.data.title}>
             {post.data.title}
           </a>
         </li>

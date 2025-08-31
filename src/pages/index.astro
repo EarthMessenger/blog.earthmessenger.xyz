@@ -13,7 +13,7 @@ const allPosts = await getCollection("posts");
         .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime())
         .map((post) => (
           <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
           </li>
         ))
     }

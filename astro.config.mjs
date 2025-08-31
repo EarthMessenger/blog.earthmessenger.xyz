@@ -8,6 +8,9 @@ import sitemap from "@astrojs/sitemap";
 import gruvboxLight from "./src/shiki/gruvbox-light.json";
 import gruvboxDark from "./src/shiki/gruvbox-dark.json";
 
+// Import the mhchem extension.
+import 'katex/contrib/mhchem';
+
 // https://astro.build/config
 export default defineConfig({
   markdown: {

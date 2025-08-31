@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const allPosts = await getCollection("oi-notes");
+const allPosts = await getCollection("solution");
 
 const title="題解";
 ---
@@ -13,7 +13,7 @@ const title="題解";
     {
       allPosts.map((post) => (
         <li>
-          <a href={`/oi-notes/${post.slug}`}>{post.data.title}</a>
+          <a href={`/oi-notes/${post.id}`}>{post.data.title}</a>
         </li>
       ))
     }
