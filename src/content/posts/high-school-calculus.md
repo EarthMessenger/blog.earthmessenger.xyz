@@ -474,13 +474,42 @@ $$
 解得：
 
 $$
-r = \pm \i \sqrt\frac{k}{m}
+r = \textcolor{red}{\pm} \i \sqrt\frac{k}{m}
 $$
 
 帶回去：
 
 $$
-v = \e^{rt} = \cos \left(\sqrt\frac{k}{m} t\right) \pm \i \sin \left(\sqrt\frac{k}{m} t\right)
+\begin{aligned}
+v_1 &= \cos \left(\sqrt\frac{k}{m} t\right) \textcolor{red}{+} \i \sin \left(\sqrt\frac{k}{m} t\right) \\
+v_2 &= \cos \left(\sqrt\frac{k}{m} t\right) \textcolor{red}{-} \i \sin \left(\sqrt\frac{k}{m} t\right)
+\end{aligned}
+$$
+
+爲什麼有兩個解？速度怎麼還有虛部？實際上，**$v_1$ 和 $v_2$ 的所有線性組合都能滿足上面的方程**，但我們應該選擇符合實際情況的。
+
+假如振幅爲 $\textcolor{blue}{A}$，初相位爲 $\textcolor{red}{\varphi}$。
+
+先看怎麼搞出來一個 $\textcolor{red}{\varphi}$，根據複數乘法規則（模長相乘，幅角相加），乘一個 $\cos \textcolor{red}{\varphi} + \i \sin \textcolor{red}{\varphi}$：
+
+$$
+(\cos \textcolor{red}{\varphi} + \i \sin \textcolor{red}{\varphi})v_1 =
+  \cos \left(\sqrt\frac{k}{m} t + \textcolor{red}{\varphi}\right)
++ \i \sin \left(\sqrt\frac{k}{m} t + \textcolor{red}{\varphi}\right)
+$$
+
+爲了能抵消掉虛部，給 $v_2$ 乘個 $\cos \textcolor{red}{\varphi} - \i \sin \textcolor{red}{\varphi}$:
+
+$$
+(\cos \textcolor{red}{\varphi} \textcolor{blue}{-} \i \sin \textcolor{red}{\varphi})v_2 =
+  \cos \left(\sqrt\frac{k}{m} t + \textcolor{red}{\varphi}\right)
+- \i \sin \left(\sqrt\frac{k}{m} t + \textcolor{red}{\varphi}\right)
+$$
+
+相加，再乘一個 $\frac{\textcolor{blue}{A}}{2}$ 就能得到：
+
+$$
+v = \textcolor{blue}{A}\cos \left(\sqrt\frac{k}{m} t + \textcolor{red}{\varphi}\right)
 $$
 
 所以發現簡諧運動的週期：
@@ -491,7 +520,7 @@ $$
 }
 $$
 
-注意，這裏的 $v$ 實際上是可以乘以任意常數的，相當於可以改變振幅和初相，但都與週期無關。
+最後結果可以看出來，初相位和振幅都不影響週期。而且在前面解出 $r = \pm \i \sqrt\frac{k}{m}$ 時，你就已經可以知道 $\omega = \sqrt\frac{k}{m}$ 了，因爲後面的線性操作都沒法影響到 $\omega$。
 
 ### LC 振盪電路
 
