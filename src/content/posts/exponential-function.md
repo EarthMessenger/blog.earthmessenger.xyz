@@ -172,7 +172,7 @@ $$
 
 $$
 \boxed{
-\ln z = \ln r + \i (\theta + 2k\pi)\quad (k \in \mathbb N)
+\ln z = \ln r + \i (\theta + 2k\pi)\quad (k \in \mathbb Z)
 }
 $$
 
