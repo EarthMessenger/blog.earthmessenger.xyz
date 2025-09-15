@@ -1,7 +1,7 @@
 ---
 title: 冪
 tags: e math real-analysis calculus limits
-pubDate: 2025-09-08
+pubDate: 2025-09-13
 lang: zh-hant
 ---
 
