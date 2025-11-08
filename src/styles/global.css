@@ -37,7 +37,7 @@
 body {
   font-family: var(--main-font);
   line-height: 2.0;
-  max-width: 800px;
+  max-width: min(800px, calc(100% - 2em));
   margin: 2em auto;
   color: var(--color-main);
   background-color: var(--bg-body);
