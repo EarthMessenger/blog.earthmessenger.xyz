@@ -1,15 +1,33 @@
-#post-content img {
+.post-content img {
   width: 100%;
   height: auto;
 }
 
-#post-content pre.astro-code {
+.post-content pre.astro-code {
   padding: 0.3em;
   border-radius: 6px;
   border: var(--border-color) 1px solid;
   line-height: 1.5;
 }
 
-#post-content hr {
+.post-content hr {
   width: 98%;
+}
+
+.post-content p {
+  text-indent: 2em;
+}
+
+.post-content p:has(img),
+.post-content p:has(video),
+.post-content p:has(iframe) {
+  text-indent: 0;
+}
+
+.post-content blockquote {
+  border-left: 4px solid var(--border-color);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 1em;
+  background-color: var(--bg-main);
 }
