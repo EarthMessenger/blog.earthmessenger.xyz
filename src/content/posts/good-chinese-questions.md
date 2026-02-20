@@ -7,7 +7,7 @@ lang: zh-hans
 
 寒假作业罢了。
 
-很多东西是 OCR 的，[OCR 工具](https://github.com/EarthMessenger/paddleocr-web)是从依云老师的玩具项目改的。OCR 结果中间有莫名其妙的空格，但是用 pandoc 转成 typst 编译成 pdf 后就没有这个问题了。
+很多东西是 OCR 的，[OCR 工具](https://github.com/EarthMessenger/paddleocr-web)是从依云老师的玩具项目改的。OCR 结果中间有莫名其妙的空格，但是应付一下得了。
 
 ## 绵阳二诊 A 卷
 
