@@ -67,7 +67,7 @@ $$
 \begin{align*}
 Ft - qLB &= mv \\
 Ft - qLB &= m \frac{\dot q R + \frac{q}{C}}{BL} \\
-\frac{mR}{LB} \dot q + \left( \frac{m}{LBC} + LB \right)q - Ft = 0 \\
+\frac{mR}{LB} \dot q + \left( \frac{m}{LBC} + LB \right)q - Ft &= 0 \\
 \end{align*}
 $$
 
