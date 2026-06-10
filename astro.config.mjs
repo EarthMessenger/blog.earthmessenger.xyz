@@ -4,6 +4,7 @@ import rehypeKatex from "rehype-katex";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
 
 import gruvboxLight from "./src/shiki/gruvbox-light.json";
 import gruvboxDark from "./src/shiki/gruvbox-dark.json";
@@ -20,18 +21,20 @@ export default defineConfig({
         dark: gruvboxDark,
       },
     },
-    remarkPlugins: [remarkMath, remarkToc, remarkJoinCjkLines],
-    rehypePlugins: [
-      [
-        rehypeKatex, {
-          macros: {
-            "\\e": "\\mathrm{e}",
-            "\\d": "\\mathrm{d}",
-            "\\i": "\\mathrm{i}",
+    processor: unified({
+      remarkPlugins: [remarkMath, remarkToc, remarkJoinCjkLines],
+      rehypePlugins: [
+        [
+          rehypeKatex, {
+            macros: {
+              "\\e": "\\mathrm{e}",
+              "\\d": "\\mathrm{d}",
+              "\\i": "\\mathrm{i}",
+            },
           },
-        },
-      ]
-    ],
+        ]
+      ],
+    }),
   },
   integrations: [sitemap()],
   site: "https://earthmessenger.xyz",
