@@ -16,8 +16,13 @@ const site = "https://earthmessenger.xyz";
 const projectRoot = process.cwd();
 const contentDir = path.resolve(projectRoot, 'src/content/posts');
 
-const imageModules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/posts/**/*.{png,jpg,jpeg,gif,webp,svg}',
+const rasterModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/posts/**/*.{png,jpg,jpeg,gif,webp}',
+  { eager: true }
+);
+
+const svgModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/posts/**/*.svg',
   { eager: true }
 );
 
@@ -26,13 +31,18 @@ export async function GET() {
 
   const imageUrlMap = new Map<string, string>();
   await Promise.all(
-    Object.entries(imageModules).map(async ([key, mod]) => {
+    Object.entries(rasterModules).map(async ([key, mod]) => {
       const absPath = path.resolve(pagesDir, key);
       const relPath = path.relative(projectRoot, absPath);
       const { src } = await getImage({ src: mod.default });
       imageUrlMap.set(relPath, new URL(src, site).href);
     })
   );
+  for (const [key, mod] of Object.entries(svgModules)) {
+    const absPath = path.resolve(pagesDir, key);
+    const relPath = path.relative(projectRoot, absPath);
+    imageUrlMap.set(relPath, new URL(mod.default.src, site).href);
+  }
 
   const posts = (await getCollection("posts"))
     .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime())
