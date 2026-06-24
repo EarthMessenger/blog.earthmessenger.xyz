@@ -1,32 +1,42 @@
 ---
 layout: ../layouts/BaseLayout.astro
-title: 关于
+title: 關於
 ---
 
-# 关于
+# 關於
 
-本博客托管于 GitHub Pages，使用 Astro。
+本博客託管於 Cloudflare Pages，使用 Astro。
 
-## 联系方式
+## 聯繫方式
 
-- 电子邮件：me@earthmessenger.xyz，这是通过 Cloudflare 邮件转发实现的，所以如果我给你发送邮件显示的地址不是这个。但是如果要给我发邮件还是建议用这个，因为我可能会改变它对应的地址。
-- GitHub: earthmessenger
+- 電子郵件：earthmessenger@qq.com 或 me@earthmessenger.xyz
 - QQ: 2731226640
-- IRC: earthmessenger@irc.libera.chat
-- Matrix: @earthmessenger:matrix.org
-- Telegram: earthmessenger
-- Codeforces: earthmessenger
+
+## 賬號
+
 - AtCoder: earthmessenger
+- Codeforces: earthmessenger
+- GitHub: earthmessenger
 - 洛谷: earthmessenger
 
-## 友情链接
+## 友情鏈接
 
-按字典序排名。
+歡迎互相交換友鏈。
 
-- [Eray](//xxeray.gitlab.io/)
+以下是好像還活着的博客，按字典序排序。
+
 - [Fat Old Eight](//fat-old-eight.github.io/)
-- [SqrtSecond](//www.cnblogs.com/SqrtSecond)
-- [grass8woc](//www.cnblogs.com/cwhfy/)
+- [Imken](//blog.imken.moe/)
+- [cwfxlh（洛谷博客）](//www.luogu.com.cn/user/340819/article/)
+- [en0nya](//en0nya.github.io/)
+- [grass8woc](//grass8cow.github.io/)
 - [robinyqc](//robinyqc.cn)
 - [xx019](//www.cnblogs.com/xx019/)
-- [煎饼Li](//www.cnblogs.com/GTGumiiL/)
+
+可悲的是，下面這些博客基本都死了。具體判定標準是 2025 年至今（2026-06-24）沒有更新的，如果你更新了博客可以告訴我一下。
+
+- [Eray](//xxeray.gitlab.io/)
+- [FromOceans（暫時訪問不了）](//fromoceans.moe/)
+- [Rickyxrc](//blog.rickyxrc.cc/)
+- [SqrtSecond](//www.cnblogs.com/SqrtSecond)
+- [ZiGao（更新成空殼了）](//www.zigao.ac/)
