@@ -1,6 +1,7 @@
 // https://docs.astro.build/en/tutorials/add-content-collections/
 
-import { z, defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { SITE_LANG } from "../config";
 
 export const collections = {

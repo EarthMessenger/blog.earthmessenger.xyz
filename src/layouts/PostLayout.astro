@@ -29,7 +29,7 @@ import "katex/dist/katex.css";
     {tags && <span>標籤：</span>}
     {
       tags &&
-        tags.split(" ").map((tag) =>
+        tags.split(" ").map((tag: string) =>
           linkTags ? (
             <a class="tags" href={`/tags/${tag}`}>
               {tag}
