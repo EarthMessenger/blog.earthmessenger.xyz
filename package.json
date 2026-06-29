@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
     "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
@@ -29,12 +28,13 @@
     "remark-rehype": "^11.1.2",
     "remark-toc": "^9.0.0",
     "sharp": "^0.35.2",
-    "typescript": "^6.0.3",
     "unified": "^11.0.5"
   },
   "packageManager": "pnpm@11.5.2",
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "node-addon-api": "^8.9.0",
-    "node-gyp": "^13.0.0"
+    "node-gyp": "^13.0.0",
+    "typescript": "^6.0.3"
   }
 }

@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@astrojs/check':
-        specifier: ^0.9.9
-        version: 0.9.9(prettier@3.9.1)(typescript@6.0.3)
       '@astrojs/markdown-remark':
         specifier: ^7.2.0
         version: 7.2.0
@@ -56,19 +53,22 @@ importers:
       sharp:
         specifier: ^0.35.2
         version: 0.35.2
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
       unified:
         specifier: ^11.0.5
         version: 11.0.5
     devDependencies:
+      '@astrojs/check':
+        specifier: ^0.9.9
+        version: 0.9.9(prettier@3.9.1)(typescript@6.0.3)
       node-addon-api:
         specifier: ^8.9.0
         version: 8.9.0
       node-gyp:
         specifier: ^13.0.0
         version: 13.0.0
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
 packages:
 
