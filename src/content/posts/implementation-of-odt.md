@@ -1,7 +1,8 @@
 ---
-title: "一种 ODT 实现"
+title: 一种 ODT 实现
 pubDate: 2023-10-15
 tags: cpp trick oi
+lang: zh-hans
 ---
 
 ## 介绍

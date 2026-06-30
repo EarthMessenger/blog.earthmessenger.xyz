@@ -1,11 +1,20 @@
 ---
+import { useTranslations } from "../i18n";
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const subscribeText = t("footer.subscribe");
+const licenseText = t("footer.license");
 ---
 
 <footer>
-  <p>訂閱：<a href="/feed.xml">RSS</a></p>
+  <p>{subscribeText}：<a href="/feed.xml">RSS</a></p>
   <p>
-    授權方式：<a rel="license" href="//creativecommons.org/licenses/by-sa/4.0/"
-      >CC-BY-SA-4.0 License</a>
+    {licenseText}：<a
+      rel="license"
+      href="//creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA-4.0 License</a
+    >
   </p>
 </footer>
 

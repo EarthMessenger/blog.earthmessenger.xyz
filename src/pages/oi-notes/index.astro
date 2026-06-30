@@ -1,21 +1,5 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_DEFAULT_LANG } from "../../config";
 
-const allPosts = await getCollection("solution");
-
-const title="題解";
+return Astro.redirect(`/${SITE_DEFAULT_LANG}/oi-notes/`, 301);
 ---
-
-<BaseLayout title={title}>
-  <h1>{title}</h1>
-  <ul>
-    {
-      allPosts.map((post) => (
-        <li>
-          <a href={`/oi-notes/${post.id}`}>{post.data.title}</a>
-        </li>
-      ))
-    }
-  </ul>
-</BaseLayout>

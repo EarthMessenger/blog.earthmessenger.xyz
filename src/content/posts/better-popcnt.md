@@ -2,7 +2,9 @@
 title: 更好的 popcnt
 pubDate: 2021-11-08
 tags: cpp trick
+lang: zh-hans
 ---
+
 众所周知 $\mathrm{popcnt}$ 是一个十分常用的算法。
 
 它是用于统计二进制数字中 $1$ 的个数的算法。

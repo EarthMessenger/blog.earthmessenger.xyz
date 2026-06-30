@@ -2,6 +2,7 @@
 title: 四川省高考報名截圖技巧
 pubDate: 2025-10-26
 tags: gaokao web firefox chromium
+lang: zh-hans
 ---
 
 首先登錄高考報名網站：https://zhbm.sceea.cn。

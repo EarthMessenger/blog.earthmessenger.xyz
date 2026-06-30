@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
-import { SITE_LANG } from "./config";
+import { SITE_LOCALES } from "./config";
 
 const posts = defineCollection({
   loader: glob({
@@ -11,8 +11,9 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     pubDate: z.date(),
-    tags: z.string(), // Currently, the tags need to be split manually, and I'm lazy to change it.
-    lang: z.string().default(SITE_LANG),
+    tags: z.string(),
+    lang: z.enum(SITE_LOCALES),
+    opencc: z.boolean().optional(),
   }),
 });
 

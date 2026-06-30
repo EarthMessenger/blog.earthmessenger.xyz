@@ -1,19 +1,16 @@
 ---
-import { getCollection, render } from "astro:content";
-import PostLayout from "../../layouts/PostLayout.astro";
+import { getCollection } from "astro:content";
+import { SITE_DEFAULT_LANG } from "../../config";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("solution");
-  return blogEntries.map((entry) => ({
+  const entries = await getCollection("solution");
+  return entries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const lang = SITE_DEFAULT_LANG;
+return Astro.redirect(`/${lang}/oi-notes/${entry.id}/`, 301);
 ---
-
-<PostLayout frontmatter={entry.data}>
-  <Content />
-</PostLayout>

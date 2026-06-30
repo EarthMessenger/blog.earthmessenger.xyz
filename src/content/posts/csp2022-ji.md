@@ -2,6 +2,7 @@
 title: CSP2022 游只因
 pubDate: 2022-11-07
 tags: journal
+lang: zh-hans
 ---
 
 ## Day 0

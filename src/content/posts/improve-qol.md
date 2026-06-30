@@ -1,7 +1,8 @@
 ---
 title: 如何提升在机房的代码体验
-tags: oi
 pubDate: 2023-05-07
+tags: oi
+lang: zh-hans
 ---
 
 ## 背景

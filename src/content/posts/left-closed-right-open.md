@@ -2,6 +2,7 @@
 title: 左闭右开神教
 pubDate: 2023-02-13
 tags: oi trick
+lang: zh-hans
 ---
 
 ## 前言

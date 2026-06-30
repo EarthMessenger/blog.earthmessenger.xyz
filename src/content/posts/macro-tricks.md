@@ -2,6 +2,7 @@
 title: 宏魔法
 pubDate: 2022-08-26
 tags: cpp trick
+lang: zh-hans
 ---
 
 ## 宏入门

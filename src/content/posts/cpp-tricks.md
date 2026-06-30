@@ -1,7 +1,8 @@
 ---
-title: "C++ 技巧"
+title: C++ 技巧
 pubDate: 2022-07-18
 tags: cpp trick continually-updated
+lang: zh-hans
 ---
 
 ## 计算 $\mathrm{highbit}$

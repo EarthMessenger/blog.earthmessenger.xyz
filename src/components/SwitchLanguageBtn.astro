@@ -1,0 +1,38 @@
+---
+// Note that: in this website we only have two languages so we can design a simple switch button.
+
+import { useTranslations } from "../i18n.js";
+const { lang } = Astro.props;
+import { SITE_LOCALES, type Lang } from "../config";
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(lang);
+
+const otherLang = SITE_LOCALES.find((val) => val !== lang)!;
+
+const otherLangDisplay = t(otherLang);
+const otherLangIcon = otherLangDisplay[0];
+
+const switchedPath = Astro.url.pathname.replace(`/${lang}`, `/${otherLang}`);
+---
+
+<a class="switch-language-btn" href={switchedPath} title={otherLangDisplay}>
+  {otherLangIcon}
+</a>
+
+<style>
+  .switch-language-btn {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-main);
+    color: var(--color-strong);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+</style>

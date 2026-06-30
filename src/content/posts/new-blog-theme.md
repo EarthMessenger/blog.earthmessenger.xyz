@@ -2,6 +2,7 @@
 title: 新的博客主题！
 pubDate: 2023-01-21
 tags: ad
+lang: zh-hans
 ---
 
 ~~十篇博客三篇都是 ad，一堆 wip 还没写~~

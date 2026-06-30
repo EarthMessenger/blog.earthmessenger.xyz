@@ -2,6 +2,7 @@
 title: 算法競賽學太多導致的
 pubDate: 2024-09-23
 tags: chinese language oi thoughts english blogging
+lang: zh-hant
 ---
 
 愈發感覺文字寫作喫力了。

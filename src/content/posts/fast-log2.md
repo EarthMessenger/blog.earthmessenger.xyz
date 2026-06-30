@@ -2,6 +2,7 @@
 title: 快速 log2
 pubDate: 2022-01-11
 tags: cpp trick
+lang: zh-hans
 ---
 
 众所周知, $\lg$ 是 OI 中十分常用的操作。

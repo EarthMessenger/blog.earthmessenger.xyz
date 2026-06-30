@@ -2,6 +2,7 @@
 title: 使用 QEMU 打开 VMware 的 vmdk 文件
 pubDate: 2023-12-16
 tags: trick
+lang: zh-hans
 ---
 
 每次需要用的时候都要上网查，挺常用的一个技巧，记录一下。

@@ -2,6 +2,7 @@
 title: "[广告] luogu-toolbox"
 pubDate: 2022-06-04
 tags: ad
+lang: zh-hans
 ---
 
 🔨 luogu-toolbox 洛谷工具箱（WIP）

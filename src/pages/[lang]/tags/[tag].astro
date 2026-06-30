@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import { SITE_LOCALES, SITE_DISCRIPTION } from "../../../config";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { useTranslations } from "../../../i18n";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+
+  const allUniqueTags = [
+    ...new Set(
+      allPosts
+        .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+        .flat(),
+    ),
+  ];
+
+  const paths = [];
+  for (const lang of SITE_LOCALES) {
+    const postsInLang = allPosts.filter((p) => p.data.lang === lang);
+    const langTagSet = new Set(
+      postsInLang
+        .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+        .flat(),
+    );
+    for (const tag of allUniqueTags) {
+      if (!langTagSet.has(tag)) continue;
+      const filteredPosts = postsInLang.filter((post) =>
+        post.data.tags.split(" ").includes(tag),
+      );
+      paths.push({
+        params: { lang, tag },
+        props: { posts: filteredPosts },
+      });
+    }
+  }
+  return paths;
+}
+
+const { lang, tag } = Astro.params;
+const { posts } = Astro.props;
+const t = useTranslations(lang);
+
+const title = t("tag.title", { tag });
+---
+
+<BaseLayout title={title} description={SITE_DISCRIPTION} lang={lang}>
+  <h1>{title}</h1>
+  <ul>
+    {
+      posts.map((post) => {
+        const baseSlug = post.data.opencc
+          ? post.id.slice(0, -lang.length)
+          : post.id;
+        return (
+          <li>
+            <a href={`/${lang}/posts/${baseSlug}`}>{post.data.title}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>

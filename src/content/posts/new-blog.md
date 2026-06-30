@@ -2,6 +2,7 @@
 title: 新博客建立啦！
 pubDate: 2021-07-21
 tags: ad
+lang: zh-hans
 ---
 
 # [新博客](/) 建立啦！

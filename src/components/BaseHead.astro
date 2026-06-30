@@ -1,16 +1,45 @@
 ---
-import { SITE_TITLE } from "../config";
-const { title } = Astro.props;
+import { SITE_TITLE, SITE_AUTHOR, SITE_LOCALES } from "../config";
+
+const {
+  title,
+  description,
+  canonicalURL,
+  ogType = "website",
+  lang,
+} = Astro.props;
+
+const displayTitle = `${title} | ${SITE_TITLE}`;
 
 import '../styles/global.css';
 ---
 
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>{title} | {SITE_TITLE}</title>
+<title>{displayTitle}</title>
+
+<meta name="description" content={description} />
+<meta name="author" content={SITE_AUTHOR} />
 
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/favicon.png" />
-<meta name="viewport" content="width=device-width" />
 
+<link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:title" content={displayTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content={lang} />
+{
+  SITE_LOCALES.filter((l) => l !== lang).map((l) => (
+    <meta property="og:locale:alternate" content={l} />
+  ))
+}
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={displayTitle} />
+<meta name="twitter:description" content={description} />

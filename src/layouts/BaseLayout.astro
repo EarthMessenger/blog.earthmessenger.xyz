@@ -2,19 +2,43 @@
 import BaseHead from "../components/BaseHead.astro";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import { SITE_LANG } from "../config";
-const title = Astro.props.title || Astro.props.frontmatter.title;
+import StructuredData from "../components/StructuredData.astro";
+import { SITE_DEFAULT_LANG, SITE_DISCRIPTION, type Lang } from "../config";
+
+const title = Astro.props.title || Astro.props.frontmatter?.title;
+const {
+  description = SITE_DISCRIPTION,
+  ogType = "website",
+  pubDate,
+} = Astro.props;
+const lang: Lang =
+  Astro.props.lang || Astro.props.frontmatter?.lang || SITE_DEFAULT_LANG;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
-<html lang={SITE_LANG}>
+<html lang={lang}>
   <head>
-    <BaseHead title={title} />
+    <BaseHead
+      title={title}
+      description={description}
+      canonicalURL={canonicalURL}
+      ogType={ogType}
+      lang={lang}
+    />
+    <StructuredData
+      ogType={ogType}
+      title={title}
+      description={description}
+      canonicalURL={canonicalURL}
+      pubDate={pubDate}
+    />
   </head>
   <body>
-    <Navigation />
-    <hr/>
+    <Navigation lang={lang} />
+    <hr />
     <slot />
     <hr />
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

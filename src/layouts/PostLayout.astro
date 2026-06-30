@@ -1,11 +1,24 @@
 ---
-import { SITE_LANG } from "../config";
+import { SITE_LOCALES, type Lang } from "../config";
 import { formatDate } from "../utils";
-const { title, pubDate, tags } = Astro.props.frontmatter;
+import { useTranslations } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  description: string;
+  linkTags: boolean;
+  frontmatter: any;
+}
+
+const { title, pubDate, tags, opencc } = Astro.props.frontmatter;
 const linkTags = Astro.props.linkTags || false;
-const lang = Astro.props.frontmatter.lang || SITE_LANG;
+const { lang, description } = Astro.props;
+const originalLang = opencc ? SITE_LOCALES.find((l) => l !== lang) : lang;
+
+const t = useTranslations(lang);
 
 import BaseLayout from "../layouts/BaseLayout.astro";
+import LanguageNotice from "../components/LanguageNotice.astro";
 import Giscus from "../components/Giscus.astro";
 
 import "../styles/shiki.css";
@@ -14,24 +27,30 @@ import "../styles/posts.css";
 import "katex/dist/katex.css";
 ---
 
-<BaseLayout title={title}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  lang={lang}
+  pubDate={pubDate}
+>
   <div id="post-meta">
     <h1>{title}</h1>
     {
       pubDate && (
         <>
-          <span>日期：</span>
+          <span>{t("post.date")}：</span>
           <time>{formatDate(pubDate)}</time>
           <br />
         </>
       )
     }
-    {tags && <span>標籤：</span>}
+    {tags && <span>{t("post.tags")}：</span>}
     {
       tags &&
         tags.split(" ").map((tag: string) =>
           linkTags ? (
-            <a class="tags" href={`/tags/${tag}`}>
+            <a class="tags" href={`/${lang}/tags/${tag}`}>
               {tag}
             </a>
           ) : (
@@ -43,6 +62,12 @@ import "katex/dist/katex.css";
   </div>
 
   <hr />
+
+  {
+    opencc && (
+      <LanguageNotice from={originalLang} to={lang} displayLang={lang} />
+    )
+  }
 
   <div class="post-content" lang={lang}>
     <slot />
@@ -60,7 +85,7 @@ import "katex/dist/katex.css";
     margin-right: 0.4em;
     padding: 0 0.2em;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     display: inline-block;
 
     text-decoration: none;

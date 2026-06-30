@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
-import { SITE_TITLE, SITE_LANG, SITE_DISCRIPTION } from "../config";
+import { SITE_TITLE, SITE_DEFAULT_LANG, SITE_DISCRIPTION } from "../config";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import path from "node:path";
@@ -45,6 +45,7 @@ export async function GET() {
   }
 
   const posts = (await getCollection("posts"))
+    .filter((p) => !p.data.opencc)
     .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime())
     .slice(0, 10);
 
@@ -54,15 +55,15 @@ export async function GET() {
     site,
     items: posts.map((post) => ({
       link: `/posts/${post.id}`,
-      content: String(createParser(post.id, imageUrlMap).processSync(post.body)),
+      content: String(createParser(post.id, post.data.lang, imageUrlMap).processSync(post.body)),
       ...post.data,
     })),
-    customData: `<language>${SITE_LANG}</language>`,
+    customData: `<language>${SITE_DEFAULT_LANG}</language>`,
   });
 }
 
-function createParser(postId: string, imageUrlMap: Map<string, string>) {
-  const postUrl = `${site}/posts/${postId}/`;
+function createParser(postId: string, postLang: string, imageUrlMap: Map<string, string>) {
+  const postUrl = `${site}/${postLang}/posts/${postId}/`;
 
   return unified()
     .use(remarkParse)

@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import { SITE_LOCALES, SITE_DISCRIPTION } from "../../../config";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { useTranslations } from "../../../i18n";
+
+export async function getStaticPaths() {
+  return SITE_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const allPosts = await getCollection("posts");
+const postsInLang = allPosts.filter((p) => p.data.lang === lang);
+
+const tags = [
+  ...new Set(
+    postsInLang
+      .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+      .flat(),
+  ),
+].sort();
+
+const title = t("nav.tags");
+---
+
+<BaseLayout title={title} description={SITE_DISCRIPTION} lang={lang}>
+  <h1>{title}</h1>
+  <ul>
+    {
+      tags.map((tag) => (
+        <li>
+          <a href={`/${lang}/tags/${tag}`}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

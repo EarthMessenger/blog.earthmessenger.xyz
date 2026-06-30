@@ -1,7 +1,8 @@
 ---
 title: 从 Jekyll 迁移到 Astro
-tags: ad
 pubDate: 2023-06-03
+tags: ad
+lang: zh-hans
 ---
 
 ## 🎉 经过两天的努力，现在博客从 Jekyll 迁移到了 Astro！🎉

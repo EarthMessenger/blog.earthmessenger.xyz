@@ -1,7 +1,8 @@
 ---
-title: "偏见"
+title: 偏见
 pubDate: 2023-01-20
 tags: thought oi
+lang: zh-hans
 ---
 
 > hyj 哲学
@@ -65,5 +66,3 @@ vim9 比 lua 好。
 当代中小学计算机教育应当减少非 FOSS 软件的教授，这样可以避免整个社会在未来被某些巨头所主导。
 
 非 FOSS 的软件是不值得信赖的，当然 FOSS 软件也需要经过充分审查才能信赖。
-
-

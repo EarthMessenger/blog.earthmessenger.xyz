@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import { SITE_LOCALES, SITE_DISCRIPTION } from "../../config";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  return SITE_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const allPosts = await getCollection("posts");
+const postsInLang = allPosts
+  .filter((p) => p.data.lang === lang)
+  .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime());
+---
+
+<BaseLayout title="首頁" description={SITE_DISCRIPTION} lang={lang}>
+  <h1>EarthMessenger 的博客</h1>
+  <ol reversed="true">
+    {
+      postsInLang.map((post) => {
+        const baseSlug = post.data.opencc
+          ? post.id.slice(0, -lang.length)
+          : post.id;
+        return (
+          <li>
+            <a href={`/${lang}/posts/${baseSlug}`}>{post.data.title}</a>
+          </li>
+        );
+      })
+    }
+  </ol>
+</BaseLayout>

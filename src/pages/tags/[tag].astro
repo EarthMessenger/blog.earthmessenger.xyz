@@ -1,11 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_DEFAULT_LANG } from "../../config";
 
 export async function getStaticPaths() {
-  const allPosts = (await getCollection("posts")).sort(
-    (p, q) => p.data.pubDate.getTime() - q.data.pubDate.getTime(),
-  );
+  const allPosts = await getCollection("posts");
   const uniqueTags = [
     ...new Set(
       allPosts
@@ -13,34 +11,9 @@ export async function getStaticPaths() {
         .flat(),
     ),
   ];
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.split(" ").includes(tag),
-    );
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+  return uniqueTags.map((tag) => ({ params: { tag } }));
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
-
-const title = `帶有 ${tag} 標籤的博客`;
+return Astro.redirect(`/${SITE_DEFAULT_LANG}/tags/${tag}/`, 301);
 ---
-
-<BaseLayout title={title}>
-  <h1>{title}</h1>
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={`/posts/${post.id}`} title={post.data.title}>
-            {post.data.title}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</BaseLayout>

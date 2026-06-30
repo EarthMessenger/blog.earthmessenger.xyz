@@ -1,0 +1,39 @@
+---
+import { SITE_TITLE, SITE_AUTHOR, SITE_URL } from "../config";
+
+const {
+  ogType = "website",
+  title,
+  description,
+  canonicalURL,
+  pubDate,
+} = Astro.props;
+
+const baseSchema = {
+  "@context": "https://schema.org",
+};
+
+const websiteSchema = JSON.stringify({
+  ...baseSchema,
+  "@type": "WebSite",
+  name: SITE_TITLE,
+  url: SITE_URL,
+  description,
+});
+
+const articleSchema = JSON.stringify({
+  ...baseSchema,
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  url: canonicalURL,
+  datePublished: pubDate,
+  author: {
+    "@type": "Person",
+    name: SITE_AUTHOR,
+  },
+});
+---
+
+<script is:inline type="application/ld+json" set:html={ogType === "article" ? articleSchema : websiteSchema}>
+</script>

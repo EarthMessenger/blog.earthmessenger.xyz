@@ -2,6 +2,7 @@
 title: 用于关联式容器的透明比较器技巧
 pubDate: 2023-12-31
 tags: cpp trick
+lang: zh-hans
 ---
 
 为什么不写到 [C++ 技巧](/posts/cpp-tricks) 里，单纯只是想水一份博客。

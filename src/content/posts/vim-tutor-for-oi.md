@@ -2,6 +2,7 @@
 title: OIer 的 VIM 教程
 pubDate: 2022-08-23
 tags: vim oi continually-updated
+lang: zh-hans
 ---
 
 ~~缺点：同学没法帮你调代码了~~

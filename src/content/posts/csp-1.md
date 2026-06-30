@@ -1,7 +1,8 @@
 ---
 title: CSP 初赛
 pubDate: 2023-09-15
-tags: oi 
+tags: oi
+lang: zh-hans
 ---
 
 ## 主定理

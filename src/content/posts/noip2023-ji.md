@@ -2,6 +2,7 @@
 title: NOIP2023 游记
 pubDate: 2023-11-18
 tags: journal
+lang: zh-hans
 ---
 
 人生中第一次参加 NOIP。

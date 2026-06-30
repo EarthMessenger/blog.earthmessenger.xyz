@@ -2,6 +2,7 @@
 title: CSP2023 游寄
 pubDate: 2023-10-22
 tags: journal
+lang: zh-hans
 ---
 
 ## Day 初赛

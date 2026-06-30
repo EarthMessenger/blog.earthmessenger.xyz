@@ -1,7 +1,8 @@
 ---
 title: 一种很新的二分答案写法
-tags: oi trick
 pubDate: 2023-03-17
+tags: oi trick
+lang: zh-hans
 ---
 
 ## 原理

@@ -2,6 +2,7 @@
 title: 使用 coredump 辅助调试
 pubDate: 2024-01-21
 tags: trick
+lang: zh-hans
 ---
 
 最近发现的一个可能有一点用的技巧。

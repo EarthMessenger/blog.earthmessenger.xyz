@@ -1,7 +1,8 @@
 ---
 title: 在 vim 中编译程序
-tags: vim oi
 pubDate: 2023-02-26
+tags: vim oi
+lang: zh-hans
 ---
 
 ## 新手：直接使用 map 映射编译命令
