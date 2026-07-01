@@ -1,8 +1,8 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_DEFAULT_LANG } from "../config";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_DEFAULT_LANG } from '../config';
 
-const title = "404 Not Found";
+const title = '404 Not Found';
 ---
 
 <BaseLayout title={title} lang={SITE_DEFAULT_LANG}>
@@ -26,7 +26,8 @@ const title = "404 Not Found";
 </style>
 
 <script>
-  const searchButton = document.querySelector<HTMLFormElement>("#search-button")!;
+  const searchButton =
+    document.querySelector<HTMLFormElement>('#search-button')!;
   searchButton.onclick = () => {
     searchButton.form.q.value = `${searchButton.form.q_origin.value} repo:EarthMessenger/blog.earthmessenger.xyz`;
   };

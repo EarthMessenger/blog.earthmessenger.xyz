@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
-import { SITE_LOCALES, SITE_DISCRIPTION } from "../../../config";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../../i18n";
+import { getCollection } from 'astro:content';
+import { SITE_LOCALES, SITE_DISCRIPTION } from '../../../config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../i18n';
 
 export async function getStaticPaths() {
   return SITE_LOCALES.map((lang) => ({ params: { lang } }));
@@ -11,9 +11,9 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const t = useTranslations(lang);
 
-const allPosts = await getCollection("solution");
+const allPosts = await getCollection('solution');
 
-const title = t("nav.solution");
+const title = t('nav.solution');
 ---
 
 <BaseLayout title={title} description={SITE_DISCRIPTION} lang={lang}>

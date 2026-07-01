@@ -1,8 +1,8 @@
 ---
-import { getCollection, render } from "astro:content";
-import PostLayout from "../../../layouts/PostLayout.astro";
-import { extractDescription } from "../../../utils";
-import type { Lang } from "../../../config";
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../../layouts/PostLayout.astro';
+import { extractDescription } from '../../../utils';
+import type { Lang } from '../../../config';
 
 interface Paths {
   params: {
@@ -15,14 +15,14 @@ interface Paths {
 }
 
 export async function getStaticPaths(): Promise<Paths[]> {
-  const allPosts = await getCollection("posts");
+  const allPosts = await getCollection('posts');
 
   const paths = [];
   for (const post of allPosts) {
     const lang = post.data.lang;
     if (post.data.opencc) {
       paths.push({
-        params: { lang, slug: post.id.slice(0, -lang.length) },
+        params: { lang, slug: post.id.slice(0, -lang.length) }, // Note that github-slugger removes '.' so this work.
         props: { entry: post },
       });
     } else {

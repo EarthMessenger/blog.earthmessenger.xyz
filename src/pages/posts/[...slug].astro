@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
+  const blogEntries = await getCollection('posts');
   return blogEntries
     .filter((entry) => !entry.data.opencc)
     .map((entry) => ({

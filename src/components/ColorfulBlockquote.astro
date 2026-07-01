@@ -1,19 +1,12 @@
 ---
 interface Props {
   color:
-    | "red"
-    | "green"
-    | "yellow"
-    | "blue"
-    | "purple"
-    | "aqua"
-    | "orange"
-    | "gray";
+    'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'aqua' | 'orange' | 'gray';
 }
 
 const { color = null } = Astro.props;
 
-const colorCss = color ? `var(--gb-dark-${color})` : "var(--gb-dark-gray)";
+const colorCss = color ? `var(--gb-dark-${color})` : 'var(--gb-dark-gray)';
 ---
 
 <blockquote style={`border-color: ${colorCss}`}>

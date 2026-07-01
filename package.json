@@ -11,7 +11,9 @@
     "opencc": "node tools/opencc-sync.mjs",
     "build": "pnpm run opencc && astro build",
     "preview": "astro preview",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint .",
+    "fmt": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -38,9 +40,14 @@
   "packageManager": "pnpm@11.5.2",
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^10.6.0",
+    "eslint-plugin-astro": "^2.1.1",
     "js-yaml": "^5.2.0",
     "node-addon-api": "^8.9.0",
     "node-gyp": "^13.0.0",
+    "prettier": "^3.9.4",
+    "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   }

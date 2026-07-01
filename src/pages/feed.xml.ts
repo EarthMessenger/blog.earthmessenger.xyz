@@ -1,29 +1,29 @@
-import { getCollection } from "astro:content";
-import rss from "@astrojs/rss";
-import { SITE_TITLE, SITE_DEFAULT_LANG, SITE_DISCRIPTION } from "../config";
-import { getImage } from "astro:assets";
-import type { ImageMetadata } from "astro";
-import path from "node:path";
+import { getCollection } from 'astro:content';
+import rss from '@astrojs/rss';
+import { SITE_TITLE, SITE_DEFAULT_LANG, SITE_DISCRIPTION } from '../config';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import path from 'node:path';
 
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkJoinCjkLines from "remark-join-cjk-lines";
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkJoinCjkLines from 'remark-join-cjk-lines';
 import remarkRehype from 'remark-rehype';
-import rehypeSanitize from "rehype-sanitize";
-import rehypeStringify from "rehype-stringify";
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeStringify from 'rehype-stringify';
 
-const site = "https://earthmessenger.xyz";
+const site = 'https://earthmessenger.xyz';
 const projectRoot = process.cwd();
 const contentDir = path.resolve(projectRoot, 'src/content/posts');
 
 const rasterModules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/posts/**/*.{png,jpg,jpeg,gif,webp}',
-  { eager: true }
+  { eager: true },
 );
 
 const svgModules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/posts/**/*.svg',
-  { eager: true }
+  { eager: true },
 );
 
 export async function GET() {
@@ -36,7 +36,7 @@ export async function GET() {
       const relPath = path.relative(projectRoot, absPath);
       const { src } = await getImage({ src: mod.default });
       imageUrlMap.set(relPath, new URL(src, site).href);
-    })
+    }),
   );
   for (const [key, mod] of Object.entries(svgModules)) {
     const absPath = path.resolve(pagesDir, key);
@@ -44,7 +44,7 @@ export async function GET() {
     imageUrlMap.set(relPath, new URL(mod.default.src, site).href);
   }
 
-  const posts = (await getCollection("posts"))
+  const posts = (await getCollection('posts'))
     .filter((p) => !p.data.opencc)
     .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime())
     .slice(0, 10);
@@ -55,14 +55,22 @@ export async function GET() {
     site,
     items: posts.map((post) => ({
       link: `/posts/${post.id}`,
-      content: String(createParser(post.id, post.data.lang, imageUrlMap).processSync(post.body)),
+      content: String(
+        createParser(post.id, post.data.lang, imageUrlMap).processSync(
+          post.body,
+        ),
+      ),
       ...post.data,
     })),
     customData: `<language>${SITE_DEFAULT_LANG}</language>`,
   });
 }
 
-function createParser(postId: string, postLang: string, imageUrlMap: Map<string, string>) {
+function createParser(
+  postId: string,
+  postLang: string,
+  imageUrlMap: Map<string, string>,
+) {
   const postUrl = `${site}/${postLang}/posts/${postId}/`;
 
   return unified()

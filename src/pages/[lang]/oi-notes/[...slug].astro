@@ -2,13 +2,13 @@
 // Haven't finish zh-hans and zh-hant support, so showing all the posts in zh-hans (original version) for now.
 // In the future, I hope to share more code between posts and solutions; writing code twice is just too shitty.
 
-import { getCollection, render } from "astro:content";
-import { SITE_LOCALES } from "../../../config";
-import PostLayout from "../../../layouts/PostLayout.astro";
-import { extractDescription } from "../../../utils";
+import { getCollection, render } from 'astro:content';
+import { SITE_LOCALES } from '../../../config';
+import PostLayout from '../../../layouts/PostLayout.astro';
+import { extractDescription } from '../../../utils';
 
 export async function getStaticPaths() {
-  const entries = await getCollection("solution");
+  const entries = await getCollection('solution');
 
   const paths = [];
   for (const entry of entries) {

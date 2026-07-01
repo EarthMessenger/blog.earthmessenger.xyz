@@ -1,7 +1,7 @@
 ---
-import { SITE_LOCALES, type Lang } from "../config";
-import { formatDate } from "../utils";
-import { useTranslations } from "../i18n";
+import { SITE_LOCALES, type Lang } from '../config';
+import { formatDate } from '../utils';
+import { useTranslations } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -17,14 +17,14 @@ const originalLang = opencc ? SITE_LOCALES.find((l) => l !== lang) : lang;
 
 const t = useTranslations(lang);
 
-import BaseLayout from "../layouts/BaseLayout.astro";
-import LanguageNotice from "../components/LanguageNotice.astro";
-import Giscus from "../components/Giscus.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LanguageNotice from '../components/LanguageNotice.astro';
+import Giscus from '../components/Giscus.astro';
 
-import "../styles/shiki.css";
-import "../styles/posts.css";
+import '../styles/shiki.css';
+import '../styles/posts.css';
 
-import "katex/dist/katex.css";
+import 'katex/dist/katex.css';
 ---
 
 <BaseLayout
@@ -39,16 +39,16 @@ import "katex/dist/katex.css";
     {
       pubDate && (
         <>
-          <span>{t("post.date")}：</span>
+          <span>{t('post.date')}：</span>
           <time>{formatDate(pubDate)}</time>
           <br />
         </>
       )
     }
-    {tags && <span>{t("post.tags")}：</span>}
+    {tags && <span>{t('post.tags')}：</span>}
     {
       tags &&
-        tags.split(" ").map((tag: string) =>
+        tags.split(' ').map((tag: string) =>
           linkTags ? (
             <a class="tags" href={`/${lang}/tags/${tag}`}>
               {tag}

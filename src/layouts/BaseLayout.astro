@@ -1,14 +1,14 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import StructuredData from "../components/StructuredData.astro";
-import { SITE_DEFAULT_LANG, SITE_DISCRIPTION, type Lang } from "../config";
+import BaseHead from '../components/BaseHead.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { SITE_DEFAULT_LANG, SITE_DISCRIPTION, type Lang } from '../config';
 
 const title = Astro.props.title || Astro.props.frontmatter?.title;
 const {
   description = SITE_DISCRIPTION,
-  ogType = "website",
+  ogType = 'website',
   pubDate,
 } = Astro.props;
 const lang: Lang =

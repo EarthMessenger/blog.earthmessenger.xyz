@@ -1,21 +1,23 @@
 ---
-import { useTranslations } from "../i18n.js";
-import SwitchLanguageBtn from "./SwitchLanguageBtn.astro";
+import { useTranslations } from '../i18n.js';
+import SwitchLanguageBtn from './SwitchLanguageBtn.astro';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
 <nav>
   <div class="nav-home">
-    <a href={`/${lang}/`} title={t("nav.home")}>
+    <a href={`/${lang}/`} title={t('nav.home')}>
       <img src="/favicon.png" title="icon" height="24" width="24" />
       <span>/</span>
     </a>
   </div>
   <div class="nav-menu">
-    <a href={`/${lang}/about`} title={t("nav.about")}>{t("nav.about")}</a>
-    <a href={`/${lang}/oi-notes`} title={t("nav.solution")}>{t("nav.solution")}</a>
-    <a href={`/${lang}/tags`} title={t("nav.tags")}>{t("nav.tags")}</a>
+    <a href={`/${lang}/about`} title={t('nav.about')}>{t('nav.about')}</a>
+    <a href={`/${lang}/oi-notes`} title={t('nav.solution')}
+      >{t('nav.solution')}</a
+    >
+    <a href={`/${lang}/tags`} title={t('nav.tags')}>{t('nav.tags')}</a>
     <SwitchLanguageBtn lang={lang} />
   </div>
 </nav>

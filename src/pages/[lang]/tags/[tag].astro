@@ -1,16 +1,16 @@
 ---
-import { getCollection } from "astro:content";
-import { SITE_LOCALES, SITE_DISCRIPTION } from "../../../config";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../../i18n";
+import { getCollection } from 'astro:content';
+import { SITE_LOCALES, SITE_DISCRIPTION } from '../../../config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../i18n';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("posts");
+  const allPosts = await getCollection('posts');
 
   const allUniqueTags = [
     ...new Set(
       allPosts
-        .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+        .map((post) => (post.data.tags ? post.data.tags.split(' ') : []))
         .flat(),
     ),
   ];
@@ -20,13 +20,13 @@ export async function getStaticPaths() {
     const postsInLang = allPosts.filter((p) => p.data.lang === lang);
     const langTagSet = new Set(
       postsInLang
-        .map((post) => (post.data.tags ? post.data.tags.split(" ") : []))
+        .map((post) => (post.data.tags ? post.data.tags.split(' ') : []))
         .flat(),
     );
     for (const tag of allUniqueTags) {
       if (!langTagSet.has(tag)) continue;
       const filteredPosts = postsInLang.filter((post) =>
-        post.data.tags.split(" ").includes(tag),
+        post.data.tags.split(' ').includes(tag),
       );
       paths.push({
         params: { lang, tag },
@@ -41,7 +41,7 @@ const { lang, tag } = Astro.params;
 const { posts } = Astro.props;
 const t = useTranslations(lang);
 
-const title = t("tag.title", { tag });
+const title = t('tag.title', { tag });
 ---
 
 <BaseLayout title={title} description={SITE_DISCRIPTION} lang={lang}>
@@ -50,7 +50,7 @@ const title = t("tag.title", { tag });
     {
       posts.map((post) => {
         const baseSlug = post.data.opencc
-          ? post.id.slice(0, -lang.length)
+          ? post.id.slice(0, -lang.length) // Note that github-slugger removes '.' so this work.
           : post.id;
         return (
           <li>

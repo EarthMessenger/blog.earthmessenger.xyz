@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import { SITE_DEFAULT_LANG } from "../../config";
+import { getCollection } from 'astro:content';
+import { SITE_DEFAULT_LANG } from '../../config';
 
 export async function getStaticPaths() {
-  const entries = await getCollection("solution");
+  const entries = await getCollection('solution');
   return entries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
