@@ -1,7 +1,7 @@
 ---
-import { useTranslations } from '../i18n';
+import { useTranslations, getLangFromUrl } from '../i18n';
 
-const { lang } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const subscribeText = t('footer.subscribe');

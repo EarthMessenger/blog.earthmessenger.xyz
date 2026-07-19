@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 292 F Regular Triangle Inside a Rectangle
+lang: zh-hans
 tags: at math
+title: AtCoder ABC 292 F Regular Triangle Inside a Rectangle
 ---
 
 给定一个 $a \times b$ 的矩形，求能放在矩形中最大的正三角形。
@@ -50,4 +51,3 @@ int main()
 
 推荐看看小日本的题解：[F - Regular Triangle Inside a Rectangle
 解説](https://atcoder.jp/contests/abc292/tasks/abc292_f/editorial)
-

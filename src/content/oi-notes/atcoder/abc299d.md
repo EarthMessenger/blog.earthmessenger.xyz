@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 299 Find by Query
+lang: zh-hans
 tags: at interactive binary-search
+title: AtCoder ABC 299 Find by Query
 ---
 
 ## 题意

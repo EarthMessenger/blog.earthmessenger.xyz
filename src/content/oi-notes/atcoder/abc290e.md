@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 290 E Make it Palindrome
+lang: zh-hans
 tags: abc
+title: AtCoder ABC 290 E Make it Palindrome
 ---
 
 对于数列 $X$，定义 $f(X)$ 表示将 $X$ 变成回文串最少的需要改变的元素数量。给定

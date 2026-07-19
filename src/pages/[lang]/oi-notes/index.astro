@@ -12,21 +12,24 @@ const { lang } = Astro.params;
 const t = useTranslations(lang);
 
 const allPosts = await getCollection('solution');
+const postsInLang = allPosts.filter((p) => p.data.lang === lang);
 
 const title = t('nav.solution');
 ---
 
-<BaseLayout title={title} description={SITE_DISCRIPTION} lang={lang}>
+<BaseLayout title={title} description={SITE_DISCRIPTION}>
   <h1>{title}</h1>
   <ul>
     {
-      allPosts.map((post) => {
-        return (
-          <li>
-            <a href={`/${lang}/oi-notes/${post.id}`}>{post.data.title}</a>
-          </li>
-        );
-      })
+      postsInLang.map((post) => (
+        <li>
+          <a
+            href={`/${lang}/oi-notes/${post.data.opencc ? post.id.slice(0, -lang.length) : post.id}`}
+          >
+            {post.data.title}
+          </a>
+        </li>
+      ))
     }
   </ul>
 </BaseLayout>

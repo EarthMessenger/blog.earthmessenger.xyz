@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 299 F Square Subsequence
+lang: zh-hans
 tags: at string dp
+title: AtCoder ABC 299 F Square Subsequence
 ---
 
 ## 题意

@@ -1,6 +1,7 @@
 ---
-title: CWOI J C30B 幻想商店
+lang: zh-hans
 tags: cwoi
+title: CWOI J C30B 幻想商店
 ---
 
 有 $n$ 个人 $m$ 个商店，每个人可以选择去编号为 $a_i$ 或 $b_i$ 的商店，问最多有多少个商店访客数量为偶数。

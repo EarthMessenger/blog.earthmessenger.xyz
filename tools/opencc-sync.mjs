@@ -9,14 +9,24 @@ import {
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { load, dump } from 'js-yaml';
 import { Converter } from 'opencc-js';
+import { splitFrontmatter, recompose } from './utils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const CONTENT_DIR = path.join(PROJECT_ROOT, 'src/content/posts');
 const PAGES_DIR = path.join(PROJECT_ROOT, 'src/pages');
 const LOCALES = ['zh-hans', 'zh-hant'];
+
+const COLLECTIONS = [
+  {
+    dir: path.join(PROJECT_ROOT, 'src/content/posts'),
+    recursive: false,
+  },
+  {
+    dir: path.join(PROJECT_ROOT, 'src/content/oi-notes'),
+    recursive: true,
+  },
+];
 
 async function main() {
   const s2t = Converter({ from: 'cn', to: 'twp' });
@@ -29,22 +39,37 @@ async function main() {
     return text;
   }
 
-  await syncPosts(CONTENT_DIR, convert);
+  for (const { dir, recursive } of COLLECTIONS) {
+    console.log(`syncing ${path.relative(PROJECT_ROOT, dir)}...`);
+    await syncCollection(dir, { recursive }, convert);
+  }
+
   await syncAbout(convert);
 
   console.log('OpenCC sync complete.');
 }
 
-async function syncPosts(contentDir, convert) {
-  const files = await readdir(contentDir);
+async function syncCollection(contentDir, { recursive }, convert) {
+  const files = await readdir(contentDir, { recursive });
 
-  const originals = files.filter((f) => {
-    if (!f.endsWith('.md') || f.startsWith('_')) return false;
-    for (const lang of LOCALES) {
-      if (f.endsWith(`.${lang}.md`)) return false;
+  // Filter to only real .md files (not directories from recursive listing)
+  const allMd = [];
+  for (const file of files) {
+    const filePath = path.join(contentDir, file);
+    const fileStat = await stat(filePath);
+    if (fileStat.isFile() && file.endsWith('.md') && !file.startsWith('_')) {
+      allMd.push(file);
     }
-    return true;
-  });
+  }
+
+  const originals = new Set(
+    allMd.filter((f) => {
+      for (const lang of LOCALES) {
+        if (f.endsWith(`.${lang}.md`)) return false;
+      }
+      return true;
+    }),
+  );
 
   for (const file of originals) {
     const sourcePath = path.join(contentDir, file);
@@ -52,11 +77,12 @@ async function syncPosts(contentDir, convert) {
     const { data, body } = splitFrontmatter(content);
     const sourceLang = data.lang;
 
+    const base = file.replace(/\.md$/, '');
+
     for (const targetLang of LOCALES) {
       if (targetLang === sourceLang) continue;
 
-      const baseName = path.basename(file, '.md');
-      const targetFile = `${baseName}.${targetLang}.md`;
+      const targetFile = `${base}.${targetLang}.md`;
       const targetPath = path.join(contentDir, targetFile);
 
       const sourceStat = await stat(sourcePath);
@@ -82,7 +108,7 @@ async function syncPosts(contentDir, convert) {
   }
 
   // Clean orphans
-  for (const file of files) {
+  for (const file of allMd) {
     let targetLang = null;
     for (const lang of LOCALES) {
       if (file.endsWith(`.${lang}.md`)) {
@@ -97,8 +123,11 @@ async function syncPosts(contentDir, convert) {
     const { data } = splitFrontmatter(content);
     if (!data.opencc) continue;
 
-    const baseName = path.basename(file, `.${targetLang}.md`);
-    if (!originals.includes(`${baseName}.md`)) {
+    const originalForm = file.replace(
+      new RegExp(`\\.${targetLang}\\.md$`),
+      '.md',
+    );
+    if (!originals.has(originalForm)) {
       await unlink(filePath);
       console.log(`  \u{1F480} orphan: ${file}`);
     }
@@ -134,19 +163,6 @@ async function syncAbout(convert) {
     await writeFile(targetPath, recompose(newData, newBody), 'utf-8');
     console.log(`  -> ${targetLang}/about.md`);
   }
-}
-
-function splitFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { data: {}, body: content };
-  const data = load(match[1]) || {};
-  return { data, body: match[2] };
-}
-
-function recompose(data, body) {
-  let fm = dump(data, { sortKeys: true, lineWidth: -1 }).trimEnd();
-  fm = fm.replace(/^pubDate: '(2\d{3}-\d{2}-\d{2})'$/gm, 'pubDate: $1');
-  return `---\n${fm}\n---\n\n${body.trim()}\n`;
 }
 
 main().catch((e) => {

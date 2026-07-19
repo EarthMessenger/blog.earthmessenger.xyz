@@ -14,7 +14,7 @@ const postsInLang = allPosts
   .sort((p, q) => q.data.pubDate.getTime() - p.data.pubDate.getTime());
 ---
 
-<BaseLayout title="首頁" description={SITE_DISCRIPTION} lang={lang}>
+<BaseLayout title="首頁" description={SITE_DISCRIPTION}>
   <h1>EarthMessenger 的博客</h1>
   <ol reversed="true">
     {

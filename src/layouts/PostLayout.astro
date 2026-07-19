@@ -1,10 +1,10 @@
 ---
-import { SITE_LOCALES, type Lang } from '../config';
+import { SITE_LOCALES } from '../config';
+import { getLangFromUrl } from '../i18n';
 import { formatDate } from '../utils';
 import { useTranslations } from '../i18n';
 
 interface Props {
-  lang: Lang;
   description: string;
   linkTags: boolean;
   frontmatter: any;
@@ -12,7 +12,8 @@ interface Props {
 
 const { title, pubDate, tags, opencc } = Astro.props.frontmatter;
 const linkTags = Astro.props.linkTags || false;
-const { lang, description } = Astro.props;
+const { description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 const originalLang = opencc ? SITE_LOCALES.find((l) => l !== lang) : lang;
 
 const t = useTranslations(lang);
@@ -31,7 +32,6 @@ import 'katex/dist/katex.css';
   title={title}
   description={description}
   ogType="article"
-  lang={lang}
   pubDate={pubDate}
 >
   <div id="post-meta">
@@ -63,11 +63,7 @@ import 'katex/dist/katex.css';
 
   <hr />
 
-  {
-    opencc && (
-      <LanguageNotice from={originalLang} to={lang} displayLang={lang} />
-    )
-  }
+  {opencc && <LanguageNotice from={originalLang} to={lang} />}
 
   <div class="post-content" lang={lang}>
     <slot />

@@ -25,6 +25,8 @@ const solution = defineCollection({
   schema: z.object({
     title: z.string(),
     tags: z.string(),
+    lang: z.enum(SITE_LOCALES),
+    opencc: z.boolean().optional(),
   }),
 });
 

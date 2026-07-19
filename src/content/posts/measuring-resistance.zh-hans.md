@@ -1,9 +1,9 @@
 ---
-title: 测电阻
-pubDate: 2025-11-08
-tags: physics math
 lang: zh-hans
 opencc: true
+pubDate: 2025-11-08
+tags: physics math
+title: 测电阻
 ---
 
 伏安法测量电阻，根据电压表所测范围是否包含电流表，可以分为内接法和外置法。

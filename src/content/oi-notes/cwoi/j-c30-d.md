@@ -1,6 +1,7 @@
 ---
-title: CWOI J C30D 糖果
+lang: zh-hans
 tags: cwoi
+title: CWOI J C30D 糖果
 ---
 
 给定 $n$ 个二元组 $\left(a_i, b_i\right)$，选取其中 $\lfloor\dfrac{n}{2}\rfloor + 1$ 个元素，

@@ -2,13 +2,10 @@
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts');
-  return blogEntries
-    .filter((entry) => !entry.data.opencc)
-    .map((entry) => ({
-      params: { slug: entry.id },
-      props: { entry },
-    }));
+  const entries = await getCollection('posts');
+  return entries
+    .filter((e) => !e.data.opencc)
+    .map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
 }
 
 const { entry } = Astro.props;

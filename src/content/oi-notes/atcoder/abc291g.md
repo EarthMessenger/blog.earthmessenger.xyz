@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 291 G OR Sum
+lang: zh-hans
 tags: at convolution
+title: AtCoder ABC 291 G OR Sum
 ---
 
 给定一个长度为 $N$ 的数组 $A$ 和 $B$，你可以选定一个整数 $k$，令 

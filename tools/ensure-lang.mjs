@@ -1,21 +1,27 @@
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { load, dump } from 'js-yaml';
+import { splitFrontmatter, recompose } from './utils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const CONTENT_DIR = path.join(PROJECT_ROOT, 'src/content/posts');
+const CONTENT_DIRS = [
+  { dir: path.join(PROJECT_ROOT, 'src/content/posts'), recursive: false },
+  { dir: path.join(PROJECT_ROOT, 'src/content/oi-notes'), recursive: true },
+];
 const DEFAULT_LANG = 'zh-hans';
 
-async function main() {
-  const files = await readdir(CONTENT_DIR);
+async function ensureLang(contentDir, { recursive }) {
+  const files = await readdir(contentDir, { recursive });
 
   for (const file of files) {
     if (!file.endsWith('.md') || file.startsWith('_')) continue;
-    const filePath = path.join(CONTENT_DIR, file);
-    const content = await readFile(filePath, 'utf-8');
+    const filePath = path.join(contentDir, file);
 
+    const fileStat = await stat(filePath);
+    if (!fileStat.isFile()) continue;
+
+    const content = await readFile(filePath, 'utf-8');
     const { data, body } = splitFrontmatter(content);
     if (data.lang) continue;
 
@@ -24,23 +30,15 @@ async function main() {
     await writeFile(filePath, newContent, 'utf-8');
     console.log(`  + ${file}: lang: ${DEFAULT_LANG}`);
   }
+}
+
+async function main() {
+  for (const { dir, recursive } of CONTENT_DIRS) {
+    console.log(`processing ${path.relative(PROJECT_ROOT, dir)}...`);
+    await ensureLang(dir, { recursive });
+  }
 
   console.log('ensure-lang complete.');
-}
-
-function splitFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { data: {}, body: content, fmRaw: '' };
-  const fmRaw = match[1];
-  const body = match[2];
-  const data = load(fmRaw) || {};
-  return { data, body, fmRaw };
-}
-
-function recompose(data, body) {
-  let fm = dump(data, { sortKeys: true, lineWidth: -1 }).trimEnd();
-  fm = fm.replace(/^pubDate: '(2\d{3}-\d{2}-\d{2})'$/gm, 'pubDate: $1');
-  return `---\n${fm}\n---\n\n${body.trim()}\n`;
 }
 
 main().catch((e) => {

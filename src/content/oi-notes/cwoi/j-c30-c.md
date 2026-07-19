@@ -1,6 +1,7 @@
 ---
-title: CWOI J C30C 覆盖
+lang: zh-hans
 tags: cwoi
+title: CWOI J C30C 覆盖
 ---
 
 有一个 $n$ 个节点的有根树，每次操作随机选取一个无色的点，将它到根的所有节点染成黑色，求将整棵树染黑的期望操作次数。

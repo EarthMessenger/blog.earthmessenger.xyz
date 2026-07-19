@@ -1,39 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import PostLayout from '../../../layouts/PostLayout.astro';
 import { extractDescription } from '../../../utils';
-import type { Lang } from '../../../config';
+import { buildEntryPaths } from '../../../lib/content-paths';
 
-interface Paths {
-  params: {
-    lang: Lang;
-    slug: string;
-  };
-  props: {
-    entry: any;
-  };
-}
-
-export async function getStaticPaths(): Promise<Paths[]> {
-  const allPosts = await getCollection('posts');
-
-  const paths = [];
-  for (const post of allPosts) {
-    const lang = post.data.lang;
-    if (post.data.opencc) {
-      paths.push({
-        params: { lang, slug: post.id.slice(0, -lang.length) }, // Note that github-slugger removes '.' so this work.
-        props: { entry: post },
-      });
-    } else {
-      paths.push({
-        params: { lang, slug: post.id },
-        props: { entry: post },
-      });
-    }
-  }
-
-  return paths;
+export async function getStaticPaths() {
+  return buildEntryPaths('posts');
 }
 
 const { entry } = Astro.props;
@@ -41,11 +13,6 @@ const { Content } = await render(entry);
 const description = extractDescription(entry.body);
 ---
 
-<PostLayout
-  frontmatter={entry.data}
-  linkTags={true}
-  lang={Astro.params.lang}
-  description={description}
->
+<PostLayout frontmatter={entry.data} linkTags={true} description={description}>
   <Content />
 </PostLayout>

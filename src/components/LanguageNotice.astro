@@ -1,10 +1,11 @@
 ---
-const { from, to, displayLang } = Astro.props;
+const { from, to } = Astro.props;
 import ColorfulBlockquote from './ColorfulBlockquote.astro';
 
-import { useTranslations } from '../i18n.js';
+import { useTranslations, getLangFromUrl } from '../i18n';
 
-const t = useTranslations(displayLang);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const notice = t('language-notice', {
   from: t(from),

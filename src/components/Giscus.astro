@@ -1,6 +1,9 @@
 ---
+import { getLangFromUrl } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
 const path = Astro.url.pathname.replace(/^\/(zh-hans|zh-hant)\//, '/').slice(1);
-const lang = Astro.url.pathname.startsWith('/zh-hans/') ? 'zh-CN' : 'zh-TW';
+const giscusLang = lang === 'zh-hans' ? 'zh-CN' : 'zh-TW';
 ---
 
 <script
@@ -17,6 +20,6 @@ const lang = Astro.url.pathname.startsWith('/zh-hans/') ? 'zh-CN' : 'zh-TW';
   data-emit-metadata="0"
   data-input-position="bottom"
   data-theme="gruvbox"
-  data-lang={lang}
+  data-lang={giscusLang}
   crossorigin="anonymous"
   async></script>

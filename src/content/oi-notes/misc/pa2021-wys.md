@@ -1,6 +1,7 @@
 ---
-title: PA2021 Wystawa
+lang: zh-hans
 tags: binary-search greedy data-structure
+title: PA2021 Wystawa
 ---
 
 ## 题意

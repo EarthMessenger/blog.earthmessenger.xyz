@@ -1,6 +1,7 @@
 ---
-title: 号家军 C297 C 绘画
+lang: zh-hans
 tags: hjj dp
+title: 号家军 C297 C 绘画
 ---
 
 ## 题意

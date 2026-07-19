@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 300 G P-smooth number
+lang: zh-hans
 tags: at brute-force dfs meet-in-the-middle
+title: AtCoder ABC 300 G P-smooth number
 ---
 
 ## 题意

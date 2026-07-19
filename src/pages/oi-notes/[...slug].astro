@@ -1,16 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
-import { SITE_DEFAULT_LANG } from '../../config';
 
 export async function getStaticPaths() {
   const entries = await getCollection('solution');
-  return entries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  return entries
+    .filter((e) => !e.data.opencc)
+    .map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
 }
 
 const { entry } = Astro.props;
-const lang = SITE_DEFAULT_LANG;
-return Astro.redirect(`/${lang}/oi-notes/${entry.id}/`, 301);
+return Astro.redirect(`/${entry.data.lang}/oi-notes/${entry.id}/`, 301);
 ---

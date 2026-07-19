@@ -1,13 +1,14 @@
 ---
 import { SITE_TITLE, SITE_AUTHOR, SITE_LOCALES } from '../config';
+import { getLangFromUrl } from '../i18n';
 
-const {
-  title,
-  description,
-  canonicalURL,
-  ogType = 'website',
-  lang,
-} = Astro.props;
+const { title, description, canonicalURL, ogType = 'website' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const ogLocale = lang === 'zh-hans' ? 'zh_CN' : 'zh_TW';
+const ogAltLocales = SITE_LOCALES.filter((l) => l !== lang).map((l) =>
+  l === 'zh-hans' ? 'zh_CN' : 'zh_TW',
+);
 
 const displayTitle = `${title} | ${SITE_TITLE}`;
 
@@ -28,17 +29,26 @@ import '../styles/global.css';
 <link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${SITE_TITLE} (繁體)`}
+  href="/feed.xml"
+/>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${SITE_TITLE} (簡體)`}
+  href="/zh-hans/feed.xml"
+/>
+
 <meta property="og:title" content={displayTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={SITE_TITLE} />
-<meta property="og:locale" content={lang} />
-{
-  SITE_LOCALES.filter((l) => l !== lang).map((l) => (
-    <meta property="og:locale:alternate" content={l} />
-  ))
-}
+<meta property="og:locale" content={ogLocale} />
+{ogAltLocales.map((l) => <meta property="og:locale:alternate" content={l} />)}
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content={displayTitle} />

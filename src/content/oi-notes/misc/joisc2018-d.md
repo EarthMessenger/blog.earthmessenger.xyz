@@ -1,6 +1,7 @@
 ---
-title: JOISC 2018 D 修行 (Asceticism)
+lang: zh-hans
 tags: joi math
+title: JOISC 2018 D 修行 (Asceticism)
 ---
 
 ## 题意

@@ -1,6 +1,7 @@
 ---
-title: 号家军 C297 B 序列
+lang: zh-hans
 tags: hjj dp combinatorics
+title: 号家军 C297 B 序列
 ---
 
 ## 题意

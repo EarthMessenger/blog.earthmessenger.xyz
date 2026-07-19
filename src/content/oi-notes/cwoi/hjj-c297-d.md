@@ -1,6 +1,7 @@
 ---
+lang: zh-hans
+tags: hjj dp data-structure
 title: 号家军 C297 D 聚会
-tags: hjj dp data-structure 
 ---
 
 ## 题意

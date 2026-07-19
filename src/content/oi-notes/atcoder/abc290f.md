@@ -1,6 +1,7 @@
 ---
-title: AtCoder ABC 290 F Maximum Diameter
+lang: zh-hans
 tags: at
+title: AtCoder ABC 290 F Maximum Diameter
 ---
 
 ## 题意
