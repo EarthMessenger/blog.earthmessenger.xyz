@@ -1005,7 +1005,7 @@ struct modint61
  
   constexpr modint61(int n) : v(n < 0 ? n + M : n) {}
   constexpr modint61(u32 n) : v(n) {}
-  constexpr modint61(i64 n) : v((n %= M) <= 0 ? n + M : n) {}
+  constexpr modint61(i64 n) : v((n %= M) < 0 ? n + M : n) {}
   constexpr modint61(u64 n) : v(n % M) {}
  
   using mint = modint61;

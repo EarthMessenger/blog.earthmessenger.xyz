@@ -1,9 +1,9 @@
 ---
-title: 算法竞赛的板子
-pubDate: 2023-07-28
-tags: oi continually-updated
 lang: zh-hans
 opencc: true
+pubDate: 2023-07-28
+tags: oi continually-updated
+title: 算法竞赛的板子
 ---
 
 https://earthmessenger.github.io/icpc-snippet/
@@ -1006,7 +1006,7 @@ struct modint61
  
   constexpr modint61(int n) : v(n < 0 ? n + M : n) {}
   constexpr modint61(u32 n) : v(n) {}
-  constexpr modint61(i64 n) : v((n %= M) <= 0 ? n + M : n) {}
+  constexpr modint61(i64 n) : v((n %= M) < 0 ? n + M : n) {}
   constexpr modint61(u64 n) : v(n % M) {}
  
   using mint = modint61;
