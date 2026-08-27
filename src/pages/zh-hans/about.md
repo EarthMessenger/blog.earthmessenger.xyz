@@ -1,7 +1,6 @@
 ---
 title: 關於
 lang: zh-hans
-opencc: true
 layout: ../../layouts/BaseLayout.astro
 ---
 

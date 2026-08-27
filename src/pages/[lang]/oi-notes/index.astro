@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { SITE_LOCALES, SITE_DISCRIPTION } from '../../../config';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../../i18n';
+import { baseSlug } from '../../../lib/content-paths';
 
 export async function getStaticPaths() {
   return SITE_LOCALES.map((lang) => ({ params: { lang } }));
@@ -24,7 +25,7 @@ const title = t('nav.solution');
       postsInLang.map((post) => (
         <li>
           <a
-            href={`/${lang}/oi-notes/${post.data.opencc ? post.id.slice(0, -lang.length) : post.id}`}
+            href={`/${lang}/oi-notes/${baseSlug(post)}`}
           >
             {post.data.title}
           </a>

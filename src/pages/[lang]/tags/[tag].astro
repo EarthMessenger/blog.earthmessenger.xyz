@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { SITE_LOCALES, SITE_DISCRIPTION } from '../../../config';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../../i18n';
+import { baseSlug } from '../../../lib/content-paths';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
@@ -49,12 +50,9 @@ const title = t('tag.title', { tag });
   <ul>
     {
       posts.map((post) => {
-        const baseSlug = post.data.opencc
-          ? post.id.slice(0, -lang.length) // Note that github-slugger removes '.' so this work.
-          : post.id;
         return (
           <li>
-            <a href={`/${lang}/posts/${baseSlug}`}>{post.data.title}</a>
+            <a href={`/${lang}/posts/${baseSlug(post)}`}>{post.data.title}</a>
           </li>
         );
       })

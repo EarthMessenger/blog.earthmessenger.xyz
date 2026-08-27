@@ -7,9 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "ensure-lang": "node tools/ensure-lang.mjs",
-    "opencc": "node tools/opencc-sync.mjs",
-    "build": "pnpm run opencc && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "test": "vitest",
     "lint": "eslint .",

@@ -1,6 +1,20 @@
 import { getCollection } from 'astro:content';
 import { type Lang } from '../config';
 
+/**
+ * The URL slug for an entry. Converted copies have ids like `beijing.zh-hant`;
+ * strip the full `.{lang}` suffix (including the dot) so both locales share
+ * one clean URL.
+ */
+export function baseSlug(entry: {
+  id: string;
+  data: { lang: string; opencc?: boolean };
+}): string {
+  return entry.data.opencc
+    ? entry.id.slice(0, -entry.data.lang.length - 1)
+    : entry.id;
+}
+
 export async function buildEntryPaths(collection: 'posts' | 'solution') {
   const entries = await getCollection(collection);
 
@@ -11,21 +25,10 @@ export async function buildEntryPaths(collection: 'posts' | 'solution') {
 
   for (const entry of entries) {
     const lang = entry.data.lang as Lang;
-    if (entry.data.opencc) {
-      // OpenCC copies have id like "beijing.zh-hans"; strip the lang suffix
-      // Note: github-slugger replaces '.' with '' in the slug, so the trailing
-      // dot from slice is harmless in the URL. The route [lang]/posts/[...slug]
-      // sees the slug without the trailing dot.
-      paths.push({
-        params: { lang, slug: entry.id.slice(0, -lang.length) },
-        props: { entry },
-      });
-    } else {
-      paths.push({
-        params: { lang, slug: entry.id },
-        props: { entry },
-      });
-    }
+    paths.push({
+      params: { lang, slug: baseSlug(entry) },
+      props: { entry },
+    });
   }
 
   return paths;

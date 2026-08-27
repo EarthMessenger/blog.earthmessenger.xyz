@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
 import { SITE_TITLE, SITE_DISCRIPTION, type Lang } from '../config';
+import { baseSlug } from './content-paths';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import path from 'node:path';
@@ -54,7 +55,7 @@ export async function generateRss(lang: Lang) {
     description: SITE_DISCRIPTION,
     site,
     items: posts.map((post) => {
-      const slug = post.data.opencc ? post.id.slice(0, -lang.length) : post.id;
+      const slug = baseSlug(post);
       const postUrl = `${site}/${lang}/posts/${slug}/`;
 
       return {
