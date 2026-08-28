@@ -1010,14 +1010,14 @@ struct modint61
  
   using mint = modint61;
  
-  static mint raw(u32 v)
+  static mint raw(u64 v)
   {
     mint res;
     res.v = v;
     return res;
   }
  
-  u32 val() const { return v; }
+  u64 val() const { return v; }
  
   mint operator-() const { return mint::raw(v == 0 ? 0u : M - v); }
  
