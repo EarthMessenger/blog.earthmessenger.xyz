@@ -1411,6 +1411,20 @@ std::pair<std::vector<int>, std::vector<int>> suffix_array(const std::string &s)
 
   return {sa, rk};
 }
+
+std::vector<int> calc_height(const std::string &s, const std::vector<int> &sa, const std::vector<int> &rk)
+{
+  int n = s.size();
+  std::vector<int> h(n);
+  int k = 0;
+  for (int i = 0; i < n; i++) {
+    if (rk[i] == 0) continue;
+    k = std::max(0, k - 1);
+    while (i + k < n && sa[rk[i] - 1] + k < n && s[i + k] == s[sa[rk[i] - 1] + k]) k++;
+    h[rk[i]] = k;
+  }
+  return h;
+}
 ```
 
 ### 後綴自動機
