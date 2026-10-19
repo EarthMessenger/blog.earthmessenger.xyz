@@ -18,14 +18,12 @@ const postsInLang = allPosts
 <BaseLayout title="首頁" description={SITE_DISCRIPTION}>
   <h1>EarthMessenger 的博客</h1>
   <ol reversed="true">
-    {
-      postsInLang.map((post) => {
-        return (
-          <li>
-            <a href={`/${lang}/posts/${baseSlug(post)}`}>{post.data.title}</a>
-          </li>
-        );
-      })
-    }
+    {postsInLang.map((post) => {
+      return (
+        <li>
+          <a href={`/${lang}/posts/${baseSlug(post)}`}>{post.data.title}</a>
+        </li>
+      );
+    })}
   </ol>
 </BaseLayout>

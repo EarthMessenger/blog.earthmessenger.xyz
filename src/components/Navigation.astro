@@ -14,11 +14,15 @@ const t = useTranslations(lang);
     </a>
   </div>
   <div class="nav-menu">
-    <a href={`/${lang}/about`} title={t('nav.about')}>{t('nav.about')}</a>
-    <a href={`/${lang}/oi-notes`} title={t('nav.solution')}
-      >{t('nav.solution')}</a
-    >
-    <a href={`/${lang}/tags`} title={t('nav.tags')}>{t('nav.tags')}</a>
+    <a href={`/${lang}/about`} title={t('nav.about')}>
+      {t('nav.about')}
+    </a>
+    <a href={`/${lang}/oi-notes`} title={t('nav.solution')}>
+      {t('nav.solution')}
+    </a>
+    <a href={`/${lang}/tags`} title={t('nav.tags')}>
+      {t('nav.tags')}
+    </a>
     <SwitchLanguageBtn />
   </div>
 </nav>

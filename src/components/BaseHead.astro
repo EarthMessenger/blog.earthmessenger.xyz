@@ -48,7 +48,9 @@ import '../styles/global.css';
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content={ogLocale} />
-{ogAltLocales.map((l) => <meta property="og:locale:alternate" content={l} />)}
+{ogAltLocales.map((l) => (
+  <meta property="og:locale:alternate" content={l} />
+))}
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content={displayTitle} />

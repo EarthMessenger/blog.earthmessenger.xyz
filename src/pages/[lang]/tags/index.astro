@@ -27,12 +27,10 @@ const title = t('nav.tags');
 <BaseLayout title={title} description={SITE_DISCRIPTION}>
   <h1>{title}</h1>
   <ul>
-    {
-      tags.map((tag) => (
-        <li>
-          <a href={`/${lang}/tags/${tag}`}>{tag}</a>
-        </li>
-      ))
-    }
+    {tags.map((tag) => (
+      <li>
+        <a href={`/${lang}/tags/${tag}`}>{tag}</a>
+      </li>
+    ))}
   </ul>
 </BaseLayout>

@@ -48,14 +48,12 @@ const title = t('tag.title', { tag });
 <BaseLayout title={title} description={SITE_DISCRIPTION}>
   <h1>{title}</h1>
   <ul>
-    {
-      posts.map((post) => {
-        return (
-          <li>
-            <a href={`/${lang}/posts/${baseSlug(post)}`}>{post.data.title}</a>
-          </li>
-        );
-      })
-    }
+    {posts.map((post) => {
+      return (
+        <li>
+          <a href={`/${lang}/posts/${baseSlug(post)}`}>{post.data.title}</a>
+        </li>
+      );
+    })}
   </ul>
 </BaseLayout>

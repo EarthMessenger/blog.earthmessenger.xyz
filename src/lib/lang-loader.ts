@@ -32,9 +32,7 @@ interface EntryType {
     contents: string;
     fileUrl: URL;
   }): Promise<{ data: Record<string, any>; body: string; slug?: string }>;
-  getRenderFunction?(
-    config: any,
-  ): Promise<
+  getRenderFunction?(config: any): Promise<
     (entry: {
       id: string;
       data: Record<string, any>;
@@ -49,7 +47,9 @@ interface EntryType {
   contentModuleTypes?: unknown;
 }
 
-type RenderFunction = Awaited<NonNullable<ReturnType<NonNullable<EntryType['getRenderFunction']>>>>;
+type RenderFunction = Awaited<
+  NonNullable<ReturnType<NonNullable<EntryType['getRenderFunction']>>>
+>;
 
 const renderFunctionCache = new WeakMap<EntryType, RenderFunction>();
 
@@ -66,7 +66,10 @@ export function createLangCollectionLoader({
   return {
     name,
     async load(ctx) {
-      const baseUrl = new URL(base.endsWith('/') ? base : `${base}/`, ctx.config.root);
+      const baseUrl = new URL(
+        base.endsWith('/') ? base : `${base}/`,
+        ctx.config.root,
+      );
       const baseDir = fileURLToPath(baseUrl);
 
       if (!existsSync(baseDir)) {
@@ -84,9 +87,13 @@ export function createLangCollectionLoader({
         if (!isWithin(baseDir, changedPath)) return;
         try {
           await syncAll(ctx, baseDir);
-          ctx.logger.info(`Reloaded ${name} after ${path.basename(changedPath)} changed`);
+          ctx.logger.info(
+            `Reloaded ${name} after ${path.basename(changedPath)} changed`,
+          );
         } catch (error) {
-          ctx.logger.error(`Failed to reload ${name}: ${(error as Error).message}`);
+          ctx.logger.error(
+            `Failed to reload ${name}: ${(error as Error).message}`,
+          );
         }
       };
       watcher.on('change', onFsEvent);
@@ -98,8 +105,9 @@ export function createLangCollectionLoader({
 }
 
 async function syncAll(ctx: LoaderContext, baseDir: string): Promise<void> {
-  const entryTypes = (ctx as LoaderContext & { entryTypes?: Map<string, EntryType> })
-    .entryTypes;
+  const entryTypes = (
+    ctx as LoaderContext & { entryTypes?: Map<string, EntryType> }
+  ).entryTypes;
   const files = await readdir(baseDir, { recursive: true });
   const raws: ParsedRaw[] = [];
 
@@ -122,7 +130,10 @@ async function syncAll(ctx: LoaderContext, baseDir: string): Promise<void> {
       contents,
       fileUrl: pathToFileURL(absPath),
     });
-    const id = typeof data.slug === 'string' && data.slug ? data.slug : slugFromRelPath(rel);
+    const id =
+      typeof data.slug === 'string' && data.slug
+        ? data.slug
+        : slugFromRelPath(rel);
     const parsedData = await ctx.parseData({ id, data, filePath: absPath });
 
     raws.push({
@@ -248,5 +259,7 @@ function toPosixRelative(rootUrl: URL, absPath: string): string {
 
 function isWithin(baseDir: string, changedPath: string): boolean {
   const relative = path.relative(baseDir, changedPath);
-  return relative !== '' && !relative.startsWith('..') && !path.isAbsolute(relative);
+  return (
+    relative !== '' && !relative.startsWith('..') && !path.isAbsolute(relative)
+  );
 }
